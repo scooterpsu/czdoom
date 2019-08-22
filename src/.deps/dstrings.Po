@@ -1,8 +1,8 @@
 dstrings.o: dstrings.c dstrings.h d_englsh.h \
-  /opt/mipsel-linux-uclibc/usr/bin/../lib/gcc/mipsel-linux-uclibc/4.3.3/include/stddef.h
+ /opt/mipsel-linux-uclibc/lib/gcc/mipsel-buildroot-linux-uclibc/7.3.0/include/stddef.h
 
 dstrings.h:
 
 d_englsh.h:
 
-/opt/mipsel-linux-uclibc/usr/bin/../lib/gcc/mipsel-linux-uclibc/4.3.3/include/stddef.h:
+/opt/mipsel-linux-uclibc/lib/gcc/mipsel-buildroot-linux-uclibc/7.3.0/include/stddef.h:

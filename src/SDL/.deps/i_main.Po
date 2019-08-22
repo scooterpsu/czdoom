@@ -1,82 +1,83 @@
 i_main.o: i_main.c ../../config.h ../../src/doomdef.h ../../src/z_zone.h \
-  /opt/mipsel-linux-uclibc/usr/include/stdio.h \
-  /opt/mipsel-linux-uclibc/usr/include/features.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/uClibc_config.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/uClibc_arch_features.h \
-  /opt/mipsel-linux-uclibc/usr/include/sys/cdefs.h \
-  /opt/mipsel-linux-uclibc/usr/bin/../lib/gcc/mipsel-linux-uclibc/4.3.3/include/stddef.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/types.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/wordsize.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/kernel_types.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/typesizes.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/pthreadtypes.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/sched.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/uClibc_stdio.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/uClibc_mutex.h \
-  /opt/mipsel-linux-uclibc/usr/include/pthread.h \
-  /opt/mipsel-linux-uclibc/usr/include/sched.h \
-  /opt/mipsel-linux-uclibc/usr/include/time.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/time.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/uClibc_clk_tck.h \
-  /opt/mipsel-linux-uclibc/usr/include/signal.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/sigset.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/initspin.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/sigthread.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/uClibc_pthread.h \
-  /opt/mipsel-linux-uclibc/usr/bin/../lib/gcc/mipsel-linux-uclibc/4.3.3/include/stdarg.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/stdio_lim.h \
-  /opt/mipsel-linux-uclibc/usr/include/stdlib.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/waitflags.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/waitstatus.h \
-  /opt/mipsel-linux-uclibc/usr/include/endian.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/endian.h \
-  /opt/mipsel-linux-uclibc/usr/include/sys/types.h \
-  /opt/mipsel-linux-uclibc/usr/include/sys/select.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/select.h \
-  /opt/mipsel-linux-uclibc/usr/include/sys/sysmacros.h \
-  /opt/mipsel-linux-uclibc/usr/include/alloca.h \
-  /opt/mipsel-linux-uclibc/usr/include/string.h \
-  /opt/mipsel-linux-uclibc/usr/include/assert.h \
-  /opt/mipsel-linux-uclibc/usr/include/ctype.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/uClibc_touplow.h \
-  /opt/mipsel-linux-uclibc/usr/bin/../lib/gcc/mipsel-linux-uclibc/4.3.3/include-fixed/limits.h \
-  /opt/mipsel-linux-uclibc/usr/bin/../lib/gcc/mipsel-linux-uclibc/4.3.3/include-fixed/syslimits.h \
-  /opt/mipsel-linux-uclibc/usr/include/limits.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/posix1_lim.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/local_lim.h \
-  /opt/mipsel-linux-uclibc/usr/include/linux/limits.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/uClibc_local_lim.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/posix2_lim.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/xopen_lim.h \
-  ../../src/m_swap.h /opt/mipsel-linux-uclibc/usr/include/asm/byteorder.h \
-  /opt/mipsel-linux-uclibc/usr/include/asm/types.h \
-  /opt/mipsel-linux-uclibc/usr/include/linux/byteorder/little_endian.h \
-  /opt/mipsel-linux-uclibc/usr/include/linux/types.h \
-  /opt/mipsel-linux-uclibc/usr/include/linux/posix_types.h \
-  /opt/mipsel-linux-uclibc/usr/include/linux/stddef.h \
-  /opt/mipsel-linux-uclibc/usr/include/asm/posix_types.h \
-  /opt/mipsel-linux-uclibc/usr/include/linux/byteorder/swab.h \
-  /opt/mipsel-linux-uclibc/usr/include/linux/byteorder/generic.h \
-  ../../src/version.h ../../src/m_argv.h ../../src/d_main.h \
-  ../../src/d_event.h ../../src/doomtype.h ../../src/w_wad.h \
-  ../../src/m_fixed.h ../../src/i_system.h ../../src/i_video.h \
-  ../../src/v_video.h ../../src/doomdef.h ../../src/r_data.h \
-  ../../src/r_defs.h ../../src/m_fixed.h ../../src/d_think.h \
-  ../../src/p_mobj.h ../../src/tables.h ../../src/doomdata.h \
-  ../../src/info.h ../../src/r_state.h ../../src/d_player.h \
-  ../../src/d_items.h ../../src/p_pspr.h ../../src/d_ticcmd.h \
-  ../../src/r_patch.h ../../src/z_zone.h ../../src/lprintf.h \
-  ../../src/m_random.h ../../src/doomstat.h ../../src/g_game.h \
-  ../../src/m_misc.h ../../src/i_sound.h ../../src/sounds.h \
-  ../../src/i_main.h ../../src/r_fps.h ../../src/doomstat.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/signum.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/siginfo.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/sigaction.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/sigcontext.h \
-  /opt/mipsel-linux-uclibc/usr/include/sgidefs.h \
-  /opt/mipsel-linux-uclibc/usr/include/bits/sigstack.h \
-  /opt/mipsel-linux-uclibc/usr/include/ucontext.h \
-  /opt/mipsel-linux-uclibc/usr/include/sys/ucontext.h
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/stdio.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/features.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/uClibc_config.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/sys/cdefs.h \
+ /opt/mipsel-linux-uclibc/lib/gcc/mipsel-buildroot-linux-uclibc/7.3.0/include/stddef.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/types.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/wordsize.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/typesizes.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/uClibc_stdio.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/wchar.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/wchar.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/pthreadtypes.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/endian.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/endian.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/byteswap.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/byteswap.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/byteswap-common.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/byteswap-16.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/sgidefs.h \
+ /opt/mipsel-linux-uclibc/lib/gcc/mipsel-buildroot-linux-uclibc/7.3.0/include/stdarg.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/stdio_lim.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/stdlib.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/waitflags.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/waitstatus.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/sys/types.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/time.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/sys/select.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/select.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/sigset.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/time.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/sys/sysmacros.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/alloca.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/string.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/assert.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/ctype.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/uClibc_touplow.h \
+ /opt/mipsel-linux-uclibc/lib/gcc/mipsel-buildroot-linux-uclibc/7.3.0/include-fixed/limits.h \
+ /opt/mipsel-linux-uclibc/lib/gcc/mipsel-buildroot-linux-uclibc/7.3.0/include-fixed/syslimits.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/limits.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/posix1_lim.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/local_lim.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/limits.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/uClibc_local_lim.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/posix2_lim.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/xopen_lim.h \
+ ../../src/m_swap.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/byteorder.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/byteorder/little_endian.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/types.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/types.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm-generic/int-ll64.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/bitsperlong.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm-generic/bitsperlong.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/posix_types.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/stddef.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/posix_types.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/sgidefs.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/swab.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/swab.h \
+ ../../src/version.h ../../src/m_argv.h ../../src/d_main.h \
+ ../../src/d_event.h ../../src/doomtype.h ../../src/w_wad.h \
+ ../../src/m_fixed.h ../../src/i_system.h ../../src/i_video.h \
+ ../../src/v_video.h ../../src/doomdef.h ../../src/r_data.h \
+ ../../src/r_defs.h ../../src/m_fixed.h ../../src/d_think.h \
+ ../../src/p_mobj.h ../../src/tables.h ../../src/doomdata.h \
+ ../../src/info.h ../../src/r_state.h ../../src/d_player.h \
+ ../../src/d_items.h ../../src/p_pspr.h ../../src/d_ticcmd.h \
+ ../../src/r_patch.h ../../src/z_zone.h ../../src/lprintf.h \
+ ../../src/m_random.h ../../src/doomstat.h ../../src/g_game.h \
+ ../../src/m_misc.h ../../src/i_sound.h ../../src/sounds.h \
+ ../../src/i_main.h ../../src/r_fps.h ../../src/doomstat.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/signal.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/signum.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/siginfo.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/sigaction.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/sigcontext.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/sigstack.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/sys/ucontext.h \
+ /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/sigthread.h
 
 ../../config.h:
 
@@ -84,123 +85,123 @@ i_main.o: i_main.c ../../config.h ../../src/doomdef.h ../../src/z_zone.h \
 
 ../../src/z_zone.h:
 
-/opt/mipsel-linux-uclibc/usr/include/stdio.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/stdio.h:
 
-/opt/mipsel-linux-uclibc/usr/include/features.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/features.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/uClibc_config.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/uClibc_config.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/uClibc_arch_features.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/sys/cdefs.h:
 
-/opt/mipsel-linux-uclibc/usr/include/sys/cdefs.h:
+/opt/mipsel-linux-uclibc/lib/gcc/mipsel-buildroot-linux-uclibc/7.3.0/include/stddef.h:
 
-/opt/mipsel-linux-uclibc/usr/bin/../lib/gcc/mipsel-linux-uclibc/4.3.3/include/stddef.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/types.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/types.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/wordsize.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/wordsize.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/typesizes.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/kernel_types.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/uClibc_stdio.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/typesizes.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/wchar.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/pthreadtypes.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/wchar.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/sched.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/pthreadtypes.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/uClibc_stdio.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/endian.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/uClibc_mutex.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/endian.h:
 
-/opt/mipsel-linux-uclibc/usr/include/pthread.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/byteswap.h:
 
-/opt/mipsel-linux-uclibc/usr/include/sched.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/byteswap.h:
 
-/opt/mipsel-linux-uclibc/usr/include/time.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/byteswap-common.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/time.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/byteswap-16.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/uClibc_clk_tck.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/sgidefs.h:
 
-/opt/mipsel-linux-uclibc/usr/include/signal.h:
+/opt/mipsel-linux-uclibc/lib/gcc/mipsel-buildroot-linux-uclibc/7.3.0/include/stdarg.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/sigset.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/stdio_lim.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/initspin.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/stdlib.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/sigthread.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/waitflags.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/uClibc_pthread.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/waitstatus.h:
 
-/opt/mipsel-linux-uclibc/usr/bin/../lib/gcc/mipsel-linux-uclibc/4.3.3/include/stdarg.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/sys/types.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/stdio_lim.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/time.h:
 
-/opt/mipsel-linux-uclibc/usr/include/stdlib.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/sys/select.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/waitflags.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/select.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/waitstatus.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/sigset.h:
 
-/opt/mipsel-linux-uclibc/usr/include/endian.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/time.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/endian.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/sys/sysmacros.h:
 
-/opt/mipsel-linux-uclibc/usr/include/sys/types.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/alloca.h:
 
-/opt/mipsel-linux-uclibc/usr/include/sys/select.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/string.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/select.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/assert.h:
 
-/opt/mipsel-linux-uclibc/usr/include/sys/sysmacros.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/ctype.h:
 
-/opt/mipsel-linux-uclibc/usr/include/alloca.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/uClibc_touplow.h:
 
-/opt/mipsel-linux-uclibc/usr/include/string.h:
+/opt/mipsel-linux-uclibc/lib/gcc/mipsel-buildroot-linux-uclibc/7.3.0/include-fixed/limits.h:
 
-/opt/mipsel-linux-uclibc/usr/include/assert.h:
+/opt/mipsel-linux-uclibc/lib/gcc/mipsel-buildroot-linux-uclibc/7.3.0/include-fixed/syslimits.h:
 
-/opt/mipsel-linux-uclibc/usr/include/ctype.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/limits.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/uClibc_touplow.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/posix1_lim.h:
 
-/opt/mipsel-linux-uclibc/usr/bin/../lib/gcc/mipsel-linux-uclibc/4.3.3/include-fixed/limits.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/local_lim.h:
 
-/opt/mipsel-linux-uclibc/usr/bin/../lib/gcc/mipsel-linux-uclibc/4.3.3/include-fixed/syslimits.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/limits.h:
 
-/opt/mipsel-linux-uclibc/usr/include/limits.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/uClibc_local_lim.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/posix1_lim.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/posix2_lim.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/local_lim.h:
-
-/opt/mipsel-linux-uclibc/usr/include/linux/limits.h:
-
-/opt/mipsel-linux-uclibc/usr/include/bits/uClibc_local_lim.h:
-
-/opt/mipsel-linux-uclibc/usr/include/bits/posix2_lim.h:
-
-/opt/mipsel-linux-uclibc/usr/include/bits/xopen_lim.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/xopen_lim.h:
 
 ../../src/m_swap.h:
 
-/opt/mipsel-linux-uclibc/usr/include/asm/byteorder.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/byteorder.h:
 
-/opt/mipsel-linux-uclibc/usr/include/asm/types.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/byteorder/little_endian.h:
 
-/opt/mipsel-linux-uclibc/usr/include/linux/byteorder/little_endian.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/types.h:
 
-/opt/mipsel-linux-uclibc/usr/include/linux/types.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/types.h:
 
-/opt/mipsel-linux-uclibc/usr/include/linux/posix_types.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm-generic/int-ll64.h:
 
-/opt/mipsel-linux-uclibc/usr/include/linux/stddef.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/bitsperlong.h:
 
-/opt/mipsel-linux-uclibc/usr/include/asm/posix_types.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm-generic/bitsperlong.h:
 
-/opt/mipsel-linux-uclibc/usr/include/linux/byteorder/swab.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/posix_types.h:
 
-/opt/mipsel-linux-uclibc/usr/include/linux/byteorder/generic.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/stddef.h:
+
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/posix_types.h:
+
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/sgidefs.h:
+
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/swab.h:
+
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/swab.h:
 
 ../../src/version.h:
 
@@ -274,18 +275,18 @@ i_main.o: i_main.c ../../config.h ../../src/doomdef.h ../../src/z_zone.h \
 
 ../../src/doomstat.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/signum.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/signal.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/siginfo.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/signum.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/sigaction.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/siginfo.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/sigcontext.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/sigaction.h:
 
-/opt/mipsel-linux-uclibc/usr/include/sgidefs.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/sigcontext.h:
 
-/opt/mipsel-linux-uclibc/usr/include/bits/sigstack.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/sigstack.h:
 
-/opt/mipsel-linux-uclibc/usr/include/ucontext.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/sys/ucontext.h:
 
-/opt/mipsel-linux-uclibc/usr/include/sys/ucontext.h:
+/opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/sigthread.h:
