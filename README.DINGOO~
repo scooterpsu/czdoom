@@ -1,0 +1,40 @@
+PRBOOM-2.5.0 for dingoo linux
+-----------------------------
+
+this is a fully working port (as far as i tested it) of prboom 2.5.0 for dingoo linux.
+
+these are some of the changes i made :
+
+- default settings for the dingoo (like 320x240x16 screen res, inputs)
+- changed Y/N questions to be handled with Y/X button
+- Removed SDL_DOUBLEBUF, it segfaults otherwise !
+- added putenv("SDL_NOMOUSE=1"); so you don't have to type it in before running prboom
+- removed the configure file so one doesn't accidently run it and overwrite the makefiles
+- made sure it compiled by changing a few settings in the make files and config.h file
+
+Compiling & Installation:
+-------------------------
+- the toolchain has to be /opt/mipseltools-gcc412-glibc261 if it's not there, alter the make files to reflect your paths. (i used the ingenics toolchain)
+- run make, it should compile without any errors
+- once compiled find yourself a copy of the shareware doom.wad file, copy the doom.wad, prboom.wad (you can find this file in the prboom-dingoo directory and prboom from the src directory to a place on your root file system (like /usr/games/prboom) 
+- run prboom on the dingoo
+
+I have included a compiled version, it will need libSDL_mixer though and perhaps a few other libs but you should be able to copy it.
+
+Also currently the root file systems gets loaded as read only so be sure to remount it as read/write (mount -n -o remount,rw /dev/root /) before you run prboom this will probably be fixed in future versions of dingoo-linux and has nothing to do with prboom, but prboom needs write access ! 
+
+
+Default keybindings:
+--------------------
+L STRAFE LEFT
+R STRAFE RIGHT
+A USE/OPEN DOOR etc
+B SHOOT
+START BRING UP MENUS / SELECT MENUS
+SELECT EXIT MENUS
+Y SELECT (BEST ?) WEAPON / ANSWER YES ON QUESTIONS
+X (can't remember) / ANSWER NO ON QUESTIONS
+
+
+
+Ported by joyrider - http://www.willemssoft.be
