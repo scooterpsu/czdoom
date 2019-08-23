@@ -1,0 +1,88 @@
+CZDoom - Enhanced Handheld Port of PRBoom for the 
+         Dingoo A320
+
+Modifications made by CongoZombie
+
+Based on PrBoom,
+(http://prboom.sourceforge.net)
+
+Code adapted from the original Dingoo Port by
+Joyrider
+
+
+This port has enhancements to make it more suitable
+for use on portable devices.
+
+These enhancements include:
+
+
+*   Changes to the control code to make best use of the
+    available buttons on the console:
+        
+        There is now a weapon select button. When it
+        is held down, weapon switches can be made with 
+        the d-pad. It is mapped to the "Best Weapon"
+        key in the Doom key map.
+
+*   Savegame names are automatically generated to compensate
+    for the lack of a keyboard. They take the form:
+
+    *Map name* - *Difficulty* - *Total game time*
+    
+    eg.
+
+    E1M4 - Hard - 00:22:35
+
+*   There is now a confirmation message when trying to overwrite
+    an existing game save.
+
+*   Text strings in the game have been changed to reflect the
+    changes in control scheme.
+
+    (i.e. instead of saying "Press Y to quit.", it now says
+    "Press Start to quit.")
+
+*   When the player is dead, a message appears telling the user
+    to press the Y button to restart.
+
+*   Changes to the workings of the automap- Select (escape) now
+    brings up the automap when in game to free up an extra button
+    When the automap is displayed, the game is paused. Since the
+    d-pad pans the map and the shoulder buttons zoom, the original
+    Doom functionality of being able to move around in automap
+    view won't work anyway.
+
+
+
+The control scheme for the Dingoo-A320 is as follows:
+
+Up- Forward
+Down - Backward
+Left - Turn Left
+Right - Turn Right
+A - Fire
+B - Run
+Y - Open/Use
+X - Weapon Select
+L - Strafe Left
+R - Strafe Right
+
+Start - Bring up the menu / select a menu item
+Select - When in game: Toggle automap
+         When in a menu: Go back / exit the menu
+
+If X is held down:
+
+    Up - Next weapon
+    Down - Previous weapon
+    Left - Cycle the 2 best weapons
+    Right - Cycle within the current weapon type (i.e. if chainsaw
+                        is the current weapon, switch to the fist,
+                        if super shotgun is the current weapon, 
+                        switch to the shotgun)
+
+
+
+
+The PrBoom paths have been updated so that savegames and the config
+file will be located in the same directory as the game.
