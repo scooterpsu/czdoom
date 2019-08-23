@@ -12,6 +12,7 @@ sed -e "s/^Version:.*/Version: $(date +%Y%m%d)/" ../src/distrib/control > contro
 echo "2.0" > debian-binary
 
 cp ../src/distrib/czdoom home/retrofw/apps/gmenu2x/sections/games/czdoom
+cp ../src/distrib/czdoom-modlaunch home/retrofw/apps/gmenu2x/sections/games/czdoom-modlaunch
 
 tar -czvf control.tar.gz control --owner=0 --group=0
 tar -czvf data.tar.gz home --owner=0 --group=0
