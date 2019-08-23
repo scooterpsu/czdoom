@@ -1,0 +1,4 @@
+#!/bin/sh
+doomfile="`cat $1 | cut -d "|" -f 1`" #assume the input might be trying something sketchy and remove pipes
+cd /home/retrofw/games/czdoom/
+./czdoom $doomfile
