@@ -22,8 +22,8 @@ Death sound = 62
 
 Thing 4 (Summoner)
 Speed = 34
-Hit points = 580
-Pain chance = 50
+Hit points = 584
+Pain chance = 48
 
 Thing 5 (Archvile attack)
 Initial frame = 767
@@ -69,7 +69,7 @@ Height = 3670016
 Pain sound = 27
 Initial frame = 321
 Close attack frame = 335
-Hit points = 300
+Hit points = 307
 Pain chance = 20
 First moving frame = 323
 Alert sound = 106
@@ -83,11 +83,14 @@ Initial frame = 749
 Thing 11 (Hell Razer)
 Action sound = 87
 Death sound = 62
+Reaction time = 6
 Exploding frame = 0
 Pain sound = 26
 Close attack frame = 660
+Hit points = 74
 Far attack frame = 746
 Alert sound = 45
+Pain chance = 150
 
 Thing 12 (Imp)
 Action sound = 0
@@ -112,7 +115,7 @@ Far attack frame = 726
 Alert sound = 52
 Speed = 12
 Mass = 510
-Pain chance = 150
+Pain chance = 140
 
 Thing 14 (Spectre)
 Action sound = 0
@@ -123,10 +126,10 @@ Bits = 4980870
 Exploding frame = 429
 Pain sound = 102
 Far attack frame = 726
-Hit points = 130
+Mass = 510
 Alert sound = 52
 Speed = 7
-Mass = 510
+Pain chance = 150
 
 Thing 15 (Cacodemon)
 Action sound = 78
@@ -139,15 +142,16 @@ Pain chance = 49
 Thing 16 (Baron of Hell)
 Respawn frame = 0
 Attack sound = 53
-Reaction time = 4
+Reaction time = 5
 Missile damage = 3
 Pain sound = 43
 Close attack frame = 748
 Hit points = 1400
 Injury frame = 538
-Mass = 510
+Far attack frame = 73
 Alert sound = 47
 Speed = 18
+Mass = 510
 Pain chance = 0
 
 Thing 17 (Baron fireball)
@@ -295,7 +299,7 @@ Hit points = 200
 
 Thing 29 (Demon spawn cube)
 Alert sound = 79
-Speed = 393216
+Speed = 327680
 
 Thing 30 (Demon spawn fire)
 Initial frame = 584
@@ -304,7 +308,7 @@ Thing 32 (Imp fireball)
 Speed = 851968
 
 Thing 33 (Hellrazer Ray)
-Width = 65536
+Width = 131072
 Speed = 1048576
 Missile damage = 1
 
@@ -316,8 +320,9 @@ Initial frame = 759
 Death sound = 0
 
 Thing 36 (BFG projectile)
+Width = 917504
 Speed = 1966080
-Missile damage = 80
+Missile damage = 83
 
 Thing 37 (Flamethrower)
 Alert sound = 79
@@ -341,7 +346,7 @@ Initial frame = 862
 Thing 72 (Backpack)
 Death frame = 596
 Bits = 524805
-Height = 131072
+Height = 3670016
 Pain sound = 95
 Far attack frame = 540
 Injury frame = 794
@@ -429,7 +434,7 @@ Next frame = 145
 Frame 16
 Duration = 0
 Sprite number = 11
-Next frame = 73
+Next frame = 67
 
 Frame 17
 Duration = 1
@@ -565,6 +570,12 @@ Frame 72
 Duration = 1
 Next frame = 16
 
+Frame 73
+Duration = 4
+Next frame = 537
+Sprite number = 42
+Sprite subnumber = 32769
+
 Frame 77
 Unknown 1 = 1
 Unknown 2 = 32
@@ -573,9 +584,6 @@ Frame 79
 Duration = 2
 
 Frame 80
-Duration = 2
-
-Frame 82
 Duration = 2
 
 Frame 83
@@ -1818,11 +1826,17 @@ Frame 624
 Sprite subnumber = 32780
 
 Frame 625
+Duration = 20
 Sprite subnumber = 32781
+Next frame = 631
 
 Frame 626
-Sprite subnumber = 32782
-Next frame = 631
+Sprite number = 7
+Next frame = 50
+Unknown 1 = 1
+Unknown 2 = 64
+Duration = 1
+Sprite subnumber = 0
 
 Frame 627
 Duration = 13
@@ -2379,10 +2393,10 @@ Sprite number = 50
 Sprite subnumber = 32791
 
 Frame 748
-Duration = 4
+Duration = 7
 Next frame = 474
 Sprite number = 42
-Sprite subnumber = 1
+Sprite subnumber = 32769
 
 Frame 749
 Duration = 8
@@ -2488,19 +2502,25 @@ Sprite subnumber = 7
 
 Frame 767
 Duration = 3
+Next frame = 767
 Sprite number = 123
-Sprite subnumber = 6
+Sprite subnumber = 5
 
 Frame 768
-Duration = 4
-Sprite number = 123
-Sprite subnumber = 7
+Sprite number = 7
+Next frame = 51
+Unknown 1 = 1
+Unknown 2 = 64
+Duration = 1
+Sprite subnumber = 0
 
 Frame 769
-Duration = 2
-Next frame = 0
-Sprite number = 123
-Sprite subnumber = 8
+Sprite number = 9
+Next frame = 58
+Unknown 1 = 1
+Unknown 2 = 64
+Duration = 1
+Sprite subnumber = 0
 
 Frame 770
 Duration = 3
@@ -2547,12 +2567,30 @@ Next frame = 760
 Sprite number = 7
 Sprite subnumber = 0
 
+Frame 780
+Duration = 120
+Next frame = 783
+
+Frame 781
+Duration = 1
+Unknown 2 = 64
+Unknown 1 = 1
+Sprite number = 3
+Next frame = 11
+
+Frame 782
+Duration = 1
+Unknown 2 = 64
+Unknown 1 = 1
+Sprite number = 3
+Next frame = 12
+
 Frame 789
 Sprite subnumber = 32771
 Next frame = 787
 
 Frame 790
-Duration = 23
+Duration = 18
 Next frame = 765
 Sprite number = 46
 Sprite subnumber = 19
@@ -2601,6 +2639,26 @@ Next frame = 795
 Sprite number = 86
 Sprite subnumber = 4
 
+Frame 813
+Sprite subnumber = 0
+Next frame = 813
+
+Frame 814
+Sprite number = 1
+Next frame = 20
+Unknown 1 = 1
+Unknown 2 = 64
+Duration = 1
+Sprite subnumber = 0
+
+Frame 815
+Sprite number = 1
+Next frame = 19
+Unknown 1 = 1
+Unknown 2 = 64
+Duration = 1
+Sprite subnumber = 0
+
 Frame 852
 Duration = 6
 Next frame = 869
@@ -2632,6 +2690,33 @@ Frame 861
 Duration = 6
 Next frame = 892
 
+Frame 864
+Next frame = 862
+
+Frame 865
+Sprite number = 6
+Next frame = 33
+Unknown 1 = 1
+Unknown 2 = 64
+Duration = 1
+Sprite subnumber = 0
+
+Frame 866
+Sprite number = 6
+Next frame = 34
+Unknown 1 = 1
+Unknown 2 = 64
+Duration = 1
+Sprite subnumber = 0
+
+Frame 867
+Sprite number = 9
+Next frame = 59
+Unknown 1 = 1
+Unknown 2 = 64
+Duration = 1
+Sprite subnumber = 0
+
 Frame 868
 Duration = 3
 Next frame = 728
@@ -2652,6 +2737,25 @@ Next frame = 938
 Sprite number = 46
 Sprite subnumber = 32793
 
+Frame 889
+Next frame = 888
+
+Frame 890
+Sprite number = 12
+Next frame = 75
+Unknown 1 = 1
+Unknown 2 = 64
+Duration = 1
+Sprite subnumber = 0
+
+Frame 891
+Sprite number = 12
+Next frame = 76
+Unknown 1 = 1
+Unknown 2 = 64
+Duration = 1
+Sprite subnumber = 0
+
 Frame 892
 Duration = 6
 Next frame = 861
@@ -2663,6 +2767,17 @@ Duration = 4
 Next frame = 738
 Sprite number = 50
 Sprite subnumber = 32784
+
+Frame 919
+Next frame = 917
+
+Frame 920
+Sprite number = 2
+Next frame = 4
+Unknown 1 = 1
+Unknown 2 = 64
+Duration = 1
+Sprite subnumber = 0
 
 Frame 926
 Next frame = 934
@@ -2746,13 +2861,28 @@ Next frame = 939
 Sprite number = 19
 Sprite subnumber = 32769
 
+Sound 1
+Value = 1
+
 Sound 2
-Value = 2
+Value = 118
 Zero/One = 1
+
+Sound 3
+Value = 1
+
+Sound 8
+Value = 1
+
+Sound 10
+Value = 80
 
 Sound 12
 Value = 120
 Zero/One = 1
+
+Sound 13
+Value = 1
 
 Sound 27
 Value = 20
@@ -2844,8 +2974,33 @@ Value = 96
 Sound 107
 Value = 96
 
+Weapon 0 (Fist)
+Deselect frame = 920
+
 Weapon 1 (Pistol)
+Deselect frame = 782
+Select frame = 781
 Firing frame = 0
+
+Weapon 2 (Shotgun)
+Deselect frame = 814
+Select frame = 815
+
+Weapon 3 (Chaingun)
+Deselect frame = 768
+Select frame = 626
+
+Weapon 4 (Rocket launcher)
+Deselect frame = 867
+Select frame = 769
+
+Weapon 5 (Plasma rifle)
+Deselect frame = 891
+Select frame = 890
+
+Weapon 8 (Super-shotgun)
+Deselect frame = 866
+Select frame = 865
 
 Ammo 0 (Bullets)
 Max ammo = 300
@@ -2867,7 +3022,7 @@ Pointer 26 (Frame 43)
 Codep Frame = 0
 
 Pointer 53 (Frame 73)
-Codep Frame = 71
+Codep Frame = 157
 
 Pointer 75 (Frame 166)
 Codep Frame = 281
@@ -3358,8 +3513,8 @@ Text 14 14
 THE CYBERDEMONCYBER-MANCUBUS
 Text 8 11
 OUR HERODOOM SLAYER
-Text 80 71
-                         DOOM 2: Hell on Earth v%i.%i                                                     D4V: Doom 4 Vanilla                          
+Text 80 69
+                         DOOM 2: Hell on Earth v%i.%i                                                     D4V: Doom 4 Vanilla                        
 Text 415 324
 ===========================================================================
 ATTENTION:  This version of DOOM has been modified.  If you would like to
