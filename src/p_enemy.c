@@ -2181,6 +2181,9 @@ void A_BossDeath(mobj_t *mo)
               break;
             }
           break;
+		  
+		case 5: // sigil
+          return;
 
         default:
           if (gamemap != 8)

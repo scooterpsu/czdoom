@@ -245,6 +245,15 @@ const char *s_HUSTR_E4M6  = HUSTR_E4M6;
 const char *s_HUSTR_E4M7  = HUSTR_E4M7;
 const char *s_HUSTR_E4M8  = HUSTR_E4M8;
 const char *s_HUSTR_E4M9  = HUSTR_E4M9;
+const char *s_HUSTR_E5M1  = HUSTR_E5M1;
+const char *s_HUSTR_E5M2  = HUSTR_E5M2;
+const char *s_HUSTR_E5M3  = HUSTR_E5M3;
+const char *s_HUSTR_E5M4  = HUSTR_E5M4;
+const char *s_HUSTR_E5M5  = HUSTR_E5M5;
+const char *s_HUSTR_E5M6  = HUSTR_E5M6;
+const char *s_HUSTR_E5M7  = HUSTR_E5M7;
+const char *s_HUSTR_E5M8  = HUSTR_E5M8;
+const char *s_HUSTR_E5M9  = HUSTR_E5M9;
 const char *s_HUSTR_1     = HUSTR_1;
 const char *s_HUSTR_2     = HUSTR_2;
 const char *s_HUSTR_3     = HUSTR_3;
@@ -390,6 +399,7 @@ const char *s_E1TEXT     = E1TEXT;
 const char *s_E2TEXT     = E2TEXT;
 const char *s_E3TEXT     = E3TEXT;
 const char *s_E4TEXT     = E4TEXT;
+const char *s_E5TEXT     = E5TEXT;
 const char *s_C1TEXT     = C1TEXT;
 const char *s_C2TEXT     = C2TEXT;
 const char *s_C3TEXT     = C3TEXT;
@@ -431,6 +441,7 @@ const char *bgflatE1     = "FLOOR4_8"; // end of DOOM Episode 1
 const char *bgflatE2     = "SFLR6_1";  // end of DOOM Episode 2
 const char *bgflatE3     = "MFLR8_4";  // end of DOOM Episode 3
 const char *bgflatE4     = "MFLR8_3";  // end of DOOM Episode 4
+const char *bgflatE5     = "FLOOR7_2"; // end of DOOM Episode 5 (SIGIL)
 const char *bgflat06     = "SLIME16";  // DOOM2 after MAP06
 const char *bgflat11     = "RROCK14";  // DOOM2 after MAP11
 const char *bgflat20     = "RROCK07";  // DOOM2 after MAP20
@@ -584,6 +595,15 @@ static const deh_strs deh_strlookup[] = {
   {&s_HUSTR_E4M7,"HUSTR_E4M7"},
   {&s_HUSTR_E4M8,"HUSTR_E4M8"},
   {&s_HUSTR_E4M9,"HUSTR_E4M9"},
+  {&s_HUSTR_E5M1,"HUSTR_E5M1"},
+  {&s_HUSTR_E5M2,"HUSTR_E5M2"},
+  {&s_HUSTR_E5M3,"HUSTR_E5M3"},
+  {&s_HUSTR_E5M4,"HUSTR_E5M4"},
+  {&s_HUSTR_E5M5,"HUSTR_E5M5"},
+  {&s_HUSTR_E5M6,"HUSTR_E5M6"},
+  {&s_HUSTR_E5M7,"HUSTR_E5M7"},
+  {&s_HUSTR_E5M8,"HUSTR_E5M8"},
+  {&s_HUSTR_E5M9,"HUSTR_E5M9"},
   {&s_HUSTR_1,"HUSTR_1"},
   {&s_HUSTR_2,"HUSTR_2"},
   {&s_HUSTR_3,"HUSTR_3"},
@@ -728,6 +748,7 @@ static const deh_strs deh_strlookup[] = {
   {&s_E2TEXT,"E2TEXT"},
   {&s_E3TEXT,"E3TEXT"},
   {&s_E4TEXT,"E4TEXT"},
+   {&s_E5TEXT,"E5TEXT"},
   {&s_C1TEXT,"C1TEXT"},
   {&s_C2TEXT,"C2TEXT"},
   {&s_C3TEXT,"C3TEXT"},
@@ -767,6 +788,7 @@ static const deh_strs deh_strlookup[] = {
   {&bgflatE2,"BGFLATE2"},
   {&bgflatE3,"BGFLATE3"},
   {&bgflatE4,"BGFLATE4"},
+  {&bgflatE5,"BGFLATE5"},
   {&bgflat06,"BGFLAT06"},
   {&bgflat11,"BGFLAT11"},
   {&bgflat20,"BGFLAT20"},
@@ -832,6 +854,17 @@ const char **const mapnames[] =
   &s_HUSTR_E4M7,
   &s_HUSTR_E4M8,
   &s_HUSTR_E4M9,
+  
+  &s_HUSTR_E5M1, // sigil
+  &s_HUSTR_E5M2,
+  &s_HUSTR_E5M3,
+  &s_HUSTR_E5M4,
+  &s_HUSTR_E5M5,
+  &s_HUSTR_E5M6,
+  &s_HUSTR_E5M7,
+  &s_HUSTR_E5M8,
+  &s_HUSTR_E5M9,
+
 
   &deh_newlevel,  // spares?  Unused.
   &deh_newlevel,
