@@ -1893,6 +1893,7 @@ static void M_DrawSetting(const setup_menu_t* s)
 
     if (key) {
       M_GetKeyString(*key,0); // string to display
+#ifndef HANDHELDMODS
       if (key == &key_use) {
   // For the 'use' key, you have to build the string
 
@@ -1911,6 +1912,7 @@ static void M_DrawSetting(const setup_menu_t* s)
       sprintf(menu_buffer+strlen(menu_buffer), "/JSB%d",
         *s->m_joy+1);
   }
+#endif
       M_DrawMenuString(x,y,color);
     }
     return;
@@ -2113,11 +2115,19 @@ static void M_DrawInstructions(void)
         if (current_setup_menu[set_menu_itemon].m_mouse || current_setup_menu[set_menu_itemon].m_joy)
           M_DrawStringCentered(160, 20, CR_SELECT, "Press key or button for this action");
         else
+#ifdef HANDHELDMODS
+          M_DrawStringCentered(160, 20, CR_SELECT, "Press button for this action");
+#else
           M_DrawStringCentered(160, 20, CR_SELECT, "Press key for this action");
+#endif
         break;
 
     case S_YESNO:
+#ifdef HANDHELDMODS
+      M_DrawStringCentered(160, 20, CR_SELECT, "Press A to toggle");
+#else
       M_DrawStringCentered(160, 20, CR_SELECT, "Press ENTER key to toggle");
+#endif
       break;
     case S_WEAP:
       M_DrawStringCentered(160, 20, CR_SELECT, "Enter weapon number");
@@ -2149,9 +2159,23 @@ static void M_DrawInstructions(void)
     }
   } else {
     if (flags & S_RESET)
+#ifdef HANDHELDMODS
+      M_DrawStringCentered(160, 20, CR_HILITE, "Press A to reset to defaults");
+#else
       M_DrawStringCentered(160, 20, CR_HILITE, "Press ENTER key to reset to defaults");
+#endif
+    else if (flags & S_KEY)
+#ifdef HANDHELDMODS
+      M_DrawStringCentered(160, 20, CR_HILITE, "Press A to Change, SELECT to Clear");
+#else
+      M_DrawStringCentered(160, 20, CR_HILITE, "Press Enter to Change, Del to Clear");
+#endif
     else
+#ifdef HANDHELDMODS
+      M_DrawStringCentered(160, 20, CR_HILITE, "Press A to Change");
+#else
       M_DrawStringCentered(160, 20, CR_HILITE, "Press Enter to Change");
+#endif
   }
 }
 
@@ -2178,6 +2202,8 @@ setup_menu_t keys_settings1[];
 setup_menu_t keys_settings2[];
 setup_menu_t keys_settings3[];
 setup_menu_t keys_settings4[];
+setup_menu_t keys_settings5[];
+setup_menu_t keys_settings6[];
 
 // The table which gets you from one screen table to the next.
 
@@ -2187,6 +2213,8 @@ setup_menu_t* keys_settings[] =
   keys_settings2,
   keys_settings3,
   keys_settings4,
+  keys_settings5,
+  keys_settings6,
   NULL
 };
 
@@ -2242,17 +2270,10 @@ setup_menu_t keys_settings1[] =  // Key Binding screen strings
   {"180 TURN"    ,S_KEY       ,m_scrn,KB_X,KB_Y+10*8,{&key_reverse}},
   {"USE"         ,S_KEY       ,m_scrn,KB_X,KB_Y+11*8,{&key_use},&mousebforward,&joybuse},
 
-  {"MENUS"       ,S_SKIP|S_TITLE,m_null,KB_X,KB_Y+12*8},
-  {"NEXT ITEM"   ,S_KEY       ,m_menu,KB_X,KB_Y+13*8,{&key_menu_down}},
-  {"PREV ITEM"   ,S_KEY       ,m_menu,KB_X,KB_Y+14*8,{&key_menu_up}},
-  {"LEFT"        ,S_KEY       ,m_menu,KB_X,KB_Y+15*8,{&key_menu_left}},
-  {"RIGHT"       ,S_KEY       ,m_menu,KB_X,KB_Y+16*8,{&key_menu_right}},
-  {"BACKSPACE"   ,S_KEY       ,m_menu,KB_X,KB_Y+17*8,{&key_menu_backspace}},
-  {"SELECT ITEM" ,S_KEY       ,m_menu,KB_X,KB_Y+18*8,{&key_menu_enter}},
-  {"EXIT"        ,S_KEY       ,m_menu,KB_X,KB_Y+19*8,{&key_menu_escape}},
-
+#ifndef HANDHELDMODS
   // Button for resetting to defaults
   {0,S_RESET,m_null,X_BUTTON,Y_BUTTON},
+#endif
 
   {"NEXT ->",S_SKIP|S_NEXT,m_null,KB_NEXT,KB_Y+20*8, {keys_settings2}},
 
@@ -2300,7 +2321,6 @@ setup_menu_t keys_settings2[] =  // Key Binding screen strings
   {"NEXT ->", S_SKIP|S_NEXT,m_null,KB_NEXT,KB_Y+20*8, {keys_settings3}},
 
   // Final entry
-
   {0,S_SKIP|S_END,m_null}
 };
 
@@ -2323,7 +2343,6 @@ setup_menu_t keys_settings3[] =  // Key Binding screen strings
   {"NEXT ->",S_SKIP|S_NEXT,m_null,KB_NEXT,KB_Y+20*8, {keys_settings4}},
 
   // Final entry
-
   {0,S_SKIP|S_END,m_null}
 
 };
@@ -2342,22 +2361,62 @@ setup_menu_t keys_settings4[] =  // Key Binding screen strings
   {"CLEAR MARKS",S_KEY       ,m_map ,KB_X,KB_Y+ 9*8,{&key_map_clear}},
   {"FULL/ZOOM"  ,S_KEY       ,m_map ,KB_X,KB_Y+10*8,{&key_map_gobig}},
   {"GRID"       ,S_KEY       ,m_map ,KB_X,KB_Y+11*8,{&key_map_grid}},
-
-  {"CHATTING"   ,S_SKIP|S_TITLE,m_null,KB_X,KB_Y+12*8},
-  {"BEGIN CHAT" ,S_KEY       ,m_scrn,KB_X,KB_Y+13*8,{&key_chat}},
-  {"PLAYER 1"   ,S_KEY       ,m_scrn,KB_X,KB_Y+14*8,{&destination_keys[0]}},
-  {"PLAYER 2"   ,S_KEY       ,m_scrn,KB_X,KB_Y+15*8,{&destination_keys[1]}},
-  {"PLAYER 3"   ,S_KEY       ,m_scrn,KB_X,KB_Y+16*8,{&destination_keys[2]}},
-  {"PLAYER 4"   ,S_KEY       ,m_scrn,KB_X,KB_Y+17*8,{&destination_keys[3]}},
-  {"BACKSPACE"  ,S_KEY       ,m_scrn,KB_X,KB_Y+18*8,{&key_backspace}},
-  {"ENTER"      ,S_KEY       ,m_scrn,KB_X,KB_Y+19*8,{&key_enter}},
+#ifdef GL_DOOM
+  {"TEXTURED"   ,S_KEY       ,m_map ,KB_X,KB_Y+12*8,{&key_map_textured}},
+#endif
 
   {"<- PREV" ,S_SKIP|S_PREV,m_null,KB_PREV,KB_Y+20*8, {keys_settings3}},
+#ifdef HANDHELDMODS
+  {"NEXT ->",S_SKIP|S_NEXT,m_null,KB_NEXT,KB_Y+20*8, {keys_settings6}},
+#else
+  {"NEXT ->",S_SKIP|S_NEXT,m_null,KB_NEXT,KB_Y+20*8, {keys_settings5}},
+#endif
 
   // Final entry
 
   {0,S_SKIP|S_END,m_null}
 
+};
+
+setup_menu_t keys_settings5[] =  // Key Binding screen strings
+{
+  {"CHATTING"   ,S_SKIP|S_TITLE,m_null,KB_X,KB_Y+0*8},
+  {"BEGIN CHAT" ,S_KEY       ,m_scrn,KB_X,KB_Y+1*8,{&key_chat}},
+  {"PLAYER 1"   ,S_KEY       ,m_scrn,KB_X,KB_Y+2*8,{&destination_keys[0]}},
+  {"PLAYER 2"   ,S_KEY       ,m_scrn,KB_X,KB_Y+3*8,{&destination_keys[1]}},
+  {"PLAYER 3"   ,S_KEY       ,m_scrn,KB_X,KB_Y+4*8,{&destination_keys[2]}},
+  {"PLAYER 4"   ,S_KEY       ,m_scrn,KB_X,KB_Y+5*8,{&destination_keys[3]}},
+  {"BACKSPACE"  ,S_KEY       ,m_scrn,KB_X,KB_Y+6*8,{&key_backspace}},
+  {"ENTER"      ,S_KEY       ,m_scrn,KB_X,KB_Y+7*8,{&key_enter}},
+
+  {"<- PREV" ,S_SKIP|S_PREV,m_null,KB_PREV,KB_Y+20*8, {keys_settings4}},
+  {"NEXT ->",S_SKIP|S_NEXT,m_null,KB_NEXT,KB_Y+20*8, {keys_settings6}},
+
+  // Final entry
+  {0,S_SKIP|S_END,m_null}
+};
+
+//e6y
+setup_menu_t keys_settings6[] =  // Key Binding screen strings
+{
+  {"MENUS"       ,S_SKIP|S_TITLE,m_null,KB_X,KB_Y+0*8},
+  {"NEXT ITEM"   ,S_KEY       ,m_menu,KB_X,KB_Y+1*8,{&key_menu_down}},
+  {"PREV ITEM"   ,S_KEY       ,m_menu,KB_X,KB_Y+2*8,{&key_menu_up}},
+  {"LEFT"        ,S_KEY       ,m_menu,KB_X,KB_Y+3*8,{&key_menu_left}},
+  {"RIGHT"       ,S_KEY       ,m_menu,KB_X,KB_Y+4*8,{&key_menu_right}},
+  {"BACKSPACE"   ,S_KEY       ,m_menu,KB_X,KB_Y+5*8,{&key_menu_backspace}},
+  {"SELECT ITEM" ,S_KEY       ,m_menu,KB_X,KB_Y+6*8,{&key_menu_enter}},
+  {"EXIT"        ,S_KEY       ,m_menu,KB_X,KB_Y+7*8,{&key_menu_escape}},
+  {"CLEAR"       ,S_KEY       ,m_menu,KB_X,KB_Y+8*8,{&key_menu_clear}},
+
+#ifdef HANDHELDMODS
+  {"<- PREV",S_SKIP|S_PREV,m_null,KB_PREV,KB_Y+20*8, {keys_settings4}},
+#else
+  {"<- PREV",S_SKIP|S_PREV,m_null,KB_PREV,KB_Y+20*8, {keys_settings5}},
+#endif
+
+  // Final entry
+  {0,S_SKIP|S_END,m_null}
 };
 
 // Setting up for the Key Binding screen. Turn on flags, set pointers,
@@ -2463,8 +2522,10 @@ setup_menu_t weap_settings1[] =  // Weapons Settings screen
   {"Enable Fist/Chainsaw\n& SG/SSG toggle", S_YESNO, m_null, WP_X,
    WP_Y+ weap_toggle*8, {"doom_weapon_toggles"}},
 
+#ifndef HANDHELDMODS
   // Button for resetting to defaults
   {0,S_RESET,m_null,X_BUTTON,Y_BUTTON},
+#endif
 
   // Final entry
   {0,S_SKIP|S_END,m_null}
@@ -2550,8 +2611,10 @@ setup_menu_t stat_settings1[] =  // Status Bar and HUD Settings screen
   {"AMMO LOW/OK"       ,S_NUM       ,m_null,ST_X,ST_Y+14*8, {"ammo_red"}},
   {"AMMO OK/GOOD"      ,S_NUM       ,m_null,ST_X,ST_Y+15*8, {"ammo_yellow"}},
 
+#ifndef HANDHELDMODS
   // Button for resetting to defaults
   {0,S_RESET,m_null,X_BUTTON,Y_BUTTON},
+#endif
 
   // Final entry
   {0,S_SKIP|S_END,m_null}
@@ -2642,8 +2705,10 @@ setup_menu_t auto_settings1[] =  // 1st AutoMap Settings screen
 
   {"Show coordinates of automap pointer",S_YESNO,m_null,AU_X,AU_Y+16*8, {"map_point_coord"}},  // killough 10/98
 
+#ifndef HANDHELDMODS
   // Button for resetting to defaults
   {0,S_RESET,m_null,X_BUTTON,Y_BUTTON},
+#endif
 
   {"NEXT ->",S_SKIP|S_NEXT,m_null,AU_NEXT,AU_Y+20*8, {auto_settings2}},
 
@@ -2828,8 +2893,10 @@ setup_menu_t enem_settings1[] =  // Enemy Settings screen
   {"Allow dogs to jump down",S_YESNO,m_null,E_X,E_Y+ enem_dog_jumping*8, {"dog_jumping"}},
 #endif
 
+#ifndef HANDHELDMODS
   // Button for resetting to defaults
   {0,S_RESET,m_null,X_BUTTON,Y_BUTTON},
+#endif
 
   // Final entry
   {0,S_SKIP|S_END,m_null}
@@ -2999,8 +3066,10 @@ setup_menu_t gen_settings1[] = { // General Settings screen1
   {"Enable v1.1 Pitch Effects", S_YESNO, m_null, G_X,
    G_YA3 + general_pitch*8, {"pitched_sounds"}},
 
+#ifndef HANDHELDMODS
   // Button for resetting to defaults
   {0,S_RESET,m_null,X_BUTTON,Y_BUTTON},
+#endif
 
   {"NEXT ->",S_SKIP|S_NEXT,m_null,KB_NEXT,KB_Y+20*8, {gen_settings2}},
 
@@ -3281,8 +3350,10 @@ setup_menu_t comp_settings1[] =  // Compatibility Settings screen #1
   {"Blazing doors make double closing sounds", S_YESNO, m_null, C_X,
    C_Y + compat_blazing * COMP_SPC, {"comp_blazing"}},
 
+#ifndef HANDHELDMODS
   // Button for resetting to defaults
   {0,S_RESET,m_null,X_BUTTON,Y_BUTTON},
+#endif
 
   {"NEXT ->",S_SKIP|S_NEXT, m_null, KB_NEXT, C_Y+C_NEXTPREV, {comp_settings2}},
 
@@ -3459,8 +3530,10 @@ setup_menu_t mess_settings1[] =  // Messages screen
   {"Message Background",  S_YESNO,  m_null,  M_X,
    M_Y + mess_background*8, {"hud_list_bgon"}},
 
+#ifndef HANDHELDMODS
   // Button for resetting to defaults
   {0,S_RESET,m_null,X_BUTTON,Y_BUTTON},
+#endif
 
   // Final entry
 
@@ -3535,8 +3608,10 @@ setup_menu_t chat_settings1[] =  // Chat Strings screen
   {"9",S_CHAT,m_null,CS_X,CS_Y+ 9*8, {"chatmacro9"}},
   {"0",S_CHAT,m_null,CS_X,CS_Y+10*8, {"chatmacro0"}},
 
+#ifndef HANDHELDMODS
   // Button for resetting to defaults
   {0,S_RESET,m_null,X_BUTTON,Y_BUTTON},
+#endif
 
   // Final entry
   {0,S_SKIP|S_END,m_null}
@@ -3883,7 +3958,27 @@ int M_GetKeyString(int c,int offset)
       menu_buffer[offset++] = '1' + c - KEYD_F1;
       menu_buffer[offset]   = 0;
     } else {
+		
+#ifdef HANDHELDMODS
       switch(c) {
+      case KEYD_TAB:      s = "L";  break;
+      case KEYD_ENTER:      s = "START"; break;
+      case KEYD_ESCAPE:     s = "SELECT";  break;
+      case KEYD_SPACEBAR:   s = "X"; break;
+      case KEYD_BACKSPACE:  s = "R"; break;
+      case KEYD_RCTRL:      s = "A"; break;
+      case KEYD_LEFTARROW:  s = "LEFT"; break;
+      case KEYD_UPARROW:    s = "UP"; break;
+      case KEYD_RIGHTARROW: s = "RIGHT"; break;
+      case KEYD_DOWNARROW:  s = "DOWN"; break;
+      case KEYD_RSHIFT:     s = "Y"; break;
+      case KEYD_RALT:       s = "B";  break;
+      case KEYD_END:        s = "MENU";  break;
+      case 0:               s = "NONE"; break;
+      default:              s = "JUNK"; break;
+      }
+#else
+	  switch(c) {
       case KEYD_TAB:      s = "TAB";  break;
       case KEYD_ENTER:      s = "ENTR"; break;
       case KEYD_ESCAPE:     s = "ESC";  break;
@@ -3908,8 +4003,10 @@ int M_GetKeyString(int c,int offset)
       case KEYD_F11:        s = "F11";  break;
       case KEYD_F12:        s = "F12";  break;
       case KEYD_PAUSE:      s = "PAUS"; break;
+      case 0:               s = "NONE"; break;
       default:              s = "JUNK"; break;
       }
+#endif
 
       if (s) { // cph - Slight code change
   strcpy(&menu_buffer[offset],s); // string to display
@@ -4974,6 +5071,21 @@ boolean M_Responder (event_t* ev) {
     return true;
   }
 
+      if (ch == key_menu_clear)
+  {
+    if (ptr1->m_flags & S_KEY)
+    {
+        if (ptr1->m_joy)
+          *ptr1->m_joy = -1;
+
+        if (ptr1->m_mouse)
+          *ptr1->m_mouse = -1;
+
+        *ptr1->var.m_key = 0;
+    }
+
+  }
+
       if (ch == key_menu_enter)
   {
     int flags = ptr1->m_flags;
@@ -5068,7 +5180,7 @@ boolean M_Responder (event_t* ev) {
       // The m_var1 field contains a pointer to the appropriate screen
       // to move to.
 
-      if (ch == key_menu_left)
+      if (ch == key_menu_left || ch == key_strafeleft)
   {
     ptr2 = ptr1;
     do
@@ -5090,7 +5202,7 @@ boolean M_Responder (event_t* ev) {
     while (!(ptr2->m_flags & S_END));
   }
 
-      if (ch == key_menu_right)
+      if (ch == key_menu_right || ch == key_straferight)
   {
     ptr2 = ptr1;
     do

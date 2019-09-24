@@ -76,7 +76,7 @@
 #define RESTARTLEVEL "restart the level?\n\n"PRESSYN
 
 #ifdef HANDHELDMODS
-#define DOSY        "(press Start to quit)"
+#define DOSY        "(press A to quit)"
 #else
 #define DOSY        "(press y to quit)"
 #endif
