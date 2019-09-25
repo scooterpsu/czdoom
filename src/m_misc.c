@@ -437,7 +437,7 @@ default_t defaults[] =
 
   {"key_fire",        {&key_fire},           {KEYD_RCTRL}     ,
    0,MAX_KEY,def_key,ss_keys}, // duh
-  {"key_use",         {&key_use},            {KEYD_RSHIFT}           ,
+  {"key_use",         {&key_use},            {KEYD_SPACEBAR}           ,
    0,MAX_KEY,def_key,ss_keys}, // key to open a door, use a switch
   {"key_strafe",      {&key_strafe},         {0}      ,
    0,MAX_KEY,def_key,ss_keys}, // key to use with arrows to strafe
@@ -519,7 +519,7 @@ default_t defaults[] =
    0,MAX_KEY,def_key,ss_keys}, // key to chat with player 3
   {"key_chatplayer4", {&destination_keys[3]}, {0}            ,
    0,MAX_KEY,def_key,ss_keys}, // key to chat with player 4
-  {"key_weapontoggle",{&key_weapontoggle},    {KEYD_SPACEBAR}            ,
+  {"key_weapontoggle",{&key_weapontoggle},    {KEYD_RSHIFT}            ,
    0,MAX_KEY,def_key,ss_keys}, // key to toggle between two most preferred weapons with ammo
   {"key_weapon1",     {&key_weapon1},         {0}            ,
    0,MAX_KEY,def_key,ss_keys}, // key to switch to weapon 1 (fist/chainsaw)
