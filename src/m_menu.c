@@ -632,7 +632,7 @@ void M_NewGame(int choice)
 // CPhipps - static
 static void M_VerifyNightmare(int ch)
 {
-  if (ch != key_enter)
+  if (ch != key_menu_enter)
     return;
 
   G_DeferedInitNew(nightmare,epi+1,1);
@@ -888,7 +888,7 @@ void M_SaveSelect(int choice)
 
   if (!strcmp(savegamestrings[choice],s_EMPTYSTRING))
   {
-      M_SaveConf(key_enter);
+      M_SaveConf(key_menu_enter);
   }else{
 
       M_StartMessage(SAVECONF, M_SaveConf, true); //  If there is already a savegame
@@ -911,7 +911,7 @@ void M_SaveSelect(int choice)
 #ifdef HANDHELDMODS
 void M_SaveConf (int ch)
 {
-    if(ch != key_enter)
+    if(ch != key_menu_enter)
         return;
 
     char savename[SAVESTRINGSIZE];
@@ -4375,7 +4375,7 @@ boolean M_Responder (event_t* ev) {
   if (messageToPrint) {
 #ifdef HANDHELDMODS
       if (messageNeedsInput == true &&
-  !(ch == ' ' || ch == 120 || ch == 115 || ch == key_escape || ch == key_enter)) // phares
+  !(ch == ' ' || ch == 120 || ch == 115 || ch == key_escape || ch == key_menu_enter)) // phares
       return false;
 #else
       if (messageNeedsInput == true &&

@@ -474,7 +474,7 @@ default_t defaults[] =
    0,MAX_KEY,def_key,ss_keys}, // key to enter a chat message
   {"key_backspace",   {&key_backspace},      {KEYD_RALT} ,
    0,MAX_KEY,def_key,ss_keys}, // backspace key
-  {"key_enter",       {&key_enter},          {KEYD_RCTRL}     ,
+  {"key_enter",       {&key_enter},          {0}     ,
    0,MAX_KEY,def_key,ss_keys}, // key to select from menu or see last message
   {"key_map",         {&key_map},            {KEYD_ESCAPE}      ,
    0,MAX_KEY,def_key,ss_keys}, // key to toggle automap display
