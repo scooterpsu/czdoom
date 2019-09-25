@@ -472,7 +472,7 @@ default_t defaults[] =
    0,MAX_KEY,def_key,ss_keys}, // key to toggle always run mode
   {"key_chat",        {&key_chat},           {0}            ,
    0,MAX_KEY,def_key,ss_keys}, // key to enter a chat message
-  {"key_backspace",   {&key_backspace},      {KEYD_RALT} ,
+  {"key_backspace",   {&key_backspace},      {0} ,
    0,MAX_KEY,def_key,ss_keys}, // backspace key
   {"key_enter",       {&key_enter},          {0}     ,
    0,MAX_KEY,def_key,ss_keys}, // key to select from menu or see last message
