@@ -848,10 +848,55 @@ static void IdentifyVersion (void)
       //jff 9/3/98 use logical output routine
       lprintf(LO_WARN,"Unknown Game Version, may not work\n");
     D_AddFile(iwad,source_iwad);
-    free(iwad);
+    //free(iwad);
   }
   else
+  {
     I_Error("IdentifyVersion: IWAD not found\n");
+  }
+  
+  char *savefolder;
+  switch ( gamemode ) {
+    case retail:
+      i = strlen(iwad);
+      if (i>=8 && !strnicmp(iwad+i-8,"chex.wad",8)) // prboom chex.wad
+		savefolder = "/chex";
+      else
+        savefolder = "/doomu";
+      break;
+    case shareware:
+      if (i>=8 && !strnicmp(iwad+i-8,"chex.wad",8)) // stock chex.wad
+		savefolder = "/chex";
+      else
+		savefolder = "/doom1";
+      break;
+    case registered:
+      savefolder = "/doom";
+      break;
+    case commercial: 
+      switch (gamemission)
+      {
+        case pack_plut:
+          savefolder = "/plutonia";
+          break;
+        case pack_tnt:
+          savefolder = "/tnt";
+          break;
+        default:
+          savefolder = "/doom2";
+          break;
+      }
+      break;
+    default:
+      savefolder = "/freedoom";
+      break;
+    }
+	free(iwad);
+	
+	//Save to per-wad subfolder
+	strcat(basesavegame, savefolder);
+	mkdir(basesavegame, S_IRUSR | S_IWUSR | S_IXUSR); // Make sure it exists
+  
 }
 
 
