@@ -282,13 +282,14 @@ const char *I_DoomExeDir(void)
 #else
 // cph - V.Aguilar (5/30/99) suggested return ~/.lxdoom/, creating
 //  if non-existant
-static const char prboom_dir[] = {"/.prboom"}; // Mead rem extra slash 8/21/03
+static const char prboom_dir[] = {"/.czdoom"}; // Mead rem extra slash 8/21/03
 
 const char *I_DoomExeDir(void)
 {
   static char *base;
   if (!base)        // cache multiple requests
     {
+/*
 #ifdef HANDHELDMODS
 
       //  Dump the saves and config files into the same dir as the executable.
@@ -299,7 +300,7 @@ const char *I_DoomExeDir(void)
       base = malloc(strlen(prboom_dir) + 1);
       strcpy(base, thisDir);
 #else
-       
+*/       
       char *home = getenv("HOME");
       size_t len = strlen(home);
 
@@ -309,7 +310,7 @@ const char *I_DoomExeDir(void)
       if (base[len-1] == '/') base[len-1] = 0;
       strcat(base, prboom_dir);
       mkdir(base, S_IRUSR | S_IWUSR | S_IXUSR); // Make sure it exists
-#endif
+//#endif
     }
   return base;
 }

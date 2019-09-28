@@ -797,6 +797,10 @@ static void IdentifyVersion (void)
 
   iwad = FindIWADFile();
 
+  //Save to savegames subfolder
+  strcat(basesavegame, "/savegames");
+  mkdir(basesavegame, S_IRUSR | S_IWUSR | S_IXUSR); // Make sure it exists
+
 #if (defined(GL_DOOM) && defined(_DEBUG))
   // proff 11/99: used for debugging
   {
