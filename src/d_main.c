@@ -390,6 +390,7 @@ static void D_DoomLoop(void)
 static int  demosequence;         // killough 5/2/98: made static
 static int  pagetic;
 static const char *pagename; // CPhipps - const
+static boolean bfgedition;
 
 //
 // D_PageTicker
@@ -432,7 +433,10 @@ void D_AdvanceDemo (void)
 
 static void D_SetPageName(const char *name)
 {
-  pagename = name;
+  if ((bfgedition) && name && !strncmp(name,"TITLEPIC",8))
+    pagename = "DMENUPIC";
+  else
+    pagename = name;
 }
 
 static void D_DrawTitle1(const char *name)
@@ -615,6 +619,7 @@ static void CheckIWAD(const char *iwadname,GameMode_t *gmode,boolean *hassec)
   if ( !access (iwadname,R_OK) )
   {
     int ud=0,rg=0,sw=0,cm=0,sc=0;
+    boolean noiwad=0;
     FILE* fp;
 
     // Identify IWAD correctly
@@ -623,10 +628,16 @@ static void CheckIWAD(const char *iwadname,GameMode_t *gmode,boolean *hassec)
       wadinfo_t header;
 
       // read IWAD header
-      if (fread(&header, sizeof(header), 1, fp) == 1 && !strncmp(header.identification, "IWAD", 4))
+      if (fread(&header, sizeof(header), 1, fp) == 1)
       {
         size_t length;
         filelump_t *fileinfo;
+		
+        if (strncmp(header.identification, "IWAD", 4)) // missing IWAD tag in header
+        {
+          noiwad++;
+        }
+
 
         // read IWAD directory
         header.numlumps = LONG(header.numlumps);
@@ -640,6 +651,7 @@ static void CheckIWAD(const char *iwadname,GameMode_t *gmode,boolean *hassec)
 
         // scan directory for levelname lumps
         while (length--)
+        {
           if (fileinfo[length].name[0] == 'E' &&
               fileinfo[length].name[2] == 'M' &&
               fileinfo[length].name[4] == 0)
@@ -664,11 +676,15 @@ static void CheckIWAD(const char *iwadname,GameMode_t *gmode,boolean *hassec)
                   fileinfo[length].name[4] == '2')
                 ++sc;
           }
-
+          if (!strncmp(fileinfo[length].name,"DMENUPIC",8))
+            bfgedition++;
+        }
         free(fileinfo);
+		
+        if (noiwad && !bfgedition)
+          I_Error("CheckIWAD: IWAD tag %s not present", iwadname);
+
       }
-      else // missing IWAD tag in header
-        I_Error("CheckIWAD: IWAD tag %s not present", iwadname);
     }
     else // error from open call
       I_Error("CheckIWAD: Can't open IWAD %s", iwadname);
