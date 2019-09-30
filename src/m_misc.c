@@ -1192,7 +1192,7 @@ void M_DoScreenShot (const char* fname)
 }
 
 #ifndef SCREENSHOT_DIR
-#define SCREENSHOT_DIR "."
+#define SCREENSHOT_DIR I_DoomExeDir()
 #endif
 
 #ifdef HAVE_LIBPNG
