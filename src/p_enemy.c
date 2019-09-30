@@ -207,19 +207,28 @@ static boolean P_CheckMissileRange(mobj_t *actor)
 
   dist >>= FRACBITS;
 
-  if (actor->info->maxattackrange > 0 && dist > actor->info->maxattackrange)
-    return false;     // too far away
+  if (actor->type == MT_VILE)
+    if (dist > 14*64)
+      return false;     // too far away
 
-  if (actor->info->meleestate != S_NULL && dist < actor->info->meleethreshold)
-    return false;     // close enough for melee attack, don't fire
 
-  // higher attack probability like Cyberdemon, Spiderboss, Revenant and Lost Soul
-  if (actor->flags & MF_MISSILEMORE)
+  if (actor->type == MT_UNDEAD)
+    {
+      if (dist < 196)
+        return false;   // close for fist attack
+      dist >>= 1;
+    }
+
+  if (actor->type == MT_CYBORG ||
+      actor->type == MT_SPIDER ||
+      actor->type == MT_SKULL)
     dist >>= 1;
 
-  // Some mobs (eg. Cyberdemon) have a minimum attack chance
-  if (dist > actor->info->minmissilechance)
-    dist = actor->info->minmissilechance;
+  if (dist > 200)
+    dist = 200;
+
+  if (actor->type == MT_CYBORG && dist > 160)
+    dist = 160;
 
   if (P_Random(pr_missrange) < dist)
     return false;
@@ -725,7 +734,7 @@ static boolean PIT_FindTarget(mobj_t *mo)
   mobj_t *actor = current_actor;
 
   if (!((mo->flags ^ actor->flags) & MF_FRIEND &&        // Invalid target
-  mo->health > 0 && (mo->flags & MF_ISMONSTER)))
+  mo->health > 0 && (mo->flags & MF_COUNTKILL || mo->type == MT_SKULL)))
     return true;
 
   // If the monster is already engaged in a one-on-one attack
@@ -1072,7 +1081,7 @@ void A_Look(mobj_t *actor)
           sound = actor->info->seesound;
           break;
         }
-      if (actor->flags & MF_FULLVOLSIGHT)
+      if (actor->type==MT_SPIDER || actor->type == MT_CYBORG)
         S_StartSound(NULL, sound);          // full volume
       else
         S_StartSound(actor, sound);
@@ -2055,7 +2064,7 @@ void A_Scream(mobj_t *actor)
     }
 
   // Check for bosses.
-  if (actor->flags & MF_FULLVOLDEATH)
+  if (actor->type==MT_SPIDER || actor->type == MT_CYBORG)
     S_StartSound(NULL, sound); // full volume
   else
     S_StartSound(actor, sound);

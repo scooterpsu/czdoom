@@ -620,9 +620,12 @@ void P_TouchSpecialThing(mobj_t *special, mobj_t *toucher)
 // killough 11/98: make static
 static void P_KillMobj(mobj_t *source, mobj_t *target)
 {
+  mobjtype_t item;
+  mobj_t     *mo;
+
   target->flags &= ~(MF_SHOOTABLE|MF_FLOAT|MF_SKULLFLY);
 
-  if (!(target->flags & MF_DONTFALL))
+  if (target->type != MT_SKULL)
     target->flags &= ~MF_NOGRAVITY;
 
   target->flags |= MF_CORPSE|MF_DROPOFF;
@@ -704,12 +707,27 @@ static void P_KillMobj(mobj_t *source, mobj_t *target)
   // This determines the kind of object spawned
   // during the death frame of a thing.
 
- if (target->info->droppeditem != MT_NULL)
-  {
-    mobj_t     *mo;
-    mo = P_SpawnMobj (target->x,target->y,ONFLOORZ, target->info->droppeditem);
-    mo->flags |= MF_DROPPED;    // special versions of items
-  }
+  switch (target->type)
+    {
+    case MT_WOLFSS:
+    case MT_POSSESSED:
+      item = MT_CLIP;
+      break;
+
+    case MT_SHOTGUY:
+      item = MT_SHOTGUN;
+      break;
+
+    case MT_CHAINGUY:
+      item = MT_CHAINGUN;
+      break;
+
+    default:
+      return;
+    }
+
+  mo = P_SpawnMobj (target->x,target->y,ONFLOORZ, item);
+  mo->flags |= MF_DROPPED;    // special versions of items
 }
 
 //
@@ -860,8 +878,8 @@ void P_DamageMobj(mobj_t *target,mobj_t *inflictor, mobj_t *source, int damage)
 
   /* killough 9/9/98: cleaned up, made more consistent: */
 
-  if (source && source != target && !(source->flags & MF_NOTARGET) &&
-      (!target->threshold || (target->flags & MF_QUICKTORETALIATE)) &&
+  if (source && source != target && source->type != MT_VILE &&
+      (!target->threshold || target->type == MT_VILE) &&
       ((source->flags ^ target->flags) & MF_FRIEND ||
        monster_infighting ||
        !mbf_features))

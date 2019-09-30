@@ -1434,8 +1434,7 @@ typedef enum {
   MT_STEALTHSHOTGUY,
   MT_STEALTHZOMBIE,
 
-  NUMMOBJTYPES,  // Counter of how many there are
-  MT_NULL = -1
+  NUMMOBJTYPES  // Counter of how many there are
 } mobjtype_t;
 
 /********************************************************************
@@ -1476,7 +1475,6 @@ typedef struct
   int deathsound;   /* The death sound.  See also A_Scream() in
            p_enemy.c for some tweaking that goes on
            for certain monsters */
-  mobjtype_t droppeditem; /* Mobj to drop after death */
   int speed;        /* How fast it moves.  Too fast and it can miss
            collision logic. */
   int radius;       /* An often incorrect radius */
@@ -1492,9 +1490,6 @@ typedef struct
   int raisestate;   /* The first state for an Archvile or respawn
            resurrection.  Zero means it won't come
            back to life. */
-  int meleethreshold; /* Distance to switch from missile to melee attack */
-  int maxattackrange; /* Maximum distance range to start shooting */
-  int minmissilechance; /* Minimum chance for firing a missile */
 } mobjinfo_t;
 
 /* See p_mobj_h for addition more technical info */

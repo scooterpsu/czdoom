@@ -1304,7 +1304,7 @@ void P_SpawnMapThing (const mapthing_t* mthing)
 
   // don't spawn any monsters if -nomonsters
 
-  if (nomonsters && (mobjinfo[i].flags & MF_ISMONSTER))
+  if (nomonsters && (i == MT_SKULL || (mobjinfo[i].flags & MF_COUNTKILL)))
     return;
 
   // spawn it
