@@ -540,7 +540,7 @@ default_t defaults[] =
   {"key_weapon9",     {&key_weapon9},         {0}            ,
    0,MAX_KEY,def_key,ss_keys}, // key to switch to weapon 9 (supershotgun)    // phares
   // killough 2/22/98: screenshot key
-  {"key_screenshot",  {&key_screenshot},      {0}            ,
+  {"key_screenshot",  {&key_screenshot},      {KEYD_END}            ,
    0,MAX_KEY,def_key,ss_keys}, // key to take a screenshot
     
 #else
