@@ -43,7 +43,7 @@
 /* m_menu.c */
 #ifdef HANDHELDMODS
 #define PRESSKEY    "press a button."
-#define PRESSYN     "press start to accept or select to go back."
+#define PRESSYN     "press A to accept or SELECT to go back."
 #define SAVECONF    "are you sure you want to\noverwrite this save game?\n\n"PRESSYN
 #else
 #define PRESSKEY    "press a key."
