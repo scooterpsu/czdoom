@@ -998,7 +998,7 @@ const char **const mapnamest[] = // TNT WAD map names.
 void    lfstrip(char *);     // strip the \r and/or \n off of a line
 void    rstrip(char *);      // strip trailing whitespace
 char *  ptr_lstrip(char *);  // point past leading whitespace
-boolean deh_GetData(char *, char *, unit_64t *, char **, FILE *);
+boolean deh_GetData(char *, char *, uint_64_t *, char **, FILE *);
 boolean deh_procStringSub(char *, char *, char *, FILE *);
 char *  dehReformatStr(char *);
 
@@ -1119,7 +1119,7 @@ static const char *deh_mobjinfo[DEH_MOBJINFOMAX] =
 
 struct deh_mobjflags_s {
   const char *name; // CPhipps - const*
-  unit_64t value;
+  uint_64_t value;
 };
 
 // CPhipps - static const
@@ -1633,8 +1633,8 @@ static void deh_procBexCodePointers(DEHFILE *fpin, FILE* fpout, char *line)
 // To be on the safe, compatible side, we manually convert DEH bitflags
 // to prboom types - POPE
 //---------------------------------------------------------------------------
-static unit_64t getConvertedDEHBits(unit_64t bits) {
-  static const unit_64t bitMap[32] = {
+static uint_64_t getConvertedDEHBits(uint_64_t bits) {
+  static const uint_64_t bitMap[32] = {
     /* cf linuxdoom-1.10 p_mobj.h */
     MF_SPECIAL, // 0 Can be picked up - When touched the thing can be picked up.
     MF_SOLID, // 1 Obstacle - The thing is solid and will not let you (or others) pass through it
@@ -1672,8 +1672,8 @@ static unit_64t getConvertedDEHBits(unit_64t bits) {
     MF_TRANSLUCENT // e6y: Translucency via dehacked/bex doesn't work without it
   };
   int i;
-  unit_64t shiftBits = bits;
-  unit_64t convertedBits = 0;
+  uint_64_t shiftBits = bits;
+  uint_64_t convertedBits = 0;
   for (i=0; i<32; i++) {
     if (shiftBits & 0x1) convertedBits |= bitMap[i];
     shiftBits >>= 1;
@@ -1684,7 +1684,7 @@ static unit_64t getConvertedDEHBits(unit_64t bits) {
 //---------------------------------------------------------------------------
 // See usage below for an explanation of this function's existence - POPE
 //---------------------------------------------------------------------------
-static void setMobjInfoValue(int mobjInfoIndex, int keyIndex, unit_64t value) {
+static void setMobjInfoValue(int mobjInfoIndex, int keyIndex, uint_64_t value) {
   mobjinfo_t *mi;
   if (mobjInfoIndex >= NUMMOBJTYPES || mobjInfoIndex < 0) return;
   mi = &mobjinfo[mobjInfoIndex];
@@ -1737,7 +1737,7 @@ static void deh_procThing(DEHFILE *fpin, FILE* fpout, char *line)
 {
   char key[DEH_MAXKEYLEN];
   char inbuffer[DEH_BUFFERMAX];
-  unit_64t value;      // All deh values are ints or longs
+  uint_64_t value;      // All deh values are ints or longs
   int indexnum;
   int ix;
   char *strval;
@@ -1866,7 +1866,7 @@ static void deh_procFrame(DEHFILE *fpin, FILE* fpout, char *line)
 {
   char key[DEH_MAXKEYLEN];
   char inbuffer[DEH_BUFFERMAX];
-  unit_64t value;      // All deh values are ints or longs
+  uint_64_t value;      // All deh values are ints or longs
   int indexnum;
 
   strncpy(inbuffer,line,DEH_BUFFERMAX);
@@ -1946,7 +1946,7 @@ static void deh_procPointer(DEHFILE *fpin, FILE* fpout, char *line) // done
 {
   char key[DEH_MAXKEYLEN];
   char inbuffer[DEH_BUFFERMAX];
-  unit_64t value;      // All deh values are ints or longs
+  uint_64_t value;      // All deh values are ints or longs
   int indexnum;
   int i; // looper
 
@@ -2024,7 +2024,7 @@ static void deh_procSounds(DEHFILE *fpin, FILE* fpout, char *line)
 {
   char key[DEH_MAXKEYLEN];
   char inbuffer[DEH_BUFFERMAX];
-  unit_64t value;      // All deh values are ints or longs
+  uint_64_t value;      // All deh values are ints or longs
   int indexnum;
 
   strncpy(inbuffer,line,DEH_BUFFERMAX);
@@ -2092,7 +2092,7 @@ static void deh_procAmmo(DEHFILE *fpin, FILE* fpout, char *line)
 {
   char key[DEH_MAXKEYLEN];
   char inbuffer[DEH_BUFFERMAX];
-  unit_64t value;      // All deh values are ints or longs
+  uint_64_t value;      // All deh values are ints or longs
   int indexnum;
 
   strncpy(inbuffer,line,DEH_BUFFERMAX);
@@ -2138,7 +2138,7 @@ static void deh_procWeapon(DEHFILE *fpin, FILE* fpout, char *line)
 {
   char key[DEH_MAXKEYLEN];
   char inbuffer[DEH_BUFFERMAX];
-  unit_64t value;      // All deh values are ints or longs
+  uint_64_t value;      // All deh values are ints or longs
   int indexnum;
 
   strncpy(inbuffer,line,DEH_BUFFERMAX);
@@ -2316,7 +2316,7 @@ static void deh_procCheat(DEHFILE *fpin, FILE* fpout, char *line) // done
 {
   char key[DEH_MAXKEYLEN];
   char inbuffer[DEH_BUFFERMAX];
-  unit_64t value;      // All deh values are ints or longs
+  uint_64_t value;      // All deh values are ints or longs
   char ch = 0; // CPhipps - `writable' null string to initialise...
   char *strval = &ch;  // pointer to the value area
   int ix, iy;   // array indices
@@ -2393,7 +2393,7 @@ static void deh_procMisc(DEHFILE *fpin, FILE* fpout, char *line) // done
 {
   char key[DEH_MAXKEYLEN];
   char inbuffer[DEH_BUFFERMAX];
-  unit_64t value;      // All deh values are ints or longs
+  uint_64_t value;      // All deh values are ints or longs
 
   strncpy(inbuffer,line,DEH_BUFFERMAX);
   while (!dehfeof(fpin) && *inbuffer && (*inbuffer != ' '))
@@ -2629,7 +2629,7 @@ static void deh_procStrings(DEHFILE *fpin, FILE* fpout, char *line)
 {
   char key[DEH_MAXKEYLEN];
   char inbuffer[DEH_BUFFERMAX];
-  unit_64t value;    // All deh values are ints or longs
+  uint_64_t value;    // All deh values are ints or longs
   char *strval;      // holds the string value of the line
   static int maxstrlen = 128; // maximum string length, bumped 128 at
   // a time as needed
@@ -2776,7 +2776,7 @@ static void deh_procHelperThing(DEHFILE *fpin, FILE *fpout, char *line)
 {
   char key[DEH_MAXKEYLEN];
   char inbuffer[DEH_BUFFERMAX];
-  unit_64t value;      // All deh values are ints or longs
+  uint_64_t value;      // All deh values are ints or longs
 
   strncpy(inbuffer,line,DEH_BUFFERMAX);
   while (!dehfeof(fpin) && *inbuffer && (*inbuffer != ' '))
@@ -2811,7 +2811,7 @@ static void deh_procBexSprites(DEHFILE *fpin, FILE *fpout, char *line)
 {
    char key[DEH_MAXKEYLEN];
    char inbuffer[DEH_BUFFERMAX];
-   unit_64t value;    // All deh values are ints or longs
+   uint_64_t value;    // All deh values are ints or longs
    char *strval;  // holds the string value of the line
    char candidate[5];
    int  rover;
@@ -2869,7 +2869,7 @@ static void deh_procBexSounds(DEHFILE *fpin, FILE *fpout, char *line)
 {
    char key[DEH_MAXKEYLEN];
    char inbuffer[DEH_BUFFERMAX];
-   unit_64t value;    // All deh values are ints or longs
+   uint_64_t value;    // All deh values are ints or longs
    char *strval;  // holds the string value of the line
    char candidate[7];
    int  rover, len;
@@ -2928,7 +2928,7 @@ static void deh_procBexMusic(DEHFILE *fpin, FILE *fpout, char *line)
 {
    char key[DEH_MAXKEYLEN];
    char inbuffer[DEH_BUFFERMAX];
-   unit_64t value;    // All deh values are ints or longs
+   uint_64_t value;    // All deh values are ints or longs
    char *strval;  // holds the string value of the line
    char candidate[7];
    int  rover, len;
@@ -3083,7 +3083,7 @@ static boolean StrToInt(char *s, long *l)
 //          as a long just in case.  The passed pointer to hold
 //          the key must be DEH_MAXKEYLEN in size.
 
-boolean deh_GetData(char *s, char *k, unit_64t *l, char **strval, FILE *fpout)
+boolean deh_GetData(char *s, char *k, uint_64_t *l, char **strval, FILE *fpout)
 {
   char *t;  // current char
   long val; // to hold value of pair

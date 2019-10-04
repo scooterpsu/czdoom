@@ -3142,7 +3142,7 @@ static boolean PIT_PushThing(mobj_t* thing)
         {
           int x = (thing->x-sx) >> FRACBITS;
           int y = (thing->y-sy) >> FRACBITS;
-          speed = (int)(((unit_64t) tmpusher->magnitude << 23) / (x*x+y*y+1));
+          speed = (int)(((uint_64_t) tmpusher->magnitude << 23) / (x*x+y*y+1));
         }
 
       // If speed <= 0, you're outside the effective radius. You also have
