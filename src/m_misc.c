@@ -71,6 +71,12 @@
 #include "r_demo.h"
 #include "r_fps.h"
 
+#ifdef _WIN32
+   #define DIR_SLASH_STR "\\"
+#else
+   #define DIR_SLASH_STR "/"
+#endif
+
 /* cph - disk icon not implemented */
 static inline void I_BeginRead(void) {}
 static inline void I_EndRead(void) {}
@@ -220,6 +226,12 @@ default_t defaults[] =
   /* cph - MBF-like wad/deh/bex autoload code */
   {"wadfile_1",{NULL,&wad_files[0]},{0,""},UL,UL,def_str,ss_none},
   {"wadfile_2",{NULL,&wad_files[1]},{0,""},UL,UL,def_str,ss_none},
+  {"wadfile_3",{NULL,&wad_files[2]},{0,""},UL,UL,def_str,ss_none},
+  {"wadfile_4",{NULL,&wad_files[3]},{0,""},UL,UL,def_str,ss_none},
+  {"wadfile_5",{NULL,&wad_files[4]},{0,""},UL,UL,def_str,ss_none},
+  {"wadfile_6",{NULL,&wad_files[5]},{0,""},UL,UL,def_str,ss_none},
+  {"wadfile_7",{NULL,&wad_files[6]},{0,""},UL,UL,def_str,ss_none},
+  {"wadfile_8",{NULL,&wad_files[7]},{0,""},UL,UL,def_str,ss_none},
   {"dehfile_1",{NULL,&deh_files[0]},{0,""},UL,UL,def_str,ss_none},
   {"dehfile_2",{NULL,&deh_files[1]},{0,""},UL,UL,def_str,ss_none},
 
@@ -1005,7 +1017,7 @@ static const char* defaultfile; // CPhipps - static, const
 //
 
 void M_SaveDefaults (void)
-  {
+{
   int   i;
   FILE* f;
 
@@ -1015,33 +1027,44 @@ void M_SaveDefaults (void)
 
   // 3/3/98 explain format of file
 
-  fprintf(f,"# Doom config file\n");
-  fprintf(f,"# Format:\n");
-  fprintf(f,"# variable   value\n");
+  fprintf(f,"# Doom config file\n"
+          "#\n"
+          "# Format:\n"
+          "#  variable   value\n"
+          "#\n"
+          "# Lines starting with '#' are comments\n"
+          "# When saved, default values are commented out\n");
 
   for (i = 0 ; i < numdefaults ; i++) {
     if (defaults[i].type == def_none) {
       // CPhipps - pure headers
-      fprintf(f, "\n# %s\n", defaults[i].name);
-    } else
-    // CPhipps - modified for new default_t form
-    if (!IS_STRING(defaults[i])) //jff 4/10/98 kill super-hack on pointer value
+      fprintf(f, "\n## %s\n", defaults[i].name);
+    } else {
+      // CPhipps - modified for new default_t form
+      if (!IS_STRING(defaults[i])) //jff 4/10/98 kill super-hack on pointer value
       {
-      // CPhipps - remove keycode hack
-      // killough 3/6/98: use spaces instead of tabs for uniform justification
-      if (defaults[i].type == def_hex)
-  fprintf (f,"%-25s 0x%x\n",defaults[i].name,*(defaults[i].location.pi));
-      else
-  fprintf (f,"%-25s %5i\n",defaults[i].name,*(defaults[i].location.pi));
+        // CPhipps - remove keycode hack
+        // killough 3/6/98: use spaces instead of tabs for uniform justification
+        if (defaults[i].type == def_hex)
+          fprintf (f,"%s%-25s 0x%x\n",
+                   (defaults[i].defaultvalue.i == *(defaults[i].location.pi))?"#":"",
+                   defaults[i].name,*(defaults[i].location.pi));
+        else
+          fprintf (f,"%s%-25s %5i\n",
+                   (defaults[i].defaultvalue.i == *(defaults[i].location.pi))?"#":"",
+                   defaults[i].name,*(defaults[i].location.pi));
       }
-    else
+      else
       {
-      fprintf (f,"%-25s \"%s\"\n",defaults[i].name,*(defaults[i].location.ppsz));
+        fprintf (f,"%s%-25s \"%s\"\n",
+                 (strcmp(defaults[i].defaultvalue.psz,*(defaults[i].location.ppsz)) == 0)?"#":"",
+                 defaults[i].name,*(defaults[i].location.ppsz));
       }
     }
+  }
 
   fclose (f);
-  }
+}
 
 /*
  * M_LookupDefault
@@ -1059,13 +1082,15 @@ struct default_s *M_LookupDefault(const char *name)
   return NULL;
 }
 
-//
-// M_LoadDefaults
-//
-
 #define NUMCHATSTRINGS 10 // phares 4/13/98
 
-void M_LoadDefaults (void)
+/*
+ * M_LoadDefaultsFile
+ *
+ * Load configuration file
+ */
+
+void M_LoadDefaultsFile (char *file, boolean basedefault)
 {
   int   i;
   int   len;
@@ -1076,43 +1101,8 @@ void M_LoadDefaults (void)
   int   parm;
   boolean isstring;
 
-  // set everything to base values
-
-  numdefaults = sizeof(defaults)/sizeof(defaults[0]);
-  for (i = 0 ; i < numdefaults ; i++) {
-    if (defaults[i].location.ppsz)
-      *defaults[i].location.ppsz = strdup(defaults[i].defaultvalue.psz);
-    if (defaults[i].location.pi)
-      *defaults[i].location.pi = defaults[i].defaultvalue.i;
-  }
-
-  // check for a custom default file
-
-  i = M_CheckParm ("-config");
-  if (i && i < myargc-1)
-    defaultfile = myargv[i+1];
-  else {
-    const char* exedir = I_DoomExeDir();
-    defaultfile = malloc(PATH_MAX+1);
-    /* get config file from same directory as executable */
-#ifdef HAVE_SNPRINTF
-    snprintf((char *)defaultfile, PATH_MAX,
-#else
-    sprintf ((char *)defaultfile,
-#endif
-            "%s%s%sboom.cfg", exedir, HasTrailingSlash(exedir) ? "" : "/", 
-#if ((defined GL_DOOM) && (defined _MSC_VER))
-            "gl");
-#else
-            "pr");
-#endif
-  }
-
-  lprintf (LO_CONFIRM, " default file: %s\n",defaultfile);
-
   // read the file in, overriding any set defaults
-
-  f = fopen (defaultfile, "r");
+  f = fopen (file, "r");
   if (f)
     {
     while (!feof(f))
@@ -1151,19 +1141,28 @@ void M_LoadDefaults (void)
         continue;
       }
             if (!isstring)
-              {
+            {
 
               //jff 3/4/98 range check numeric parameters
 
               if ((defaults[i].minvalue==UL || defaults[i].minvalue<=parm) &&
                   (defaults[i].maxvalue==UL || defaults[i].maxvalue>=parm))
-                *(defaults[i].location.pi) = parm;
-              }
-            else
               {
-              free((char*)*(defaults[i].location.ppsz));  /* phares 4/13/98 */
-              *(defaults[i].location.ppsz) = newstring;
+                *(defaults[i].location.pi) = parm;
+	                if(basedefault)
+                  defaults[i].defaultvalue.i = parm;
               }
+            }
+            else
+            {
+              union { const char **c; char **s; } u; // type punning via unions
+              u.c = defaults[i].location.ppsz;
+              free(*(u.s));
+              *(u.s) = newstring;
+			  
+              if(basedefault)
+                defaults[i].defaultvalue.psz = strdup(newstring);
+            }
             break;
             }
         }
@@ -1177,6 +1176,55 @@ void M_LoadDefaults (void)
   wad_files[MAXLOADFILES-1]="prboom.wad";
 }
 
+//
+// M_LoadDefaults
+//
+
+void M_LoadDefaults (void)
+{
+  int   i;
+  char* basefile;
+
+  // set everything to base values
+
+  numdefaults = sizeof(defaults)/sizeof(defaults[0]);
+  for (i = 0 ; i < numdefaults ; i++) {
+    if (defaults[i].location.ppsz)
+      *defaults[i].location.ppsz = strdup(defaults[i].defaultvalue.psz);
+    if (defaults[i].location.pi)
+      *defaults[i].location.pi = defaults[i].defaultvalue.i;
+  }
+
+
+  // check if a base default file was provided, to load as base values
+
+  i = M_CheckParm ("-baseconfig");
+  if (i && i < myargc-1)
+  {
+    basefile = strdup(myargv[i+1]);
+    lprintf (LO_CONFIRM, " default file with base values: %s\n", basefile);
+    M_LoadDefaultsFile(basefile, true);
+  }
+
+  // check for a custom default file
+
+  i = M_CheckParm ("-config");
+  if (i && i < myargc-1)
+    defaultfile = strdup(myargv[i+1]);
+  else {
+    const char* exedir = I_DoomExeDir();
+    defaultfile = malloc(PATH_MAX+1);
+    /* get config file from same directory as executable */
+    snprintf(defaultfile, PATH_MAX,
+            "%s%s%sboom.cfg", exedir,
+            HasTrailingSlash(exedir) ? "" : DIR_SLASH_STR,
+            "pr");
+  }
+
+  lprintf (LO_CONFIRM, " default file: %s\n",defaultfile);
+
+  M_LoadDefaultsFile(defaultfile, false);
+}
 
 //
 // SCREEN SHOTS
