@@ -34,14 +34,14 @@
 
 // killough 5/3/98: reformatted
 
+#include <stddef.h>
+
 #ifdef HAVE_CONFIG_H
 #include "config.h"
 #endif
 
 #include "doomtype.h"
 #include "sounds.h"
-
-#define NULL 0
 
 //
 // Information about all the music

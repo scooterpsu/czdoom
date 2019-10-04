@@ -522,7 +522,7 @@ static void cheat_massacre()    // jff 2/01/98 kill all monsters
   extern void A_PainDie(mobj_t *);
 
   // killough 7/20/98: kill friendly monsters only if no others to kill
-  uint_64_t mask = MF_FRIEND;
+  unit_64t mask = MF_FRIEND;
   P_MapStart();
   do
     while ((currentthinker = P_NextThinker(currentthinker,th_all)) != NULL)
@@ -673,7 +673,7 @@ static void cheat_pitch()
 
 boolean M_FindCheats(int key)
 {
-  static uint_64_t sr;
+  static unit_64t sr;
   static char argbuf[CHEAT_ARGS_MAX+1], *arg;
   static int init, argsleft, cht;
   int i, ret, matchedbefore;
@@ -701,7 +701,7 @@ boolean M_FindCheats(int key)
       init = 1;
       for (i=0;cheat[i].cheat;i++)
         {
-          uint_64_t c=0, m=0;
+          unit_64t c=0, m=0;
           const char *p;
 
           for (p=cheat[i].cheat; *p; p++)

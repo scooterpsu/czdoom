@@ -50,7 +50,7 @@ extern struct cheat_s {
   } const when;
   void (*const func)();
   const int arg;
-  uint_64_t code, mask;
+  unit_64t code, mask;
 } cheat[];
 
 boolean M_FindCheats(int key);

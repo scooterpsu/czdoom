@@ -1492,7 +1492,7 @@ void P_SpawnPlayerMissile(mobj_t* source,mobjtype_t type)
   // killough 7/19/98: autoaiming was not in original beta
     {
       // killough 8/2/98: prefer autoaiming at enemies
-      uint_64_t mask = mbf_features ? MF_FRIEND : 0;
+      unit_64t mask = mbf_features ? MF_FRIEND : 0;
 
       do
   {

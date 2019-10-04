@@ -1,4 +1,6 @@
-sounds.o: sounds.c ../config.h doomtype.h \
+sounds.o: sounds.c \
+ /opt/mipsel-linux-uclibc/lib/gcc/mipsel-buildroot-linux-uclibc/7.3.0/include/stddef.h \
+ ../config.h doomtype.h \
  /opt/mipsel-linux-uclibc/lib/gcc/mipsel-buildroot-linux-uclibc/7.3.0/include-fixed/limits.h \
  /opt/mipsel-linux-uclibc/lib/gcc/mipsel-buildroot-linux-uclibc/7.3.0/include-fixed/syslimits.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/limits.h \
@@ -13,6 +15,8 @@ sounds.o: sounds.c ../config.h doomtype.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/xopen_lim.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/stdio_lim.h \
  sounds.h
+
+/opt/mipsel-linux-uclibc/lib/gcc/mipsel-buildroot-linux-uclibc/7.3.0/include/stddef.h:
 
 ../config.h:
 

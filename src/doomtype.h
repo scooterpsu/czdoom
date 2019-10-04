@@ -63,14 +63,14 @@ typedef unsigned char byte;
  * Proff - I fixed it */
 #ifndef _MSC_VER
 typedef signed long long int_64_t;
-typedef unsigned long long uint_64_t;
+typedef unsigned long long unit_64t;
 // define compiled-specific long-long contstant notation here
-#define LONGLONG(num)   (uint_64_t)num ## ll
+#define LONGLONG(num)   (unit_64t)num ## ll
 #else
 typedef __int64 int_64_t;
-typedef unsigned __int64 uint_64_t;
+typedef unsigned __int64 unit_64t;
 // define compiled-specific long-long contstant notation here
-#define LONGLONG(num) (uint_64_t)num
+#define LONGLONG(num) (unit_64t)num
 #undef PATH_MAX
 #define PATH_MAX 1024
 #define strcasecmp _stricmp
