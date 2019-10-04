@@ -60,10 +60,10 @@ r_draw.o: r_draw.c doomstat.h d_player.h d_items.h doomdef.h ../config.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/swab.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/swab.h \
  version.h p_pspr.h m_fixed.h doomtype.h tables.h info.h d_think.h \
- p_mobj.h doomdata.h d_ticcmd.h w_wad.h r_main.h r_data.h r_defs.h \
- r_state.h r_patch.h r_draw.h r_filter.h v_video.h st_stuff.h d_event.h \
- g_game.h am_map.h lprintf.h r_drawflush.inl r_drawcolpipeline.inl \
- r_drawcolumn.inl r_drawspan.inl
+ p_mobj.h doomdata.h d_ticcmd.h u_mapinfo.h w_wad.h r_main.h r_data.h \
+ r_defs.h r_state.h r_patch.h r_draw.h r_filter.h v_video.h st_stuff.h \
+ d_event.h g_game.h am_map.h lprintf.h r_drawflush.inl \
+ r_drawcolpipeline.inl r_drawcolumn.inl r_drawspan.inl
 
 doomstat.h:
 
@@ -214,6 +214,8 @@ p_mobj.h:
 doomdata.h:
 
 d_ticcmd.h:
+
+u_mapinfo.h:
 
 w_wad.h:
 

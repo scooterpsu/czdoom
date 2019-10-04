@@ -60,9 +60,10 @@ am_map.o: am_map.c ../config.h doomstat.h d_player.h d_items.h doomdef.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/swab.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/swab.h \
  version.h p_pspr.h m_fixed.h doomtype.h tables.h info.h d_think.h \
- p_mobj.h doomdata.h d_ticcmd.h st_stuff.h d_event.h r_main.h r_data.h \
- r_defs.h r_state.h r_patch.h p_setup.h p_maputl.h w_wad.h v_video.h \
- p_spec.h am_map.h dstrings.h d_englsh.h d_deh.h lprintf.h g_game.h
+ p_mobj.h doomdata.h d_ticcmd.h u_mapinfo.h st_stuff.h d_event.h r_main.h \
+ r_data.h r_defs.h r_state.h r_patch.h p_setup.h p_maputl.h w_wad.h \
+ v_video.h p_spec.h am_map.h dstrings.h d_englsh.h d_deh.h lprintf.h \
+ g_game.h
 
 ../config.h:
 
@@ -213,6 +214,8 @@ p_mobj.h:
 doomdata.h:
 
 d_ticcmd.h:
+
+u_mapinfo.h:
 
 st_stuff.h:
 

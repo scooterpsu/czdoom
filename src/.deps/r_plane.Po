@@ -60,9 +60,9 @@ r_plane.o: r_plane.c ../config.h z_zone.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/swab.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/swab.h \
  version.h p_pspr.h m_fixed.h doomtype.h tables.h info.h d_think.h \
- p_mobj.h doomdata.h d_ticcmd.h w_wad.h r_main.h r_data.h r_defs.h \
- r_state.h r_patch.h r_draw.h r_things.h r_sky.h r_plane.h v_video.h \
- lprintf.h
+ p_mobj.h doomdata.h d_ticcmd.h u_mapinfo.h w_wad.h r_main.h r_data.h \
+ r_defs.h r_state.h r_patch.h r_draw.h r_things.h r_sky.h r_plane.h \
+ v_video.h lprintf.h
 
 ../config.h:
 
@@ -213,6 +213,8 @@ p_mobj.h:
 doomdata.h:
 
 d_ticcmd.h:
+
+u_mapinfo.h:
 
 w_wad.h:
 

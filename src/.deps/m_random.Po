@@ -60,7 +60,7 @@ m_random.o: m_random.c doomstat.h d_player.h d_items.h doomdef.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/swab.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/swab.h \
  version.h p_pspr.h m_fixed.h doomtype.h tables.h info.h d_think.h \
- p_mobj.h doomdata.h d_ticcmd.h m_random.h lprintf.h
+ p_mobj.h doomdata.h d_ticcmd.h u_mapinfo.h m_random.h lprintf.h
 
 doomstat.h:
 
@@ -211,6 +211,8 @@ p_mobj.h:
 doomdata.h:
 
 d_ticcmd.h:
+
+u_mapinfo.h:
 
 m_random.h:
 

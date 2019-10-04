@@ -60,9 +60,9 @@ wi_stuff.o: wi_stuff.c doomstat.h d_player.h d_items.h doomdef.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/swab.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/swab.h \
  version.h p_pspr.h m_fixed.h doomtype.h tables.h info.h d_think.h \
- p_mobj.h doomdata.h d_ticcmd.h m_random.h w_wad.h g_game.h d_event.h \
- r_main.h r_data.h r_defs.h r_state.h r_patch.h v_video.h wi_stuff.h \
- s_sound.h sounds.h lprintf.h r_draw.h
+ p_mobj.h doomdata.h d_ticcmd.h u_mapinfo.h m_random.h w_wad.h g_game.h \
+ d_event.h r_main.h r_data.h r_defs.h r_state.h r_patch.h v_video.h \
+ wi_stuff.h s_sound.h sounds.h lprintf.h r_draw.h hu_stuff.h
 
 doomstat.h:
 
@@ -214,6 +214,8 @@ doomdata.h:
 
 d_ticcmd.h:
 
+u_mapinfo.h:
+
 m_random.h:
 
 w_wad.h:
@@ -243,3 +245,5 @@ sounds.h:
 lprintf.h:
 
 r_draw.h:
+
+hu_stuff.h:

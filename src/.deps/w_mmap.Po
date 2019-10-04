@@ -62,7 +62,7 @@ w_mmap.o: w_mmap.c ../config.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/swab.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/swab.h \
  version.h p_pspr.h m_fixed.h doomtype.h tables.h info.h d_think.h \
- p_mobj.h doomdata.h d_ticcmd.h w_wad.h lprintf.h i_system.h
+ p_mobj.h doomdata.h d_ticcmd.h u_mapinfo.h w_wad.h lprintf.h i_system.h
 
 ../config.h:
 
@@ -217,6 +217,8 @@ p_mobj.h:
 doomdata.h:
 
 d_ticcmd.h:
+
+u_mapinfo.h:
 
 w_wad.h:
 

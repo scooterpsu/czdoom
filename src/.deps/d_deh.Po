@@ -59,9 +59,9 @@ d_deh.o: d_deh.c doomdef.h ../config.h z_zone.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/swab.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/swab.h \
  version.h doomtype.h doomstat.h d_player.h d_items.h p_pspr.h m_fixed.h \
- tables.h info.h d_think.h p_mobj.h doomdata.h d_ticcmd.h d_deh.h \
- sounds.h m_cheat.h p_inter.h p_enemy.h g_game.h d_event.h w_wad.h \
- lprintf.h dstrings.h d_englsh.h
+ tables.h info.h d_think.h p_mobj.h doomdata.h d_ticcmd.h u_mapinfo.h \
+ d_deh.h sounds.h m_cheat.h p_inter.h p_enemy.h g_game.h d_event.h \
+ w_wad.h lprintf.h dstrings.h d_englsh.h
 
 doomdef.h:
 
@@ -212,6 +212,8 @@ p_mobj.h:
 doomdata.h:
 
 d_ticcmd.h:
+
+u_mapinfo.h:
 
 d_deh.h:
 

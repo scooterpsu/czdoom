@@ -68,10 +68,10 @@ p_setup.o: p_setup.c \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/swab.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/swab.h \
  version.h p_pspr.h m_fixed.h doomtype.h tables.h info.h d_think.h \
- p_mobj.h doomdata.h d_ticcmd.h m_bbox.h m_argv.h g_game.h d_event.h \
- w_wad.h r_main.h r_data.h r_defs.h r_state.h r_patch.h r_things.h \
- r_draw.h p_maputl.h p_map.h p_setup.h p_spec.h p_tick.h p_enemy.h \
- s_sound.h lprintf.h v_video.h r_demo.h r_fps.h
+ p_mobj.h doomdata.h d_ticcmd.h u_mapinfo.h m_bbox.h m_argv.h g_game.h \
+ d_event.h w_wad.h r_main.h r_data.h r_defs.h r_state.h r_patch.h \
+ r_things.h r_draw.h p_maputl.h p_map.h p_setup.h p_spec.h p_tick.h \
+ p_enemy.h s_sound.h lprintf.h v_video.h r_demo.h r_fps.h
 
 /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/math.h:
 
@@ -238,6 +238,8 @@ p_mobj.h:
 doomdata.h:
 
 d_ticcmd.h:
+
+u_mapinfo.h:
 
 m_bbox.h:
 

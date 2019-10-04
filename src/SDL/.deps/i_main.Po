@@ -66,10 +66,11 @@ i_main.o: i_main.c ../../config.h ../../src/doomdef.h ../../src/z_zone.h \
  ../../src/p_mobj.h ../../src/tables.h ../../src/doomdata.h \
  ../../src/info.h ../../src/r_state.h ../../src/d_player.h \
  ../../src/d_items.h ../../src/p_pspr.h ../../src/d_ticcmd.h \
- ../../src/r_patch.h ../../src/z_zone.h ../../src/lprintf.h \
- ../../src/m_random.h ../../src/doomstat.h ../../src/g_game.h \
- ../../src/m_misc.h ../../src/i_sound.h ../../src/sounds.h \
- ../../src/i_main.h ../../src/r_fps.h ../../src/doomstat.h \
+ ../../src/u_mapinfo.h ../../src/r_patch.h ../../src/z_zone.h \
+ ../../src/lprintf.h ../../src/m_random.h ../../src/doomstat.h \
+ ../../src/g_game.h ../../src/m_misc.h ../../src/i_sound.h \
+ ../../src/sounds.h ../../src/i_main.h ../../src/r_fps.h \
+ ../../src/doomstat.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/signal.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/signum.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/siginfo.h \
@@ -250,6 +251,8 @@ i_main.o: i_main.c ../../config.h ../../src/doomdef.h ../../src/z_zone.h \
 ../../src/p_pspr.h:
 
 ../../src/d_ticcmd.h:
+
+../../src/u_mapinfo.h:
 
 ../../src/r_patch.h:
 

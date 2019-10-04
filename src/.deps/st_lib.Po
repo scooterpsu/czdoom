@@ -59,9 +59,9 @@ st_lib.o: st_lib.c doomdef.h ../config.h z_zone.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/swab.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/swab.h \
  version.h doomstat.h d_player.h d_items.h p_pspr.h m_fixed.h doomtype.h \
- tables.h info.h d_think.h p_mobj.h doomdata.h d_ticcmd.h v_video.h \
- r_data.h r_defs.h r_state.h r_patch.h w_wad.h st_stuff.h d_event.h \
- st_lib.h r_main.h lprintf.h
+ tables.h info.h d_think.h p_mobj.h doomdata.h d_ticcmd.h u_mapinfo.h \
+ v_video.h r_data.h r_defs.h r_state.h r_patch.h w_wad.h st_stuff.h \
+ d_event.h st_lib.h r_main.h lprintf.h
 
 doomdef.h:
 
@@ -212,6 +212,8 @@ p_mobj.h:
 doomdata.h:
 
 d_ticcmd.h:
+
+u_mapinfo.h:
 
 v_video.h:
 

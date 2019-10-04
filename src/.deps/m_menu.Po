@@ -65,11 +65,11 @@ m_menu.o: m_menu.c \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/swab.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/swab.h \
  version.h doomstat.h d_player.h d_items.h p_pspr.h m_fixed.h doomtype.h \
- tables.h info.h d_think.h p_mobj.h doomdata.h d_ticcmd.h dstrings.h \
- d_englsh.h d_main.h d_event.h w_wad.h v_video.h r_data.h r_defs.h \
- r_state.h r_patch.h r_main.h hu_stuff.h g_game.h s_sound.h sounds.h \
- m_menu.h d_deh.h m_misc.h lprintf.h am_map.h i_main.h i_system.h \
- i_video.h i_sound.h r_demo.h r_fps.h
+ tables.h info.h d_think.h p_mobj.h doomdata.h d_ticcmd.h u_mapinfo.h \
+ dstrings.h d_englsh.h d_main.h d_event.h w_wad.h v_video.h r_data.h \
+ r_defs.h r_state.h r_patch.h r_main.h hu_stuff.h g_game.h s_sound.h \
+ sounds.h m_menu.h d_deh.h m_misc.h lprintf.h am_map.h i_main.h \
+ i_system.h i_video.h i_sound.h r_demo.h r_fps.h
 
 /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/stdio.h:
 
@@ -230,6 +230,8 @@ p_mobj.h:
 doomdata.h:
 
 d_ticcmd.h:
+
+u_mapinfo.h:
 
 dstrings.h:
 

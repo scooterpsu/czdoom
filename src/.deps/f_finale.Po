@@ -60,9 +60,9 @@ f_finale.o: f_finale.c doomstat.h d_player.h d_items.h doomdef.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/swab.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/swab.h \
  version.h p_pspr.h m_fixed.h doomtype.h tables.h info.h d_think.h \
- p_mobj.h doomdata.h d_ticcmd.h d_event.h v_video.h r_data.h r_defs.h \
- r_state.h r_patch.h w_wad.h s_sound.h sounds.h d_deh.h f_finale.h \
- hu_stuff.h
+ p_mobj.h doomdata.h d_ticcmd.h u_mapinfo.h d_event.h v_video.h r_data.h \
+ r_defs.h r_state.h r_patch.h w_wad.h s_sound.h sounds.h d_deh.h \
+ f_finale.h hu_stuff.h
 
 doomstat.h:
 
@@ -213,6 +213,8 @@ p_mobj.h:
 doomdata.h:
 
 d_ticcmd.h:
+
+u_mapinfo.h:
 
 d_event.h:
 

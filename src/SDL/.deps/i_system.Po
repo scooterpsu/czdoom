@@ -122,7 +122,7 @@ i_system.o: i_system.c \
  ../../src/d_items.h ../../src/doomdef.h ../../src/p_pspr.h \
  ../../src/m_fixed.h ../../src/tables.h ../../src/info.h \
  ../../src/d_think.h ../../src/p_mobj.h ../../src/doomdata.h \
- ../../src/d_ticcmd.h ../../src/i_system.h
+ ../../src/d_ticcmd.h ../../src/u_mapinfo.h ../../src/i_system.h
 
 /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/stdio.h:
 
@@ -397,5 +397,7 @@ i_system.o: i_system.c \
 ../../src/doomdata.h:
 
 ../../src/d_ticcmd.h:
+
+../../src/u_mapinfo.h:
 
 ../../src/i_system.h:

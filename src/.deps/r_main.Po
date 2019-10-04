@@ -60,10 +60,10 @@ r_main.o: r_main.c ../config.h doomstat.h d_player.h d_items.h doomdef.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/swab.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/swab.h \
  version.h p_pspr.h m_fixed.h doomtype.h tables.h info.h d_think.h \
- p_mobj.h doomdata.h d_ticcmd.h d_net.h w_wad.h r_main.h r_data.h \
- r_defs.h r_state.h r_patch.h r_things.h r_draw.h r_plane.h r_bsp.h \
- m_bbox.h r_sky.h v_video.h lprintf.h st_stuff.h d_event.h i_main.h \
- i_system.h g_game.h r_demo.h r_fps.h \
+ p_mobj.h doomdata.h d_ticcmd.h u_mapinfo.h d_net.h w_wad.h r_main.h \
+ r_data.h r_defs.h r_state.h r_patch.h r_things.h r_draw.h r_plane.h \
+ r_bsp.h m_bbox.h r_sky.h v_video.h lprintf.h st_stuff.h d_event.h \
+ i_main.h i_system.h g_game.h r_demo.h r_fps.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/math.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/huge_val.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/bits/huge_valf.h \
@@ -222,6 +222,8 @@ p_mobj.h:
 doomdata.h:
 
 d_ticcmd.h:
+
+u_mapinfo.h:
 
 d_net.h:
 

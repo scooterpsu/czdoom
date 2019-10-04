@@ -61,7 +61,7 @@ f_wipe.o: f_wipe.c ../config.h z_zone.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/swab.h \
  version.h i_video.h doomtype.h v_video.h r_data.h r_defs.h m_fixed.h \
  d_think.h p_mobj.h tables.h doomdata.h info.h r_state.h d_player.h \
- d_items.h p_pspr.h d_ticcmd.h r_patch.h m_random.h f_wipe.h
+ d_items.h p_pspr.h d_ticcmd.h u_mapinfo.h r_patch.h m_random.h f_wipe.h
 
 ../config.h:
 
@@ -220,6 +220,8 @@ d_items.h:
 p_pspr.h:
 
 d_ticcmd.h:
+
+u_mapinfo.h:
 
 r_patch.h:
 

@@ -111,8 +111,8 @@ i_sound.o: i_sound.c ../../config.h \
  ../../src/doomdef.h ../../src/p_pspr.h ../../src/m_fixed.h \
  ../../src/tables.h ../../src/info.h ../../src/d_think.h \
  ../../src/p_mobj.h ../../src/doomdata.h ../../src/d_ticcmd.h \
- ../../src/doomtype.h ../../src/d_main.h ../../src/d_event.h \
- ../../src/w_wad.h ../../src/mmus2mid.h
+ ../../src/u_mapinfo.h ../../src/doomtype.h ../../src/d_main.h \
+ ../../src/d_event.h ../../src/w_wad.h ../../src/mmus2mid.h
 
 ../../config.h:
 
@@ -371,6 +371,8 @@ i_sound.o: i_sound.c ../../config.h \
 ../../src/doomdata.h:
 
 ../../src/d_ticcmd.h:
+
+../../src/u_mapinfo.h:
 
 ../../src/doomtype.h:
 

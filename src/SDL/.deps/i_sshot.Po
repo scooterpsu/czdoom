@@ -99,10 +99,11 @@ i_sshot.o: i_sshot.c ../../config.h \
  ../../src/version.h ../../src/p_pspr.h ../../src/m_fixed.h \
  ../../src/doomtype.h ../../src/tables.h ../../src/info.h \
  ../../src/d_think.h ../../src/p_mobj.h ../../src/doomdata.h \
- ../../src/d_ticcmd.h ../../src/doomdef.h ../../src/doomtype.h \
- ../../src/v_video.h ../../src/r_data.h ../../src/r_defs.h \
- ../../src/r_state.h ../../src/r_patch.h ../../src/i_video.h \
- ../../src/v_video.h ../../src/z_zone.h ../../src/lprintf.h
+ ../../src/d_ticcmd.h ../../src/u_mapinfo.h ../../src/doomdef.h \
+ ../../src/doomtype.h ../../src/v_video.h ../../src/r_data.h \
+ ../../src/r_defs.h ../../src/r_state.h ../../src/r_patch.h \
+ ../../src/i_video.h ../../src/v_video.h ../../src/z_zone.h \
+ ../../src/lprintf.h
 
 ../../config.h:
 
@@ -325,6 +326,8 @@ i_sshot.o: i_sshot.c ../../config.h \
 ../../src/doomdata.h:
 
 ../../src/d_ticcmd.h:
+
+../../src/u_mapinfo.h:
 
 ../../src/doomdef.h:
 

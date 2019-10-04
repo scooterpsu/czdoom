@@ -59,9 +59,9 @@ p_telept.o: p_telept.c doomdef.h ../config.h z_zone.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/linux/swab.h \
  /opt/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/asm/swab.h \
  version.h doomstat.h d_player.h d_items.h p_pspr.h m_fixed.h doomtype.h \
- tables.h info.h d_think.h p_mobj.h doomdata.h d_ticcmd.h p_spec.h \
- r_defs.h p_maputl.h p_map.h r_main.h r_data.h r_state.h r_patch.h \
- p_tick.h s_sound.h sounds.h p_user.h r_demo.h
+ tables.h info.h d_think.h p_mobj.h doomdata.h d_ticcmd.h u_mapinfo.h \
+ p_spec.h r_defs.h p_maputl.h p_map.h r_main.h r_data.h r_state.h \
+ r_patch.h p_tick.h s_sound.h sounds.h p_user.h r_demo.h
 
 doomdef.h:
 
@@ -212,6 +212,8 @@ p_mobj.h:
 doomdata.h:
 
 d_ticcmd.h:
+
+u_mapinfo.h:
 
 p_spec.h:
 
