@@ -92,6 +92,7 @@ int G_GetGameSkill (void);
 #endif
 
 static void G_DoLoadLevel (void);
+int  G_ValidateMapName(const char *mapname, int *pEpi, int *pMap);
 
 // killough 1/18/98: Doom-style printf;   killough 4/25/98: add gcc attributes
 // CPhipps - renames to doom_printf to avoid name collision with glibc

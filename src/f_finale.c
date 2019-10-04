@@ -67,6 +67,7 @@ void    F_CastDrawer (void);
 
 void WI_checkForAccelerate(void);    // killough 3/28/98: used to
 extern int acceleratestage;          // accelerate intermission screens
+extern boolean secretexit;           // whether we've entered a secret map
 static int midstage;                 // whether we're in "mid-stage"
 
 //
@@ -81,10 +82,25 @@ void F_StartFinale (void)
   // killough 3/28/98: clear accelerative text flags
   acceleratestage = midstage = 0;
 
+
+  if (gamemapinfo)
+  {
+    if (gamemapinfo->intertextsecret && secretexit
+       && gamemapinfo->intertextsecret[0] != '-') // '-' means that any default intermission was cleared.
+      finaletext = gamemapinfo->intertextsecret;
+    else if (gamemapinfo->intertext && !secretexit
+            && gamemapinfo->intertext[0] != '-') // '-' means that any default intermission was cleared.
+      finaletext = gamemapinfo->intertext;
+
+    if (!finaletext) finaletext = "The End";	// this is to avoid a crash on a missing text in the last map.
+
+    finaleflat = gamemapinfo->interbackdrop[0] ? gamemapinfo->interbackdrop : "FLOOR4_8";	// use a single fallback for all maps.
+  }
+
   // Okay - IWAD dependend stuff.
   // This has been changed severly, and
   //  some stuff might have changed in the process.
-  switch ( gamemode )
+  else switch ( gamemode )
   {
     // DOOM 1 - E1, E3 or E4, but each nine missions
     case shareware:
@@ -234,30 +250,66 @@ void F_Ticker(void)
 
   if (!finalestage)
     {
-      float speed = demo_compatibility ? TEXTSPEED : Get_TextSpeed();
-      /* killough 2/28/98: changed to allow acceleration */
-      if (finalecount > strlen(finaletext)*speed +
-          (midstage ? NEWTEXTWAIT : TEXTWAIT) ||
-          (midstage && acceleratestage)) {
-        if (gamemode != commercial)       // Doom 1 / Ultimate Doom episode end
-          {                               // with enough time, it's automatic
+    float speed = demo_compatibility ? TEXTSPEED : Get_TextSpeed();
+    /* killough 2/28/98: changed to allow acceleration */
+	    if (finalecount > strlen(finaletext)*speed +
+        (midstage ? NEWTEXTWAIT : TEXTWAIT) ||
+        (midstage && acceleratestage)) {
+	      if (gamemapinfo)
+      {
+         if (gamemapinfo->endpic[0])
+         {
+           if (!stricmp(gamemapinfo->endpic, "$CAST"))
+             F_StartCast();
+           else
+           {
+             finalecount = 0;
+             finalestage = 1;
+             wipegamestate = -1;         // force a wipe
+             if (!stricmp(gamemapinfo->endpic, "$BUNNY"))
+               S_StartMusic(mus_bunny);
+           }
+         }
+         else
+           gameaction = ga_worlddone;
+      }
+      else if (gamemode != commercial)       // Doom 1 / Ultimate Doom episode end
+      {                               // with enough time, it's automatic
+        finalecount = 0;
+        finalestage = 1;
+        wipegamestate = -1;         // force a wipe
+        if (gameepisode == 3)
+          S_StartMusic(mus_bunny);
+      }
+
+      // you must press a button to continue in Doom 2
+      else if (!demo_compatibility && midstage)
+      {
+        next_level:
+        if (gamemapinfo && gamemapinfo->endpic[0])
+        {
+          if (!strcasecmp(gamemapinfo->endpic, "$CAST"))
+          {
+            F_StartCast();
+           }
+           else
+          {
             finalecount = 0;
             finalestage = 1;
             wipegamestate = -1;         // force a wipe
-            if (gameepisode == 3)
-              S_StartMusic(mus_bunny);
-          }
-        else   // you must press a button to continue in Doom 2
-          if (!demo_compatibility && midstage)
+            if (!strcasecmp(gamemapinfo->endpic, "$BUNNY"))
             {
-            next_level:
-              if (gamemap == 30)
-                F_StartCast();              // cast of Doom 2 characters
-              else
-                gameaction = ga_worlddone;  // next level, e.g. MAP07
+              S_StartMusic(mus_bunny);
             }
+          }
+        }
+        if (gamemap == 30)
+          F_StartCast();              // cast of Doom 2 characters
+        else
+          gameaction = ga_worlddone;  // next level, e.g. MAP07			
       }
     }
+  }	
 }
 
 //
@@ -374,6 +426,10 @@ void F_StartCast (void)
   castonmelee = 0;
   castattacking = false;
   S_ChangeMusic(mus_evil, true);
+	
+  // Fallback to CREDIT if Cast background is missing (eg. Doom1)
+  if (W_CheckNumForName(bgcastcall) == -1)
+     bgcastcall = "CREDIT";
 }
 
 
@@ -391,14 +447,22 @@ void F_CastTicker (void)
   if (caststate->tics == -1 || caststate->nextstate == S_NULL)
   {
     // switch from deathstate to next monster
-    castnum++;
     castdeath = false;
-    if (castorder[castnum].name == NULL)
-      castnum = 0;
-    if (mobjinfo[castorder[castnum].type].seesound)
-      S_StartSound (NULL, mobjinfo[castorder[castnum].type].seesound);
-    caststate = &states[mobjinfo[castorder[castnum].type].seestate];
     castframes = 0;
+	
+    // find the next cast member with valid sprite frames
+    do
+    {
+       castnum++;
+       if (castorder[castnum].name == NULL)
+          castnum = 0;
+       caststate = &states[mobjinfo[castorder[castnum].type].seestate];
+    }
+    while(!sprites[caststate->sprite].numframes && castorder[castnum].name && castnum);
+
+    // Play its see sound
+    if (mobjinfo[castorder[castnum].type].seesound)
+       S_StartSound (NULL, mobjinfo[castorder[castnum].type].seesound);
   }
   else
   {
@@ -567,6 +631,7 @@ void F_CastDrawer (void)
 {
   spritedef_t*        sprdef;
   spriteframe_t*      sprframe;
+  int                 sprframenum;
   int                 lump;
   boolean             flip;
 
@@ -578,13 +643,16 @@ void F_CastDrawer (void)
 
   // draw the current frame in the middle of the screen
   sprdef = &sprites[caststate->sprite];
-  sprframe = &sprdef->spriteframes[ caststate->frame & FF_FRAMEMASK];
-  lump = sprframe->lump[0];
-  flip = (boolean)sprframe->flip[0];
-
-  // CPhipps - patch drawing updated
-  V_DrawNumPatch(160, 170, 0, lump+firstspritelump, CR_DEFAULT,
-     VPT_STRETCH | (flip ? VPT_FLIP : 0));
+  sprframenum = caststate->frame & FF_FRAMEMASK;
+  if (sprframenum < sprdef->numframes)
+  {
+    sprframe = &sprdef->spriteframes[ caststate->frame & FF_FRAMEMASK];
+    lump = sprframe->lump[0];
+    flip = (boolean)sprframe->flip[0];
+    // CPhipps - patch drawing updated
+    V_DrawNumPatch(160, 170, 0, lump+firstspritelump, CR_DEFAULT,
+       VPT_STRETCH | (flip ? VPT_FLIP : 0));
+  }
 }
 
 //
@@ -641,14 +709,25 @@ static void F_BunnyScroll (void)
 //
 void F_Drawer (void)
 {
-  if (finalestage == 2)
+  if (!finalestage)
+    F_TextWrite ();
+  else if (finalestage == 2)
   {
     F_CastDrawer ();
     return;
   }
-
-  if (!finalestage)
-    F_TextWrite ();
+  else if (gamemapinfo) {
+    if (!gamemapinfo->endpic[0])
+      F_TextWrite();
+    else if (!stricmp(gamemapinfo->endpic, "$BUNNY"))
+       F_BunnyScroll ();
+    else
+    {
+      V_DrawNamePatch(0, 0, 0, gamemapinfo->endpic, CR_DEFAULT, VPT_STRETCH);
+      // e6y: wide-res
+      //V_FillBorder(-1, 0);
+    }
+  }
   else
   {
     switch (gameepisode)

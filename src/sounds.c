@@ -41,6 +41,8 @@
 #include "doomtype.h"
 #include "sounds.h"
 
+#define NULL 0
+
 //
 // Information about all the music
 //
@@ -114,6 +116,7 @@ musicinfo_t S_music[] = {
   { "read_m", 0 },
   { "dm2ttl", 0 },
   { "dm2int", 0 },
+  { NULL, 0 }, // custom music
 };
 
 

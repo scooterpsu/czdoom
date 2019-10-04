@@ -80,8 +80,10 @@ am__prboom_SOURCES_DIST = mmus2mid.c mmus2mid.h am_map.c g_game.c \
 	r_main.h z_zone.c f_wipe.h p_maputl.c r_plane.c z_zone.h md5.c \
 	md5.h p_checksum.h p_checksum.c r_patch.c r_patch.h r_fps.c \
 	r_fps.h r_filter.c r_filter.h d_client.c gl_intern.h gl_main.c \
-	gl_struct.h gl_texture.c w_memcache.c w_mmap.c
-am__objects_1 = am_map.$(OBJEXT) g_game.$(OBJEXT) p_mobj.$(OBJEXT) \
+	gl_struct.h gl_texture.c w_memcache.c w_mmap.c \
+	u_mapinfo.c u_mapinfo.h u_scanner.c u_scanner.h
+am__objects_1 = u_mapinfo.$(OBJEXT) u_scanner.$(OBJEXT) \
+	am_map.$(OBJEXT) g_game.$(OBJEXT) p_mobj.$(OBJEXT) \
 	r_demo.$(OBJEXT) r_segs.$(OBJEXT) hu_lib.$(OBJEXT) \
 	lprintf.$(OBJEXT) p_plats.$(OBJEXT) r_sky.$(OBJEXT) \
 	d_deh.$(OBJEXT) hu_stuff.$(OBJEXT) m_argv.$(OBJEXT) \

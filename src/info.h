@@ -1448,6 +1448,7 @@ typedef enum {
 
 typedef struct
 {
+  const char * actorname; /* Doom actor name, meant to match ZDoom's */
   int doomednum;    /* Thing number used in id's editor, and now
        probably by every other editor too */
   int spawnstate;   /* The state (frame) index when this Thing is
@@ -1492,6 +1493,9 @@ typedef struct
   int raisestate;   /* The first state for an Archvile or respawn
            resurrection.  Zero means it won't come
            back to life. */
+  int meleethreshold; /* Distance to switch from missile to melee attack */
+  int maxattackrange; /* Maximum distance range to start shooting */
+  int minmissilechance; /* Minimum chance for firing a missile */
 } mobjinfo_t;
 
 /* See p_mobj_h for addition more technical info */

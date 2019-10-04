@@ -111,6 +111,7 @@ int S_AdjustSoundParams(mobj_t *listener, mobj_t *source,
                         int *vol, int *sep, int *pitch);
 
 static int S_getChannel(void *origin, sfxinfo_t *sfxinfo, int is_pickup);
+static void S_ChangeMusicByName(char* lumpname, int looping);
 
 // Initializes sound stuff, including volume
 // Sets channels, SFX and music volume,
@@ -184,6 +185,12 @@ void S_Start(void)
 
   // start new music for the level
   mus_paused = 0;
+
+  if (gamemapinfo && gamemapinfo->music[0])
+  {
+    S_ChangeMusicByName(gamemapinfo->music, true);
+    return;
+  }
 
   if (idmusnum!=-1)
     mnum = idmusnum; //jff 3/17/98 reload IDMUS music if not -1
@@ -458,8 +465,6 @@ void S_StartMusic(int m_id)
   S_ChangeMusic(m_id, false);
 }
 
-
-
 void S_ChangeMusic(int musicnum, int looping)
 {
   musicinfo_t *music;
@@ -471,7 +476,12 @@ void S_ChangeMusic(int musicnum, int looping)
     return;
 
   if (musicnum <= mus_None || musicnum >= NUMMUSIC)
+  {
     I_Error("S_ChangeMusic: Bad music number %d", musicnum);
+    return;
+  }
+
+
 
   music = &S_music[musicnum];
 
@@ -489,6 +499,10 @@ void S_ChangeMusic(int musicnum, int looping)
       music->lumpnum = W_GetNumForName(namebuf);
     }
 
+  if (music->lumpnum < 0) {
+    I_Error("S_ChangeMusic: No valid music lump");
+    return;
+  }
   music_file_failed = 1;
 
   // proff_fs - only load when from IWAD
@@ -519,6 +533,54 @@ void S_ChangeMusic(int musicnum, int looping)
   mus_playing = music;
 }
 
+void S_ChangeMusicByName(char* lumpname, int looping)
+{
+  if (nomusicparm)
+    return;
+
+  {
+    // First find if the provided lump is in the list of customizable music
+    // and can be played with S_ChangeMusic
+    int i;
+    char *musicname = lumpname+2; // skip  first 2 chars ("D_" prefix)
+    for (i=1; i<NUMMUSIC; i++)
+      if (!strncasecmp(musicname, S_music[i].name, 6))
+      {
+        S_ChangeMusic(i, looping);
+        return;
+      }
+  }
+  {
+    // If the lump name does not correspond to any known music
+    // attempt to play it as custom music (last in S_music array)
+
+    musicinfo_t *music = &S_music[NUMMUSIC];
+    int lumpnum = W_CheckNumForName(lumpname);
+
+    if ((lumpnum < -1) || (mus_playing && mus_playing->lumpnum == lumpnum))
+      return;
+
+    // shutdown old music
+    S_StopMusic();
+
+    // save lumpnum
+    music->lumpnum = lumpnum;
+
+    // load & register it
+    music->data = W_CacheLumpNum(music->lumpnum);
+    if (!music->data)
+    {
+      I_Error("S_ChangeMusicByName: invalid music lump '%s'", lumpname);
+      return;
+    }
+
+    lprintf(LO_INFO, "S_ChangeMusicByName: playing '%s'\n", lumpname);
+    music->handle = I_RegisterSong(music->data, W_LumpLength(music->lumpnum));
+    I_PlaySong(music->handle, looping);
+
+    mus_playing = music;
+  }
+}
 
 void S_StopMusic(void)
 {

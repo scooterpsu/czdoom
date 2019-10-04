@@ -104,6 +104,7 @@ skill_t         gameskill;
 boolean         respawnmonsters;
 int             gameepisode;
 int             gamemap;
+mapentry_t*     gamemapinfo;
 boolean         paused;
 // CPhipps - moved *_loadgame vars here
 static boolean forced_loadgame = false;
@@ -261,6 +262,7 @@ mobj_t **bodyque = 0;                   // phares 8/10/98
 
 static void G_DoSaveGame (boolean menu);
 static const byte* G_ReadDemoHeader(const byte* demo_p, size_t size, boolean failonerror);
+static mapentry_t *G_LookupMapinfo(int episode, int map);
 
 //
 // G_BuildTiccmd
@@ -808,38 +810,50 @@ void G_RestartLevel(void)
 static void G_DoLoadLevel (void)
 {
   int i;
+  
+  lprintf(LO_ALWAYS,
+          "---------------------------------\n"
+          "G_DoLoadLevel: Episode %d - Map %.2d\n"
+          "---------------------------------\n",
+          gameepisode, gamemap);
 
-  // Set the sky map.
-  // First thing, we have a dummy sky texture name,
-  //  a flat. The data is in the WAD only because
-  //  we look for an actual index, instead of simply
-  //  setting one.
+  /* Set the sky map for the episode.
+   * First thing, we have a dummy sky texture name,
+   *  a flat. The data is in the WAD only because
+   *  we look for an actual index, instead of simply
+   *  setting one.
+   */
+  skyflatnum = R_FlatNumForName ( SKYFLATNAME );  
 
-  skyflatnum = R_FlatNumForName ( SKYFLATNAME );
-
-  // DOOM determines the sky texture to be used
-  // depending on the current episode, and the game version.
-  if (gamemode == commercial)
-    // || gamemode == pack_tnt   //jff 3/27/98 sorry guys pack_tnt,pack_plut
-    // || gamemode == pack_plut) //aren't gamemodes, this was matching retail
-    {
-      skytexture = R_TextureNumForName ("SKY3");
-      if (gamemap < 12)
-        skytexture = R_TextureNumForName ("SKY1");
-      else
-        if (gamemap < 21)
-          skytexture = R_TextureNumForName ("SKY2");
-    }
-   else /* and lets not forget about DOOM, Ultimate DOOM, SIGIL & extra Eps */
-   {
-     // Each episode has its own sky, numbered after it
-     char skyname[9];
-     sprintf(skyname, "SKY%d", gameepisode);
-     skytexture = R_CheckTextureNumForName(skyname);
-     if (skytexture == -1)
-       // default sky, in case of custom episodes with missing SKY
-       skytexture = R_TextureNumForName ("SKY1");
-   }
+  /* skytexture set through UMAPINFO */
+  if (gamemapinfo && gamemapinfo->skytexture[0])
+  {
+    skytexture = R_TextureNumForName(gamemapinfo->skytexture);
+  }
+  /* DOOM determines the sky texture to be used
+   * depending on the current episode, and the game version.
+   */
+  else if (gamemode == commercial)
+     // || gamemode == pack_tnt   //jff 3/27/98 sorry guys pack_tnt,pack_plut
+     // || gamemode == pack_plut) //aren't gamemodes, this was matching retail
+  {
+    skytexture = R_TextureNumForName ("SKY3");
+    if (gamemap < 12)
+      skytexture = R_TextureNumForName ("SKY1");
+    else
+      if (gamemap < 21)
+        skytexture = R_TextureNumForName ("SKY2");
+  }
+  else /* and lets not forget about DOOM, Ultimate DOOM, SIGIL & extra Eps */
+  {
+    // Each episode has its own sky, numbered after it
+    char skyname[9];
+    sprintf(skyname, "SKY%d", gameepisode);
+    skytexture = R_CheckTextureNumForName(skyname);
+    if (skytexture == -1)
+      // default sky, in case of custom episodes with missing SKY
+      skytexture = R_TextureNumForName ("SKY1");
+  }	  
 
   /* cph 2006/07/31 - took out unused levelstarttic variable */
 
@@ -1494,7 +1508,7 @@ int cpars[32] = {
   120,30          // 31-32
 };
 
-static boolean secretexit;
+boolean secretexit;
 
 void G_ExitLevel (void)
 {
@@ -1531,6 +1545,29 @@ void G_DoCompleted (void)
   if (automapmode & am_active)
     AM_Stop();
 
+  wminfo.lastmapinfo = gamemapinfo;
+  wminfo.nextmapinfo = NULL;
+  if (gamemapinfo)
+  {
+    if (gamemapinfo->endpic[0])
+    {
+      gameaction = ga_victory;
+      return;
+    }
+    const char *next = "";
+    if (secretexit) next = gamemapinfo->nextsecret;
+    if (next[0] == 0) next = gamemapinfo->nextmap;
+    if (next[0])
+    {
+      G_ValidateMapName(next, &wminfo.nextep, &wminfo.next);
+      wminfo.nextep--;
+      wminfo.next--;
+      wminfo.didsecret = players[consoleplayer].didsecret;
+      wminfo.partime = gamemapinfo->partime;
+      goto frommapinfo;	// skip past the default setup.
+    }
+  }
+
   if (gamemode != commercial) // kilough 2/7/98
     switch(gamemap)
       {
@@ -1542,7 +1579,7 @@ void G_DoCompleted (void)
       }
 
   wminfo.didsecret = players[consoleplayer].didsecret;
-  wminfo.epsd = gameepisode -1;
+  wminfo.nextep = wminfo.epsd = gameepisode -1;
   wminfo.last = gamemap -1;
 
   // wminfo.next is 0 biased, unlike gamemap
@@ -1597,16 +1634,17 @@ void G_DoCompleted (void)
           wminfo.next = gamemap;          // go to next level
     }
 
-  wminfo.maxkills = totalkills;
-  wminfo.maxitems = totalitems;
-  wminfo.maxsecret = totalsecret;
-  wminfo.maxfrags = 0;
-
   if ( gamemode == commercial )
     wminfo.partime = TICRATE*cpars[gamemap-1];
   else
     wminfo.partime = TICRATE*pars[gameepisode][gamemap];
 
+frommapinfo:
+  wminfo.nextmapinfo = G_LookupMapinfo(wminfo.nextep+1, wminfo.next+1);
+  wminfo.maxkills = totalkills;
+  wminfo.maxitems = totalitems;
+  wminfo.maxsecret = totalsecret;
+  wminfo.maxfrags = 0;
   wminfo.pnum = consoleplayer;
 
   for (i=0 ; i<MAXPLAYERS ; i++)
@@ -1681,6 +1719,29 @@ void G_WorldDone (void)
   if (secretexit)
     players[consoleplayer].didsecret = true;
 
+  if (gamemapinfo)
+  {
+    if (gamemapinfo->intertextsecret && secretexit)
+    {
+      if (gamemapinfo->intertextsecret[0] != '-') // '-' means that any default intermission was cleared.
+        F_StartFinale();
+      return;
+    }
+    else if (gamemapinfo->intertext && !secretexit)
+    {
+      if (gamemapinfo->intertext[0] != '-') // '-' means that any default intermission was cleared.
+        F_StartFinale();
+      return;
+    }
+    else if (gamemapinfo->endpic && gamemapinfo->endpic[0] && gamemapinfo->nointermission)
+    {
+      // game ends without a status screen.
+      gameaction = ga_victory;
+      return;
+    }
+    // if nothing applied, use the defaults.
+  }
+
   if (gamemode == commercial)
     {
       switch (gamemap)
@@ -1705,7 +1766,9 @@ void G_DoWorldDone (void)
 {
   idmusnum = -1;             //jff 3/17/98 allow new level's music to be loaded
   gamestate = GS_LEVEL;
-  gamemap = wminfo.next+1;
+  gameepisode = wminfo.nextep + 1;
+  gamemap = wminfo.next + 1;
+  gamemapinfo = G_LookupMapinfo(gameepisode, gamemap);
   G_DoLoadLevel();
   gameaction = ga_nothing;
   AM_clearMarks();           //jff 4/12/98 clear any marks on the automap
@@ -1915,6 +1978,7 @@ void G_DoLoadGame(void)
   gameskill = *save_p++;
   gameepisode = *save_p++;
   gamemap = *save_p++;
+  gamemapinfo = G_LookupMapinfo(gameepisode, gamemap);  
 
   for (i=0 ; i<MAXPLAYERS ; i++)
     playeringame[i] = *save_p++;
@@ -2411,6 +2475,64 @@ void G_SetFastParms(int fast_pending)
 }
 
 //
+//
+//
+mapentry_t *G_LookupMapinfo(int episode, int map)
+{
+  char lumpname[9];
+  unsigned i;
+  if (gamemode == commercial) snprintf(lumpname, 9, "MAP%02d", map);
+  else snprintf(lumpname, 9, "E%dM%d", episode, map);
+  for (i = 0; i < U_mapinfo.mapcount; i++)
+  {
+    if (!stricmp(lumpname, U_mapinfo.maps[i].mapname))
+    {
+      return &U_mapinfo.maps[i];
+    }
+  }
+  return NULL;
+}
+
+//
+//
+//
+mapentry_t *G_LookupMapinfoByName(const char *lumpname)
+{
+  unsigned i;
+  for (i = 0; i < U_mapinfo.mapcount; i++)
+  {
+    if (!stricmp(lumpname, U_mapinfo.maps[i].mapname))
+    {
+      return &U_mapinfo.maps[i];
+    }
+  }
+  return NULL;
+}
+
+int G_ValidateMapName(const char *mapname, int *pEpi, int *pMap)
+{
+  // Check if the given map name can be expressed as a gameepisode/gamemap pair and be reconstructed from it.
+  char lumpname[9], mapuname[9];
+  int epi = -1, map = -1;
+
+  if (strlen(mapname) > 8) return 0;
+  strncpy(mapuname, mapname, 8);
+  mapuname[8] = 0;
+  M_Strupr(mapuname);
+
+
+  if (sscanf(mapuname, "MAP%d", &map) == 1)
+    snprintf(lumpname, 9, "MAP%02d", map);
+  else if (sscanf(mapuname, "E%dM%d", &epi, &map) == 2)
+    snprintf(lumpname, 9, "E%dM%d", epi, map);
+  else return 0;
+
+  if (pEpi) *pEpi = epi;
+  if (pMap) *pMap = map;
+  return !strcmp(mapuname, lumpname);
+}
+
+//
 // G_InitNew
 // Can be called by the startup code or the menu task,
 // consoleplayer, displayplayer, playeringame[] should be set.
@@ -2468,6 +2590,7 @@ void G_InitNew(skill_t skill, int episode, int map)
   gameepisode = episode;
   gamemap = map;
   gameskill = skill;
+  gamemapinfo = G_LookupMapinfo(gameepisode, gamemap);  
 
   totalleveltimes = 0; // cph
 

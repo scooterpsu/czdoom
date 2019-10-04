@@ -91,7 +91,7 @@ static char *dehfgets(char *buf, size_t n, DEHFILE *fp)
   else
     {                                                // copy buffer
       char *p = buf;
-      while (n>1 && *fp->inp && fp->size &&
+      while (n>1 && fp->size && *fp->inp &&
              (n--, fp->size--, *p++ = *fp->inp++) != '\n')
         ;
       *p = 0;
@@ -101,7 +101,7 @@ static char *dehfgets(char *buf, size_t n, DEHFILE *fp)
 
 static int dehfeof(DEHFILE *fp)
 {
-  return !fp->lump ? feof(fp->f) : !*fp->inp || fp->size<=0;
+  return !fp->lump ? feof(fp->f) : fp->size<=0 || !*fp->inp;
 }
 
 static int dehfgetc(DEHFILE *fp)
@@ -1164,6 +1164,15 @@ static const struct deh_mobjflags_s deh_mobjflags[] = {
   {"TOUCHY",       MF_TOUCHY},       // dies on contact with solid objects (MBF)
   {"BOUNCES",      MF_BOUNCES},      // bounces off floors, ceilings and maybe walls (MBF)
   {"FRIEND",       MF_FRIEND},       // a friend of the player(s) (MBF)
+  
+  {"NOTARGET",     MF_NOTARGET},     // won't be targetted even if it hurts someone else
+  {"MISSILEMORE",  MF_MISSILEMORE},  // more often missile attacks from far away (like Cyber)
+  {"FULLVOLSIGHT", MF_FULLVOLSIGHT}, // plays its alert sound at full volume
+  {"FULLVOLDEATH", MF_FULLVOLDEATH},    // plays its death sound at full volume
+  {"NORADIUSDMG",  MF_NORADIUSDMG},  // radius (explosive) damage doesnt harm it
+  {"QUICKTORETALIATE", MF_QUICKTORETALIATE}, // immediately switch target if attacked
+  {"ISMONSTER",    MF_ISMONSTER},    // for all monsters, even those that don't count in kill%
+  {"DONTFALL",     MF_DONTFALL},     // doesn't fall down after being killed (for the Lost Soul)  
 };
 
 // STATE - Dehacked block name = "Frame" and "Pointer"
@@ -1705,6 +1714,9 @@ static void setMobjInfoValue(int mobjInfoIndex, int keyIndex, uint_64_t value) {
     case 22: mi->flags = value; return;
     case 23: return; // "Bits2", unused
     case 24: mi->raisestate = (int)value; return;
+    case 25: mi->meleethreshold = (int)value; return;
+    case 26: mi->maxattackrange = (int)value; return;
+    case 27: mi->minmissilechance = (int)value; return;
     default: return;
   }
 }

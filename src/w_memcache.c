@@ -155,6 +155,10 @@ void W_UnlockLumpNum(int lump)
     lprintf(LO_DEBUG, "W_UnlockLumpNum: Excess unlocks on %8s (%d-%d)\n",
 	    lumpinfo[lump].name, cachelump[lump].locks, unlocks);
 #endif
+
+  // invalid lump, ignore unlock
+  if (lump < 0) return;
+
   cachelump[lump].locks -= unlocks;
   /* cph - Note: must only tell z_zone to make purgeable if currently locked,
    * else it might already have been purged

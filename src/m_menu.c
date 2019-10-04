@@ -159,6 +159,7 @@ typedef struct
   //   choice=0:leftarrow,1:rightarrow
   void  (*routine)(int choice);
   char  alphaKey; // hotkey in menu
+  const char *alttext;
 } menuitem_t;
 
 typedef struct menu_s
@@ -261,6 +262,8 @@ void M_DrawSelCell(menu_t *menu,int item);
 void M_WriteText(int x, int y, const char *string);
 int  M_StringWidth(const char *string);
 int  M_StringHeight(const char *string);
+void M_DrawTitle(int x, int y, const char *patch, int cm,
+                 const char *alttext, int altcm);
 void M_StartMessage(const char *string,void *routine,boolean );
 void M_StopMessage(void);
 void M_ClearMenus (void);
@@ -507,8 +510,10 @@ menuitem_t EpisodeMenu[]=
   {1,"M_EPI3", M_Episode,'i'},
   {1,"M_EPI4", M_Episode,'t'},
   {1,"M_EPI5", M_Episode,'s'},
+  // Some extra empty episodes for extensibility through UMAPINFO  
   {1,"M_EPI6", M_Episode,'6'},
-  {1,"M_EPI7", M_Episode,'7'}
+  {1,"M_EPI7", M_Episode,'7'},
+  {1,"M_EPI8", M_Episode,'8'}
 };
 
 menu_t EpiDef =
@@ -521,10 +526,52 @@ menu_t EpiDef =
   0              // lastOn
 };
 
+// This is for customized episode menus
+int EpiCustom;
+short EpiMenuEpi[8], EpiMenuMap[8];
+
 //
 //    M_Episode
 //
 int epi;
+
+void M_AddEpisode(const char *map, char *def)
+{
+  if (!EpiCustom) {
+     EpiCustom = true;
+     // No more than 4 Eps expected when having UMAPINFO (prevent SIGILv1.2 from showing twice)
+     if (EpiDef.numitems > 4)
+        EpiDef.numitems = 4;
+  }
+  if (*def == '-')	// means 'clear'
+  {
+    EpiDef.numitems = 0;
+  }
+  else
+  {
+    const char *gfx = strtok(def, "\n");
+    const char *txt = strtok(NULL, "\n");
+    const char *alpha = strtok(NULL, "\n");
+    if (EpiDef.numitems >= 8) return;
+    int episodenum, mapnum;
+    G_ValidateMapName(map, &episodenum, &mapnum);
+    EpiMenuEpi[EpiDef.numitems] = episodenum;
+    EpiMenuMap[EpiDef.numitems] = mapnum;
+    strncpy(EpisodeMenu[EpiDef.numitems].name, gfx, 8);
+    EpisodeMenu[EpiDef.numitems].name[8] = 0;
+    EpisodeMenu[EpiDef.numitems].alttext = txt;
+    EpisodeMenu[EpiDef.numitems].alphaKey = alpha ? *alpha : 0;
+    EpiDef.numitems++;
+  }
+  if (EpiDef.numitems <= 4)
+  {
+    EpiDef.y = 63;
+  }
+  else
+  {
+    EpiDef.y = 63 - (EpiDef.numitems - 4) * (LINEHEIGHT / 2);
+  }
+}
 
 void M_DrawEpisode(void)
 {
@@ -624,7 +671,7 @@ void M_NewGame(int choice)
     return;
   }
 
-  if ( gamemode == commercial )
+  if ( EpiDef.numitems == 0 )
     M_SetupNextMenu(&NewDef);
   else
     M_SetupNextMenu(&EpiDef);
@@ -648,7 +695,8 @@ void M_ChooseSkill(int choice)
       return;
     }
 
-  G_DeferedInitNew(choice,epi+1,1);
+  if (!EpiCustom) G_DeferedInitNew(choice,epi+1,1);
+  else G_DeferedInitNew(choice, EpiMenuEpi[epi], EpiMenuMap[epi]);
   M_ClearMenus ();
 }
 
@@ -5716,6 +5764,7 @@ void M_Init(void)
       ReadDef1.x = 330;
       ReadDef1.y = 165;
       ReadMenu1[0].routine = M_FinishReadThis;
+      EpiDef.numitems = 0;
       break;
     case registered:
       // Episode 2 and 3 are handled,
