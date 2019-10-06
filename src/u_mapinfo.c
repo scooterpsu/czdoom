@@ -143,12 +143,12 @@ static int ParseStandardProperty(u_scanner_t* s, mapentry_t *mape)
     if (U_MustGetToken(s, TK_StringConst))
       ReplaceString(&mape->levelname, s->string);
   }
-  else if (!strcasecmp(pname, "episode"))
+  /*else if (!strcasecmp(pname, "episode"))
   {
     char *lname = ParseMultiString(s, 1);
     if (lname)
       M_AddEpisode(mape->mapname, lname);
-  }
+  }*/
   else if (!strcasecmp(pname, "next"))
   {
     status = ParseLumpName(s, mape->nextmap);
