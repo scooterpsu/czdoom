@@ -1600,7 +1600,9 @@ enum
   set_automap,
   set_enemy,
   set_messages,
+#ifndef HANDHELDMODS    
   set_chatstrings,
+#endif  
   set_setup_end
 } setup_e;
 
@@ -1623,7 +1625,9 @@ menuitem_t SetupMenu[]=
   {1,"M_AUTO"  ,M_Automap,    'a'},
   {1,"M_ENEM"  ,M_Enemy,      'e'},
   {1,"M_MESS"  ,M_Messages,   'm'},
+#ifndef HANDHELDMODS  
   {1,"M_CHAT"  ,M_ChatStrings,'c'},
+#endif  
 };
 
 /////////////////////////////
