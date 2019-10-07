@@ -134,7 +134,7 @@ char saveOldString[SAVESTRINGSIZE];
 
 boolean inhelpscreens; // indicates we are in or just left a help screen
 
-boolean menuactive;    // The menus are up
+enum menuactive_e menuactive;    // The menus are up
 
 #define SKULLXOFF  -32
 #define LINEHEIGHT  16
@@ -259,7 +259,7 @@ void M_SetupNextMenu(menu_t *menudef);
 void M_DrawThermo(int x,int y,int thermWidth,int thermDot);
 void M_DrawEmptyCell(menu_t *menu,int item);
 void M_DrawSelCell(menu_t *menu,int item);
-void M_WriteText(int x, int y, const char *string);
+void M_WriteText(int x, int y, const char *string, int cm);
 int  M_StringWidth(const char *string);
 int  M_StringHeight(const char *string);
 void M_DrawTitle(int x, int y, const char *patch, int cm,
@@ -399,17 +399,17 @@ enum               // killough 10/98
 
 menuitem_t ReadMenu1[] =
 {
-  {1,"",M_ReadThis2,0}
+  {1,"",M_ReadThis2,0,NULL}
 };
 
 menuitem_t ReadMenu2[]=
 {
-  {1,"",M_FinishReadThis,0}
+  {1,"",M_FinishReadThis,0,NULL}
 };
 
 menuitem_t HelpMenu[]=    // killough 10/98
 {
-  {1,"",M_FinishHelp,0}
+  {1,"",M_FinishHelp,0,NULL}
 };
 
 menu_t ReadDef1 =
@@ -505,15 +505,15 @@ void M_DrawReadThis2(void)
 
 menuitem_t EpisodeMenu[]=
 {
-  {1,"M_EPI1", M_Episode,'k'},
-  {1,"M_EPI2", M_Episode,'t'},
-  {1,"M_EPI3", M_Episode,'i'},
-  {1,"M_EPI4", M_Episode,'t'},
-  {1,"M_EPI5", M_Episode,'s'},
-  // Some extra empty episodes for extensibility through UMAPINFO  
-  {1,"M_EPI6", M_Episode,'6'},
-  {1,"M_EPI7", M_Episode,'7'},
-  {1,"M_EPI8", M_Episode,'8'}
+  {1,"M_EPI1", M_Episode,'k',"Episode 1"},
+  {1,"M_EPI2", M_Episode,'t',"Episode 2"},
+  {1,"M_EPI3", M_Episode,'i',"Episode 3"},
+  {1,"M_EPI4", M_Episode,'t',"Episode 4"},
+  {1,"M_EPI5", M_Episode,'s',"Episode 5"},
+  // Some extra empty episodes for extensibility through UMAPINFO
+  {1,"M_EPI6", M_Episode,'6',"Episode 6"},
+  {1,"M_EPI7", M_Episode,'7',"Episode 7"},
+  {1,"M_EPI8", M_Episode,'8',"Episode 8"}
 };
 
 menu_t EpiDef =
@@ -612,11 +612,11 @@ enum
 
 menuitem_t NewGameMenu[]=
 {
-  {1,"M_JKILL", M_ChooseSkill, 'i'},
-  {1,"M_ROUGH", M_ChooseSkill, 'h'},
-  {1,"M_HURT",  M_ChooseSkill, 'h'},
-  {1,"M_ULTRA", M_ChooseSkill, 'u'},
-  {1,"M_NMARE", M_ChooseSkill, 'n'}
+  {1,"M_JKILL", M_ChooseSkill, 'i', "I'm too young to die."},
+  {1,"M_ROUGH", M_ChooseSkill, 'h', "Hey, not too rough."},
+  {1,"M_HURT",  M_ChooseSkill, 'h', "Hurt me plenty."},
+  {1,"M_ULTRA", M_ChooseSkill, 'u', "Ultra-Violence."},
+  {1,"M_NMARE", M_ChooseSkill, 'n', "Nightmare!"}
 };
 
 menu_t NewDef =
@@ -724,14 +724,14 @@ enum
 
 menuitem_t LoadMenue[]=
 {
-  {1,"", M_LoadSelect,'1'},
-  {1,"", M_LoadSelect,'2'},
-  {1,"", M_LoadSelect,'3'},
-  {1,"", M_LoadSelect,'4'},
-  {1,"", M_LoadSelect,'5'},
-  {1,"", M_LoadSelect,'6'},
-  {1,"", M_LoadSelect,'7'}, //jff 3/15/98 extend number of slots
-  {1,"", M_LoadSelect,'8'},
+  {1,"", M_LoadSelect,'1',NULL},
+  {1,"", M_LoadSelect,'2',NULL},
+  {1,"", M_LoadSelect,'3',NULL},
+  {1,"", M_LoadSelect,'4',NULL},
+  {1,"", M_LoadSelect,'5',NULL},
+  {1,"", M_LoadSelect,'6',NULL},
+  {1,"", M_LoadSelect,'7',NULL}, //jff 3/15/98 extend number of slots
+  {1,"", M_LoadSelect,'8',NULL},
 };
 
 menu_t LoadDef =
@@ -759,7 +759,7 @@ void M_DrawLoad(void)
   V_DrawNamePatch(72 ,LOADGRAPHIC_Y, 0, "M_LOADG", CR_DEFAULT, VPT_STRETCH);
   for (i = 0 ; i < load_end ; i++) {
     M_DrawSaveLoadBorder(LoadDef.x,LoadDef.y+LINEHEIGHT*i);
-    M_WriteText(LoadDef.x,LoadDef.y+LINEHEIGHT*i,savegamestrings[i]);
+    M_WriteText(LoadDef.x,LoadDef.y+LINEHEIGHT*i,savegamestrings[i], CR_DEFAULT);
   }
 }
 
@@ -842,14 +842,14 @@ void M_LoadGame (int choice)
 
 menuitem_t SaveMenu[]=
 {
-  {1,"", M_SaveSelect,'1'},
-  {1,"", M_SaveSelect,'2'},
-  {1,"", M_SaveSelect,'3'},
-  {1,"", M_SaveSelect,'4'},
-  {1,"", M_SaveSelect,'5'},
-  {1,"", M_SaveSelect,'6'},
-  {1,"", M_SaveSelect,'7'}, //jff 3/15/98 extend number of slots
-  {1,"", M_SaveSelect,'8'},
+  {1,"", M_SaveSelect,'1',NULL},
+  {1,"", M_SaveSelect,'2',NULL},
+  {1,"", M_SaveSelect,'3',NULL},
+  {1,"", M_SaveSelect,'4',NULL},
+  {1,"", M_SaveSelect,'5',NULL},
+  {1,"", M_SaveSelect,'6',NULL},
+  {1,"", M_SaveSelect,'7',NULL}, //jff 3/15/98 extend number of slots
+  {1,"", M_SaveSelect,'8',NULL},
 };
 
 menu_t SaveDef =
@@ -902,13 +902,13 @@ void M_DrawSave(void)
   for (i = 0 ; i < load_end ; i++)
     {
     M_DrawSaveLoadBorder(LoadDef.x,LoadDef.y+LINEHEIGHT*i);
-    M_WriteText(LoadDef.x,LoadDef.y+LINEHEIGHT*i,savegamestrings[i]);
+    M_WriteText(LoadDef.x,LoadDef.y+LINEHEIGHT*i,savegamestrings[i], CR_DEFAULT);
     }
 
   if (saveStringEnter)
     {
     i = M_StringWidth(savegamestrings[saveSlot]);
-    M_WriteText(LoadDef.x + i,LoadDef.y+LINEHEIGHT*saveSlot,"_");
+    M_WriteText(LoadDef.x + i,LoadDef.y+LINEHEIGHT*saveSlot,"_", CR_DEFAULT);
     }
 }
 
@@ -1062,16 +1062,13 @@ enum
 menuitem_t OptionsMenu[]=
 {
   // killough 4/6/98: move setup to be a sub-menu of OPTIONs
-  {1,"M_GENERL", M_General, 'g'},      // killough 10/98
-  {1,"M_SETUP",  M_Setup,   's'},                          // phares 3/21/98
-  {1,"M_ENDGAM", M_EndGame,'e'},
-  {1,"M_MESSG",  M_ChangeMessages,'m'},
-  /*    {1,"M_DETAIL",  M_ChangeDetail,'g'},  unused -- killough */
-  {2,"M_SCRNSZ", M_SizeDisplay,'s'},
-  {-1,"",0},
-  {1,"M_MSENS",  M_ChangeSensitivity,'m'},
-  /* {-1,"",0},  replaced with submenu -- killough */
-  {1,"M_SVOL",   M_Sound,'s'}
+  {1,"M_GENERL", M_General, 'g', "GENERAL"},      // killough 10/98
+  {1,"M_SETUP",  M_Setup,   's', "SETUP"},        // phares 3/21/98
+  {1,"M_ENDGAM", M_EndGame,'e',  "END GAME"},
+  {1,"M_MESSG",  M_ChangeMessages,'m', "MESSAGES"},
+  {2,"M_SCRNSZ", M_SizeDisplay,'s', "SCREEN SIZE"},
+  {1,"M_MSENS",  M_ChangeSensitivity,'m', "MOUSE SENSITIVITY"},
+  {1,"M_SVOL",   M_Sound,'s', "SOUND VOLUME"},
 };
 
 menu_t OptionsDef =
@@ -1097,8 +1094,17 @@ void M_DrawOptions(void)
   // proff/nicolas 09/20/98 -- changed for hi-res
   V_DrawNamePatch(108, 15, 0, "M_OPTTTL", CR_DEFAULT, VPT_STRETCH);
 
-  V_DrawNamePatch(OptionsDef.x + 120, OptionsDef.y+LINEHEIGHT*messages, 0,
+  if ((W_CheckNumForName("M_GENERL") < 0) || (W_CheckNumForName("M_SETUP") < 0))
+  {
+    M_WriteText(OptionsDef.x + M_StringWidth("MESSAGES: "),
+      OptionsDef.y+8-(M_StringHeight("ONOFF")/2)+LINEHEIGHT*messages,
+      showMessages ? "ON" : "OFF", CR_DEFAULT);
+  }
+  else
+  {
+    V_DrawNamePatch(OptionsDef.x + 120, OptionsDef.y+LINEHEIGHT*messages, 0,
       msgNames[showMessages], CR_DEFAULT, VPT_STRETCH);
+  }
 
   M_DrawThermo(OptionsDef.x,OptionsDef.y+LINEHEIGHT*(scrnsize+1),
    9,screenSize);
@@ -1203,10 +1209,10 @@ enum
 
 menuitem_t SoundMenu[]=
 {
-  {2,"M_SFXVOL",M_SfxVol,'s'},
-  {-1,"",0},
-  {2,"M_MUSVOL",M_MusicVol,'m'},
-  {-1,"",0}
+  {2,"M_SFXVOL",M_SfxVol,'s',"Sfx Volume"},
+  {-1,"",NULL,0,NULL},
+  {2,"M_MUSVOL",M_MusicVol,'m', "Music Volume"},
+  {-1,"",NULL,0,NULL}
 };
 
 menu_t SoundDef =
@@ -1293,10 +1299,10 @@ enum
 
 menuitem_t MouseMenu[]=
 {
-  {2,"M_HORSEN",M_MouseHoriz,'h'},
-  {-1,"",0},
-  {2,"M_VERSEN",M_MouseVert,'v'},
-  {-1,"",0}
+  {2,"M_HORSEN",M_MouseHoriz,'h', "HORIZONTAL"},
+  {-1,"",NULL,0,NULL},
+  {2,"M_VERSEN",M_MouseVert,'v', "VERTICAL"},
+  {-1,"",NULL,0,NULL}
 };
 
 menu_t MouseDef =
@@ -1618,15 +1624,15 @@ int setup_screen; // the current setup screen. takes values from setup_e
 
 menuitem_t SetupMenu[]=
 {
-  {1,"M_COMPAT",M_Compat,     'p'},
-  {1,"M_KEYBND",M_KeyBindings,'k'},
-  {1,"M_WEAP"  ,M_Weapons,    'w'},
-  {1,"M_STAT"  ,M_StatusBar,  's'},
-  {1,"M_AUTO"  ,M_Automap,    'a'},
-  {1,"M_ENEM"  ,M_Enemy,      'e'},
-  {1,"M_MESS"  ,M_Messages,   'm'},
+  {1,"M_COMPAT",M_Compat,     'p', "DOOM COMPATIBILITY"},
+  {1,"M_KEYBND",M_KeyBindings,'k', "KEY BINDINGS"},
+  {1,"M_WEAP"  ,M_Weapons,    'w', "WEAPONS"},
+  {1,"M_STAT"  ,M_StatusBar,  's', "STATUS BAR / HUD"},
+  {1,"M_AUTO"  ,M_Automap,    'a', "AUTOMAP"},
+  {1,"M_ENEM"  ,M_Enemy,      'e', "ENEMIES"},
+  {1,"M_MESS"  ,M_Messages,   'm', "MESSAGES"},
 #ifndef HANDHELDMODS  
-  {1,"M_CHAT"  ,M_ChatStrings,'c'},
+  {1,"M_CHAT"  ,M_ChatStrings,'c', "CHAT STRINGS"},
 #endif  
 };
 
@@ -1656,7 +1662,7 @@ enum
 
 menuitem_t Generic_Setup[] =
 {
-  {1,"",M_DoNothing,0}
+  {1,"",M_DoNothing,0,NULL}
 };
 
 /////////////////////////////
@@ -3871,7 +3877,7 @@ int extended_help_index;   // index of current extended help screen
 
 menuitem_t ExtHelpMenu[] =
 {
-  {1,"",M_ExtHelpNextScreen,0}
+  {1,"",M_ExtHelpNextScreen,0,NULL}
 };
 
 menu_t ExtHelpDef =
@@ -5476,7 +5482,7 @@ void M_Drawer (void)
         while ((c = *p) && *p != '\n')
           p++;
         *p = 0;
-        M_WriteText(160 - M_StringWidth(string)/2, y, string);
+        M_WriteText(160 - M_StringWidth(string)/2, y, string, CR_DEFAULT);
         y += hu_font[0].height;
         if ((*p = c))
           p++;
@@ -5487,6 +5493,9 @@ void M_Drawer (void)
     if (menuactive)
       {
   int x,y,max,i;
+  int lumps_missing = 0;
+
+  menuactive = mnact_float; // Boom-style menu drawers will set mnact_full
 
   if (currentMenu->routine)
     currentMenu->routine();     // call Draw routine
@@ -5497,11 +5506,25 @@ void M_Drawer (void)
   y = currentMenu->y;
   max = currentMenu->numitems;
 
-  for (i=0;i<max;i++)
+  for (i = 0; i < max; i++)
+    if (currentMenu->menuitems[i].name[0])
+      if (W_CheckNumForName(currentMenu->menuitems[i].name) < 0)
+        lumps_missing++;
+
+  if (lumps_missing == 0)
+    for (i=0;i<max;i++)
     {
       if (currentMenu->menuitems[i].name[0])
         V_DrawNamePatch(x,y,0,currentMenu->menuitems[i].name,
             CR_DEFAULT, VPT_STRETCH);
+      y += LINEHEIGHT;
+    }
+  else
+    for (i = 0; i < max; i++)
+    {
+      const char *alttext = currentMenu->menuitems[i].alttext;
+      if (alttext)
+        M_WriteText(x, y+8-(M_StringHeight(alttext)/2), alttext, CR_DEFAULT);
       y += LINEHEIGHT;
     }
 
@@ -5670,17 +5693,22 @@ int M_StringHeight(const char* string)
 //
 //    Write a string using the hu_font
 //
-void M_WriteText (int x,int y,const char* string)
+void M_WriteText (int x,int y, const char* string, int cm)
 {
   int   w;
   const char* ch;
   int   c;
   int   cx;
   int   cy;
+  int   flags;
 
   ch = string;
   cx = x;
   cy = y;
+
+  flags = VPT_STRETCH;
+  if (cm != CR_DEFAULT)
+    flags |= VPT_TRANS;
 
   while(1) {
     c = *ch++;
@@ -5699,12 +5727,33 @@ void M_WriteText (int x,int y,const char* string)
     }
 
     w = hu_font[c].width;
-    if (cx+w > SCREENWIDTH)
+    if (cx+w > BASE_WIDTH)
       break;
     // proff/nicolas 09/20/98 -- changed for hi-res
     // CPhipps - patch drawing updated
-    V_DrawNumPatch(cx, cy, 0, hu_font[c].lumpnum, CR_DEFAULT, VPT_STRETCH);
+    V_DrawNumPatch(cx, cy, 0, hu_font[c].lumpnum, cm, flags);
     cx+=w;
+  }
+}
+
+void M_DrawTitle(int x, int y, const char *patch, int cm,
+                 const char *alttext, int altcm)
+{
+  int lumpnum = W_CheckNumForName(patch);
+
+  if (lumpnum >= 0)
+  {
+    int flags = VPT_STRETCH;
+    if (cm != CR_DEFAULT)
+      flags |= VPT_TRANS;
+    V_DrawNumPatch(x, y, 0, lumpnum, cm, flags);
+  }
+  else
+  {
+    // patch doesn't exist, draw some text in place of it
+    M_WriteText(160-(M_StringWidth(alttext)/2),
+                y+8-(M_StringHeight(alttext)/2), // assumes patch height 16
+                alttext, altcm);
   }
 }
 
