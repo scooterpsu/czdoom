@@ -1038,7 +1038,7 @@ typedef struct
 // killough 8/9/98: make DEH_BLOCKMAX self-adjusting
 #define DEH_BLOCKMAX (sizeof deh_blocks/sizeof*deh_blocks)  // size of array
 #define DEH_MAXKEYLEN 32 // as much of any key as we'll look at
-#define DEH_MOBJINFOMAX 25 // number of ints in the mobjinfo_t structure (!)
+#define DEH_MOBJINFOMAX 28 // number of ints in the mobjinfo_t structure (!)
 
 // Put all the block header values, and the function to be called when that
 // one is encountered, in this array:
@@ -1103,7 +1103,10 @@ static const char *deh_mobjinfo[DEH_MOBJINFOMAX] =
   "Action sound",        // .activesound
   "Bits",                // .flags
   "Bits2",               // .flags
-  "Respawn frame"        // .raisestate
+  "Respawn frame",        // .raisestate
+  "Melee threshold",     // .meleethreshold
+  "Max target range",     // .maxattackrange
+  "Min missile chance"   // .minmissilechance
 };
 
 // Strings that are used to indicate flags ("Bits" in mobjinfo)
@@ -1830,6 +1833,14 @@ static void deh_procThing(DEHFILE *fpin, FILE* fpout, char *line)
                 fprintf(fpout, "Could not find bit mnemonic %s\n", strval);
               }
             }
+
+            // the MF_COUNTKILL flag used to be indicative of the Mobj being a
+            // monster, but this is no longer true after the logic for monsters_infight
+            // that don't count towards limit was dehardcoded.
+            // Let's make sure that any actor that has MF_COUNTKILL is considered
+            // a monster, avoid incompatibility with older DEH files
+            if (value & MF_COUNTKILL)
+              value |= MF_ISMONSTER;
 
             // Don't worry about conversion -- simply print values
             if (fpout) {
