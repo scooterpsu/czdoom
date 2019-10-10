@@ -1066,7 +1066,11 @@ menuitem_t OptionsMenu[]=
   {1,"M_ENDGAM", M_EndGame,'e',  "END GAME"},
   {1,"M_MESSG",  M_ChangeMessages,'m', "MESSAGES"},
   {2,"M_SCRNSZ", M_SizeDisplay,'s', "SCREEN SIZE"},
+#ifdef HANDHELDMODS
+  {-1,"",NULL,0,NULL},
+#else  
   {1,"M_MSENS",  M_ChangeSensitivity,'m', "MOUSE SENSITIVITY"},
+#endif
   {1,"M_SVOL",   M_Sound,'s', "SOUND VOLUME"},
 };
 
@@ -3167,6 +3171,7 @@ static const char *gen_skillstrings[] = {
 
 setup_menu_t gen_settings2[] = { // General Settings screen2
 
+#ifndef HANDHELDMODS
   {"Input Devices"     ,S_SKIP|S_TITLE, m_null, G_X, G_YB - 12},
 
   {"Enable Mouse", S_YESNO, m_null, G_X,
@@ -3174,7 +3179,7 @@ setup_menu_t gen_settings2[] = { // General Settings screen2
 
   {"Enable Joystick", S_YESNO, m_null, G_X,
    G_YB + general_joy*8, {"use_joystick"}},
-
+   
   {"Files Preloaded at Game Startup",S_SKIP|S_TITLE, m_null, G_X,
    G_YB1 - 12},
 
@@ -3185,6 +3190,7 @@ setup_menu_t gen_settings2[] = { // General Settings screen2
   {"DEH/BEX # 1", S_FILE, m_null, GF_X, G_YB1 + general_deh1*8, {"dehfile_1"}},
 
   {"DEH/BEX #2", S_FILE, m_null, GF_X, G_YB1 + general_deh2*8, {"dehfile_2"}},
+#endif
 
   {"Miscellaneous"  ,S_SKIP|S_TITLE, m_null, G_X, G_YB2 - 12},
 
@@ -3337,7 +3343,6 @@ void M_DrawGeneral(void)
 #define C_X  284
 #define C_Y  32
 #define COMP_SPC 12
-#define C_NEXTPREV 131
 
 setup_menu_t comp_settings1[], comp_settings2[], comp_settings3[];
 
@@ -3413,7 +3418,7 @@ setup_menu_t comp_settings1[] =  // Compatibility Settings screen #1
   {0,S_RESET,m_null,X_BUTTON,Y_BUTTON},
 #endif
 
-  {"NEXT ->",S_SKIP|S_NEXT, m_null, KB_NEXT, C_Y+C_NEXTPREV, {comp_settings2}},
+  {"NEXT ->",S_SKIP|S_NEXT, m_null, KB_NEXT, C_Y+20*8, {comp_settings2}},
 
   // Final entry
   {0,S_SKIP|S_END,m_null}
@@ -3451,9 +3456,9 @@ setup_menu_t comp_settings2[] =  // Compatibility Settings screen #2
   {"Linedef effects work with sector tag = 0", S_YESNO, m_null, C_X,
    C_Y + compat_zerotags * COMP_SPC, {"comp_zerotags"}},
 
-  {"<- PREV", S_SKIP|S_PREV, m_null, KB_PREV, C_Y+C_NEXTPREV,{comp_settings1}},
+  {"<- PREV", S_SKIP|S_PREV, m_null, KB_PREV, C_Y+20*8,{comp_settings1}},
 
-  {"NEXT ->",S_SKIP|S_NEXT, m_null, KB_NEXT, C_Y+C_NEXTPREV, {comp_settings3}},
+  {"NEXT ->",S_SKIP|S_NEXT, m_null, KB_NEXT, C_Y+20*8, {comp_settings3}},
 
   // Final entry
 
@@ -3471,7 +3476,7 @@ setup_menu_t comp_settings3[] =  // Compatibility Settings screen #2
   {"2S middle textures do not animate", S_YESNO, m_null, C_X,
    C_Y + compat_maskedanim * COMP_SPC, {"comp_maskedanim"}},
 
-  {"<- PREV", S_SKIP|S_PREV, m_null, KB_PREV, C_Y+C_NEXTPREV,{comp_settings2}},
+  {"<- PREV", S_SKIP|S_PREV, m_null, KB_PREV, C_Y+20*8,{comp_settings2}},
 
   // Final entry
 
