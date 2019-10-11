@@ -1050,7 +1050,9 @@ enum
   /*    detail, obsolete -- killough */
   scrnsize,
   option_empty1,
+#ifndef HANDHELDMODS  
   mousesens,
+#endif  
   /* option_empty2, submenu now -- killough */
   soundvol,
   opt_end
@@ -3055,7 +3057,11 @@ enum {
 #define G_X 250
 #define G_YA  44
 #define G_YA2 (G_YA+9*8)
-#define G_YA3 (G_YA2+5*8)
+#ifndef HANDHELDMODS
+	#define G_YA3 (G_YA2+5*8)
+#else
+	#define G_YA3 G_YA2
+#endif
 #define GF_X 76
 
 static const char *videomodes[] = {"8bit","15bit","16bit",
@@ -3162,7 +3168,11 @@ enum {
 
 #define G_YB  44
 #define G_YB1 (G_YB+44)
-#define G_YB2 (G_YB1+52)
+#ifndef HANDHELDMODS
+	#define G_YB2 (G_YB1+52)
+#else
+	#define G_YB2 G_YB
+#endif
 
 static const char *gen_skillstrings[] = {
   // Dummy first option because defaultskill is 1-based
