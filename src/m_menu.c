@@ -2334,10 +2334,8 @@ setup_menu_t keys_settings1[] =  // Key Binding screen strings
   {"180 TURN"    ,S_KEY       ,m_scrn,KB_X,KB_Y+10*8,{&key_reverse}},
   {"USE"         ,S_KEY       ,m_scrn,KB_X,KB_Y+11*8,{&key_use},&mousebforward,&joybuse},
 
-#ifndef HANDHELDMODS
   // Button for resetting to defaults
   {0,S_RESET,m_null,X_BUTTON,Y_BUTTON},
-#endif
 
   {"NEXT ->",S_SKIP|S_NEXT,m_null,KB_NEXT,KB_Y+20*8, {keys_settings2}},
 
@@ -2600,10 +2598,8 @@ setup_menu_t weap_settings1[] =  // Weapons Settings screen
   {"Enable Fist/Chainsaw\n& SG/SSG toggle", S_YESNO, m_null, WP_X,
    WP_Y+ weap_toggle*8, {"doom_weapon_toggles"}},
 
-#ifndef HANDHELDMODS
   // Button for resetting to defaults
   {0,S_RESET,m_null,X_BUTTON,Y_BUTTON},
-#endif
 
   // Final entry
   {0,S_SKIP|S_END,m_null}
@@ -2689,10 +2685,8 @@ setup_menu_t stat_settings1[] =  // Status Bar and HUD Settings screen
   {"AMMO LOW/OK"       ,S_NUM       ,m_null,ST_X,ST_Y+14*8, {"ammo_red"}},
   {"AMMO OK/GOOD"      ,S_NUM       ,m_null,ST_X,ST_Y+15*8, {"ammo_yellow"}},
 
-#ifndef HANDHELDMODS
   // Button for resetting to defaults
   {0,S_RESET,m_null,X_BUTTON,Y_BUTTON},
-#endif
 
   // Final entry
   {0,S_SKIP|S_END,m_null}
@@ -2783,10 +2777,8 @@ setup_menu_t auto_settings1[] =  // 1st AutoMap Settings screen
 
   {"Show coordinates of automap pointer",S_YESNO,m_null,AU_X,AU_Y+16*8, {"map_point_coord"}},  // killough 10/98
 
-#ifndef HANDHELDMODS
   // Button for resetting to defaults
   {0,S_RESET,m_null,X_BUTTON,Y_BUTTON},
-#endif
 
   {"NEXT ->",S_SKIP|S_NEXT,m_null,AU_NEXT,AU_Y+20*8, {auto_settings2}},
 
@@ -2971,10 +2963,8 @@ setup_menu_t enem_settings1[] =  // Enemy Settings screen
   {"Allow dogs to jump down",S_YESNO,m_null,E_X,E_Y+ enem_dog_jumping*8, {"dog_jumping"}},
 #endif
 
-#ifndef HANDHELDMODS
   // Button for resetting to defaults
   {0,S_RESET,m_null,X_BUTTON,Y_BUTTON},
-#endif
 
   // Final entry
   {0,S_SKIP|S_END,m_null}
@@ -3148,10 +3138,8 @@ setup_menu_t gen_settings1[] = { // General Settings screen1
   {"Enable v1.1 Pitch Effects", S_YESNO, m_null, G_X,
    G_YA3 + general_pitch*8, {"pitched_sounds"}},
 
-#ifndef HANDHELDMODS
   // Button for resetting to defaults
   {0,S_RESET,m_null,X_BUTTON,Y_BUTTON},
-#endif
 
   {"NEXT ->",S_SKIP|S_NEXT,m_null,KB_NEXT,KB_Y+20*8, {gen_settings2}},
 
@@ -3437,10 +3425,8 @@ setup_menu_t comp_settings1[] =  // Compatibility Settings screen #1
   {"Blazing doors make double closing sounds", S_YESNO, m_null, C_X,
    C_Y + compat_blazing * COMP_SPC, {"comp_blazing"}},
 
-#ifndef HANDHELDMODS
   // Button for resetting to defaults
   {0,S_RESET,m_null,X_BUTTON,Y_BUTTON},
-#endif
 
   {"NEXT ->",S_SKIP|S_NEXT, m_null, KB_NEXT, C_Y+20*8, {comp_settings2}},
 
@@ -3617,10 +3603,8 @@ setup_menu_t mess_settings1[] =  // Messages screen
   {"Message Background",  S_YESNO,  m_null,  M_X,
    M_Y + mess_background*8, {"hud_list_bgon"}},
 
-#ifndef HANDHELDMODS
   // Button for resetting to defaults
   {0,S_RESET,m_null,X_BUTTON,Y_BUTTON},
-#endif
 
   // Final entry
 
@@ -3695,10 +3679,8 @@ setup_menu_t chat_settings1[] =  // Chat Strings screen
   {"9",S_CHAT,m_null,CS_X,CS_Y+ 9*8, {"chatmacro9"}},
   {"0",S_CHAT,m_null,CS_X,CS_Y+10*8, {"chatmacro0"}},
 
-#ifndef HANDHELDMODS
   // Button for resetting to defaults
   {0,S_RESET,m_null,X_BUTTON,Y_BUTTON},
-#endif
 
   // Final entry
   {0,S_SKIP|S_END,m_null}
@@ -4656,12 +4638,12 @@ boolean M_Responder (event_t* ev) {
 
     if (default_verify)
       {
-  if (ch == 120) {
+  if (ch == key_menu_enter) {
     M_ResetDefaults();
     default_verify = false;
     M_SelectDone(ptr1);
   }
-  else if (ch == 115) {
+  else if (ch == key_menu_backspace) {
     default_verify = false;
     M_SelectDone(ptr1);
   }
