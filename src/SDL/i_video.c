@@ -638,7 +638,7 @@ void I_UpdateVideoMode(void)
    // if (use_doublebuffer)
    //   init_flags = SDL_DOUBLEBUF;
    // else
-      init_flags = SDL_SWSURFACE;
+      init_flags = SDL_TRIPLEBUF|SDL_HWSURFACE;
 #ifndef _DEBUG
     init_flags |= SDL_HWPALETTE;
 #endif
