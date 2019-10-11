@@ -2568,11 +2568,14 @@ setup_menu_t* weap_settings[] =
   NULL
 };
 
+static const char *weapnumbers[] = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+
 setup_menu_t weap_settings1[] =  // Weapons Settings screen
 {
   {"ENABLE RECOIL", S_YESNO,m_null,WP_X, WP_Y+ weap_recoil*8, {"weapon_recoil"}},
   {"ENABLE BOBBING",S_YESNO,m_null,WP_X, WP_Y+weap_bobbing*8, {"player_bobbing"}},
 
+#ifndef HANDHELDMODS
   {"1ST CHOICE WEAPON",S_WEAP,m_null,WP_X,WP_Y+weap_pref1*8, {"weapon_choice_1"}},
   {"2nd CHOICE WEAPON",S_WEAP,m_null,WP_X,WP_Y+weap_pref2*8, {"weapon_choice_2"}},
   {"3rd CHOICE WEAPON",S_WEAP,m_null,WP_X,WP_Y+weap_pref3*8, {"weapon_choice_3"}},
@@ -2582,6 +2585,17 @@ setup_menu_t weap_settings1[] =  // Weapons Settings screen
   {"7th CHOICE WEAPON",S_WEAP,m_null,WP_X,WP_Y+weap_pref7*8, {"weapon_choice_7"}},
   {"8th CHOICE WEAPON",S_WEAP,m_null,WP_X,WP_Y+weap_pref8*8, {"weapon_choice_8"}},
   {"9th CHOICE WEAPON",S_WEAP,m_null,WP_X,WP_Y+weap_pref9*8, {"weapon_choice_9"}},
+#else
+  {"1ST CHOICE WEAPON",S_CHOICE,m_null,WP_X,WP_Y+weap_pref1*8, {"weapon_choice_1"}, 0, 0, NULL, weapnumbers},
+  {"2nd CHOICE WEAPON",S_CHOICE,m_null,WP_X,WP_Y+weap_pref2*8, {"weapon_choice_2"}, 0, 0, NULL, weapnumbers},
+  {"3rd CHOICE WEAPON",S_CHOICE,m_null,WP_X,WP_Y+weap_pref3*8, {"weapon_choice_3"}, 0, 0, NULL, weapnumbers},
+  {"4th CHOICE WEAPON",S_CHOICE,m_null,WP_X,WP_Y+weap_pref4*8, {"weapon_choice_4"}, 0, 0, NULL, weapnumbers},
+  {"5th CHOICE WEAPON",S_CHOICE,m_null,WP_X,WP_Y+weap_pref5*8, {"weapon_choice_5"}, 0, 0, NULL, weapnumbers},
+  {"6th CHOICE WEAPON",S_CHOICE,m_null,WP_X,WP_Y+weap_pref6*8, {"weapon_choice_6"}, 0, 0, NULL, weapnumbers},
+  {"7th CHOICE WEAPON",S_CHOICE,m_null,WP_X,WP_Y+weap_pref7*8, {"weapon_choice_7"}, 0, 0, NULL, weapnumbers},
+  {"8th CHOICE WEAPON",S_CHOICE,m_null,WP_X,WP_Y+weap_pref8*8, {"weapon_choice_8"}, 0, 0, NULL, weapnumbers},
+  {"9th CHOICE WEAPON",S_CHOICE,m_null,WP_X,WP_Y+weap_pref9*8, {"weapon_choice_9"}, 0, 0, NULL, weapnumbers},
+#endif
 
   {"Enable Fist/Chainsaw\n& SG/SSG toggle", S_YESNO, m_null, WP_X,
    WP_Y+ weap_toggle*8, {"doom_weapon_toggles"}},
