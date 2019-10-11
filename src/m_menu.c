@@ -1461,7 +1461,7 @@ void M_QuickLoad(void)
 
 static void M_EndGameResponse(int ch)
 {
-  if (ch != 120)
+  if (ch != key_menu_enter)
 {
 printf("%d\n",ch);
     return;
