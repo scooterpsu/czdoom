@@ -1,0 +1,61 @@
+Title: WolfenDOOM: The Original Missions v1.5
+Date: 29/11/1998
+Note: This document is best viewed in DOS Editor (EDIT.COM)
+
+This is an upgrade for the ORIGINAL.EXE released with The Original Missions
+by Laz Rojas. Its is based on the Boom engine by TeamTNT. If you do not
+already have it, I recommend you download it by visiting
+http://www.teamtnt.com. The archive includes documentation and support
+utilities which, while not necessary, can be useful in some cases.
+
+Here is the list of new features and bug fixes:
+
+- Both WADs and the DEH are loaded automatically
+- Episodes end correctly (error in the original ORIGINAL.DEH)
+- New startup and end screens (minor change, nothing major)
+- Old title music restored
+- Episode selection menu implemented (removes the need for batch files)
+- BJ no longer screams in pain as he leaps for joy in the "cast list" :)
+- New screen border
+- Reads unique savegame and configuration files
+- Menu entry graphics are now all in the correct font
+- Original Wolfenstein par times restored
+- General optimisations, removal of unnecessary code
+- Tenth level title graphics no longer display at the end of the episode
+- No more glow in the dark bones :) Anybody who saw the secret room of E3M1
+  in the old version will know what I mean
+
+Known Problems
+--------------
+James Haley of Team Eternity has told me that for some reason the new 320x200
+intermissions cause the game to crash under Windows 98, and Laz says that it
+crashes his machine too (a Mac running Virtual PC). It runs fine for me (I use
+Windows 95) and I have not heard any other complaints, so I am assuming the
+problem is unique to those systems.
+
+The function in question calls upon an everyday Doom routine that is used
+every other time a 320x200 graphic is drawn in Doom. So why it would happen
+just this time is completely beyond me. If I ever figure out why it is, I
+will update the EXE once more.
+
+This game is, as it was from the start, single-player only. Several people
+have mailed me asking how to play it in multi-player mode, but the fact is it
+can not be done. Laz did not put the start points in, and we do not have any
+player graphics. Hopefully, I will fix this problem with Wolfenstein: The
+Resurrection.
+
+For some reason, pressing escape when you are in one of the Boom setup menus
+(eg: Options|Setup|Key Bindings) when you're not running a game causes a
+Segmentation Violation. I have no idea why this would be. Just use backspace
+instead.
+
+How to Install
+--------------
+Unzip this archive to the same directory where you have got the old release,
+confirming to overwrite the old ORIGINAL.DEH and ORIGINAL.EXE. Get rid of the
+batch files and then you're ready to go.
+
+As always, questions, comments and bug reports are welcome at Joel@ts.co.nz
+
+Enjoy!
+Joel D. Murdoch

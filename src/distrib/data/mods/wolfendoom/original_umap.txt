@@ -1,0 +1,3 @@
+Downloaded from https://github.com/libretro/libretro-prboom/pull/116
+
+umapinfo/deh modifications by Ferk, then edited by scooterpsu (uses episode glpyhs from orig15.wad instead of rendered text).

@@ -1,0 +1,58 @@
+NOTE: This wad should be played with the included
+original.exe, not with boom, legacy, dosdoom, or any of the
+other source port mods.
+
+Title: The Original Missions
+Filename: ORIGINAL.WAD
+Author: Laz Rojas
+Email Address: filmman@pacificnet.net
+Misc. Author Info: web site at
+http://www.doomworld.com/wolfendoom/
+Description: Faithful recreation of Episodes 1, 2, and 3 of
+Wolfenstein 3D, with improved graphics and ambient sounds.
+Created on a Macintosh.
+Additional Credits to: The guys at id, for creating both
+Doom and Wolfenstein.  Also Joel Murdoch, not only for beta
+testing the levels, but for coding a special Boom
+modification for this TC.
+
+============================================================
+
+*Play Information*
+
+Game: Doom II
+Level #: MAP01-MAP32 (MAP31 and MAP32 are special bonus
+levels)
+Single Player: Yes
+Cooperative 2-4 Player: No
+Deathmatch 2-4 Player: No
+Difficulty Settings: Not at this time.
+New Sounds: Yes
+New Graphics: Yes
+New Music: Yes
+Demos Replaced: All
+
+*Construction*
+
+Base: New levels from scratch, duplicating Episodes 1, 2,
+and 3 of Wolfenstein 3D.
+Build Time: About two months
+Editor(s) Used: HellMaker, Demon, Deimos, MacBSP, NWT Pro 
+Known Bugs: None 
+
+*Copyright/Permissions*
+
+Authors may not use this level as a base to build
+additional levels.
+
+You may distribute this WAD as long as this read me is
+included.
+
+*Where to get this WAD*
+
+FTP Sites: ftp.cdrom.com
+BBS Numbers:
+Other: http://www.doomworld.com/wolfendoom
+
+===========================================================
+= 
