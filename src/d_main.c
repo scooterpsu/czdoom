@@ -883,38 +883,43 @@ static void IdentifyVersion (void)
     case retail:
       i = strlen(iwad);
       if (i>=8 && !strnicmp(iwad+i-8,"chex.wad",8)) // prboom chex.wad
-		savefolder = "/chex";
+		savefolder = "/chex.wad";
+      else if (i>=8 && !strnicmp(iwad+i-13,"freedoom1.wad",8)) // prboom chex.wad
+		savefolder = "/freedoom1.wad";
       else
-        savefolder = "/doomu";
+        savefolder = "/doom.wad";
       break;
     case shareware:
       if (i>=8 && !strnicmp(iwad+i-8,"chex.wad",8)) // stock chex.wad
-		savefolder = "/chex";
+		savefolder = "/chex.wad";
       else
-		savefolder = "/doom1";
+		savefolder = "/doom.wad";
       break;
     case registered:
-      savefolder = "/doom";
+      savefolder = "/doom.wad";
       break;
     case commercial: 
       switch (gamemission)
       {
         case pack_plut:
-          savefolder = "/plutonia";
+          savefolder = "/plutonia.wad";
           break;
         case pack_tnt:
-          savefolder = "/tnt";
+          savefolder = "/tnt.wad";
           break;
         case hacx:
-          savefolder = "/hacx";
+          savefolder = "/hacx.wad";
           break;
         default:
-          savefolder = "/doom2";
+          if (i>=8 && !strnicmp(iwad+i-13,"freedoom2.wad",8)) // prboom chex.wad
+			savefolder = "/freedoom2.wad";
+          else
+			savefolder = "/doom2.wad";
           break;
       }
       break;
     default:
-      savefolder = "/freedoom";
+      savefolder = "/unknown";
       break;
     }
 	free(iwad);
