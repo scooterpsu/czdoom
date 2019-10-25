@@ -130,6 +130,7 @@ int     (W_CheckNumForName)(const char *name, int ns)
         { return (W_FindNumFromName)(name, ns, -1); }
 int     (W_CheckNumForName)(const char* name, int);   // killough 4/17/98
 int     W_GetNumForName (const char* name);
+char*   W_GetNameForNum (const int lump);
 int     W_LumpLength (int lump);
 void    W_ReadLump (int lump, void *dest);
 // CPhipps - modified for 'new' lump locking

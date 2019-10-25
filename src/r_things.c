@@ -508,6 +508,9 @@ static void R_ProjectSprite (mobj_t* thing, int lightlevel)
   if (D_abs(tx)>(tz<<2))
     return;
 
+   // Do not attempt to render special TNT1 invisible sprite
+   if (thing->sprite == SPR_TNT1) return;
+
     // decide which patch to use for sprite relative to player
 #ifdef RANGECHECK
   if ((unsigned) thing->sprite >= (unsigned)numsprites)
@@ -522,9 +525,19 @@ static void R_ProjectSprite (mobj_t* thing, int lightlevel)
              thing->frame);
 #endif
 
-  if (!sprdef->spriteframes)
-    I_Error ("R_ProjectSprite: Missing spriteframes %i : %i", thing->sprite,
-             thing->frame);
+   if (!sprdef->numframes)
+   {
+      const spritenum_t fallback = states[S_NULL].sprite; // Use the sprite from the dummy state
+      I_Error ("R_ProjectSprite: Using fallback '%s' for sprite '%s' (%i) with missing spriteframes!",
+               sprnames[fallback], sprnames[thing->sprite], thing->sprite);
+      *sprdef = sprites[fallback];
+      if (!sprdef->spriteframes)
+      {
+         I_Error ("R_ProjectSprite: fallback missing! sprite won't be rendered");
+         *sprdef = sprites[SPR_TNT1];
+         return;
+      }
+   }
 
   sprframe = &sprdef->spriteframes[thing->frame & FF_FRAMEMASK];
 

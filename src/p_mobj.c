@@ -1155,11 +1155,13 @@ void P_SpawnMapThing (const mapthing_t* mthing)
   fixed_t y;
   fixed_t z;
   int options = mthing->options; /* cph 2001/07/07 - make writable copy */
+  short thingtype = mthing->type;
+  int iden_num = 0;
 
   // killough 2/26/98: Ignore type-0 things as NOPs
   // phares 5/14/98: Ignore Player 5-8 starts (for now)
 
-  switch(mthing->type)
+  switch(thingtype)
     {
   case 0:
   case DEN_PLAYER5:
@@ -1182,14 +1184,14 @@ void P_SpawnMapThing (const mapthing_t* mthing)
        options & MTF_RESERVED)) {
     if (!demo_compatibility) // cph - Add warning about bad thing flags
       lprintf(LO_WARN, "P_SpawnMapThing: correcting bad flags (%u) (thing type %d)\n",
-        options, mthing->type);
+        options, thingtype);
     options &= MTF_EASY|MTF_NORMAL|MTF_HARD|MTF_AMBUSH|MTF_NOTSINGLE;
   }
 
   // count deathmatch start positions
 
   // doom2.exe has at most 10 deathmatch starts
-  if (mthing->type == 11)
+  if (thingtype == 11)
     {
     if (!(!compatibility || deathmatch_p-deathmatchstarts < 10)) {
 		return;
@@ -1215,11 +1217,10 @@ void P_SpawnMapThing (const mapthing_t* mthing)
 
   // check for players specially
 
-  if (mthing->type <= 4 && mthing->type > 0)  // killough 2/26/98 -- fix crashes
+  if (thingtype <= 4 && thingtype > 0)  // killough 2/26/98 -- fix crashes
     {
-#ifdef DOGS
       // killough 7/19/98: Marine's best friend :)
-      if (!netgame && mthing->type > 1 && mthing->type <= dogs+1 &&
+      if (!netgame && thingtype > 1 && thingtype <= dogs+1 &&
     !players[mthing->type-1].secretcount)
   {  // use secretcount to avoid multiple dogs in case of multiple starts
     players[mthing->type-1].secretcount = 1;
@@ -1244,7 +1245,6 @@ void P_SpawnMapThing (const mapthing_t* mthing)
     }
     goto spawnit;
   }
-#endif
 
     // save spots for respawning in coop games
     playerstarts[mthing->type-1] = *mthing;
@@ -1308,9 +1308,7 @@ void P_SpawnMapThing (const mapthing_t* mthing)
     return;
 
   // spawn it
-#ifdef DOGS
-spawnit:
-#endif
+  spawnit:
 
   x = mthing->x << FRACBITS;
   y = mthing->y << FRACBITS;
@@ -1322,6 +1320,7 @@ spawnit:
 
   mobj = P_SpawnMobj (x,y,z, i);
   mobj->spawnpoint = *mthing;
+  mobj->iden_num = iden_num;
 
   if (mobj->tics > 0)
     mobj->tics = 1 + (P_Random (pr_spawnthing) % mobj->tics);

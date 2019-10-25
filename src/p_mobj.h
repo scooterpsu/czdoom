@@ -204,24 +204,15 @@
 // Hmm ???.
 #define MF_TRANSSHIFT 26
 
-#define MF_UNUSED2      (uint_64_t)(0x0000000010000000)
-#define MF_UNUSED3      (uint_64_t)(0x0000000020000000)
-
-    // Translucent sprite?                                          // phares
-#define MF_TRANSLUCENT  (uint_64_t)(0x0000000040000000)
-
-// this is free            LONGLONG(0x0000000100000000)
-
-// these are greater than an int. That's why the flags below are now uint_64_t
-
-#define MF_TOUCHY          LONGLONG(0x0000000100000000)
-#define MF_BOUNCES         LONGLONG(0x0000000200000000)
-#define MF_FRIEND          LONGLONG(0x0000000400000000)
+// Flags added by MBF port
+#define MF_TOUCHY       (uint_64_t)(0x0000000010000000)
+#define MF_BOUNCES      (uint_64_t)(0x0000000020000000)
+#define MF_FRIEND       (uint_64_t)(0x0000000040000000)
+// Translucent sprite (BOOM)
+#define MF_TRANSLUCENT  (uint_64_t)(0x0000000080000000)
 
 // This actor not targetted when it hurts something else
 #define MF_NOTARGET     LONGLONG(0x0000010000000000)
-#define MF_FLY          LONGLONG(0x0000020000000000) // unused, prboom+ compat
-
 // higher attack probability like Cyberdemon, Spiderboss, Revenant and Lost Soul
 #define MF_MISSILEMORE  LONGLONG(0x0000040000000000)
 // play full volume sounds on player sight and death (eg. Spider & Cyberdemon)
@@ -236,12 +227,25 @@
 // doesn't fall down after being killed (for the Lost Soul)
 #define MF_DONTFALL		      LONGLONG(0x0001000000000000)
 
-// killough 9/15/98: Same, but internal flags, not intended for .deh
-// (some degree of opaqueness is good, to avoid compatibility woes)
 
+// The flags below are switching order, starting from the most significant bit,
+// since they do not reflect the expected dehacked order of the flags.
+// See getConvertedDEHBits() in d_deh.c for the real mapping order.
+
+// These were free flags in BOOM
+// (for compatibility, placed outside of dehacked reach so they aren't used by it)
+#define MF_UNUSED2        LONGLONG(0x8000000000000000)
+#define MF_UNUSED3        LONGLONG(0x4000000000000000)
+
+// Meant to be internal but included in flags so it's usable from vissprite_t
+#define MF_PLAYERSPRITE   LONGLONG(0x8000000000000000) // player graphic (eg. wielded weapon)
+
+// These are internal flags not exposed in dehacked
+// (some degree of opaqueness is good, to avoid compatibility woes)
 enum {
-  MIF_FALLING = 1,      // Object is falling
-  MIF_ARMED = 2,        // Object is armed (for MF_TOUCHY objects)
+  MIF_FALLING     = 0x00000001, // Object is falling
+  MIF_ARMED       = 0x00000002, // Object is armed (for MF_TOUCHY objects)
+  MIF_RESURRECTED = 0x00000004, // Object has been resurrected
 };
 
 // Map Object definition.
@@ -368,6 +372,9 @@ typedef struct mobj_s
     fixed_t             PrevX;
     fixed_t             PrevY;
     fixed_t             PrevZ;
+
+    // Extra id based on thing type that's used in MUSINFO
+    short               iden_num;
 
     fixed_t             pad; // cph - needed so I can get the size unambiguously on amd64
 

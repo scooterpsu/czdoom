@@ -435,7 +435,6 @@ static boolean P_SmartMove(mobj_t *actor)
   // dropoff==1 means always allow it, dropoff==2 means only up to 128 high,
   // and only if the target is immediately on the other side of the line.
 
-#ifdef DOGS
   // haleyjd: allow all friends of HelperType to also jump down
 
   if ((actor->type == MT_DOGS || (actor->type == (HelperThing-1) && actor->flags&MF_FRIEND))
@@ -445,7 +444,6 @@ static boolean P_SmartMove(mobj_t *actor)
           actor->y - target->y) < FRACUNIT*144 &&
       P_Random(pr_dropoff) < 235)
     dropoff = 2;
-#endif
 
   if (!P_Move(actor, dropoff))
     return false;
@@ -1679,6 +1677,8 @@ void A_VileChase(mobj_t* actor)
        */
       corpsehit->flags =
         (info->flags & ~MF_FRIEND) | (actor->flags & MF_FRIEND);
+		
+      corpsehit->intflags = corpsehit->intflags | MIF_RESURRECTED;//mark as resurrected
 
 		  if (!((corpsehit->flags ^ MF_COUNTKILL) & (MF_FRIEND | MF_COUNTKILL)))
 		    totallive++;
@@ -1919,6 +1919,40 @@ void A_SkullAttack(mobj_t *actor)
   if (dist < 1)
     dist = 1;
   actor->momz = (dest->z+(dest->height>>1) - actor->z) / dist;
+}
+
+//
+// A_BetaSkullAttack
+// The flying skull had different behavior on Beta Doom
+//
+
+void A_BetaSkullAttack(mobj_t *actor)
+{
+  int damage;
+
+  if (compatibility_level < mbf_compatibility)
+    return;
+
+  if (!actor->target || actor->target->type == MT_SKULL)
+    return;
+
+  S_StartSound(actor, actor->info->attacksound);
+  A_FaceTarget(actor);
+  damage = (P_Random(pr_skullfly)%8+1)*actor->info->damage;
+  P_DamageMobj(actor->target, actor, actor, damage);
+}
+
+//
+// A_Stop
+// The flying skull had different behavior on Beta Doom
+//
+
+void A_Stop(mobj_t *actor)
+{
+  if (compatibility_level < mbf_compatibility)
+    return;
+
+  actor->momx = actor->momy = actor->momz = 0;
 }
 
 //
