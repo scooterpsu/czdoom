@@ -355,13 +355,18 @@ char* I_FindFile(const char* wfname, const char* ext)
     {NULL}, // current working directory
     {NULL, NULL, "DOOMWADDIR"}, // run-time $DOOMWADDIR
     {DOOMWADDIR}, // build-time configured DOOMWADDIR
-    {NULL, "doom", "HOME"}, // ~/doom
+    {NULL, ".czdoom", "HOME"}, // ~/.czdoom
     {NULL, NULL, "HOME"}, // ~
     {NULL, NULL, NULL, I_DoomExeDir}, // config directory
     {"/usr/local/share/games/doom"},
     {"/usr/share/games/doom"},
     {"/usr/local/share/doom"},
     {"/usr/share/doom"},
+    {"/mnt"}, // opk mount point	
+	{"/home/retrofw/roms/doom"},
+	{"/home/retrofw/roms/doom/mods"},		
+	{"/media/mmcblk1p1/roms/doom"},
+	{"/media/mmcblk1p1/roms/doom/mods"},	
   };
 
   int   i;
