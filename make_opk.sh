@@ -15,7 +15,7 @@ Type=Application
 StartupNotify=true
 Icon=czdoom
 Categories=games;
-X-OD-Selector=/home/retrofw/roms/doom/
+X-OD-Alias=aliases.txt
 X-OD-Filter=.wad,.WAD
 X-OD-Manual=czdoom.man.txt
 EOF
@@ -31,9 +31,8 @@ Type=Application
 StartupNotify=true
 Icon=czdoom-modlaunch
 Categories=games;
-X-OD-Selector=/home/retrofw/roms/doom/mods/
-X-OD-Alias=/home/retrofw/roms/doom/mods/aliases.txt
-X-OD-Filter=.doom
+X-OD-Alias=aliases.txt
+X-OD-Filter=.doom,.DOOM
 EOF
 
 # copy/rename binary
