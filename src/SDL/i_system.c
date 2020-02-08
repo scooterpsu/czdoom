@@ -362,11 +362,7 @@ char* I_FindFile(const char* wfname, const char* ext)
     {"/usr/share/games/doom"},
     {"/usr/local/share/doom"},
     {"/usr/share/doom"},
-    {"/mnt"}, // opk mount point	
-	{"/home/retrofw/roms/doom"},
-	{"/home/retrofw/roms/doom/mods"},		
-	{"/media/mmcblk1p1/roms/doom"},
-	{"/media/mmcblk1p1/roms/doom/mods"},	
+    {"/mnt/"}, // opk mount point	
   };
 
   int   i;
