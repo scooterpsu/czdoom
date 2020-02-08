@@ -1,0 +1,11 @@
+#!/bin/sh
+filename=$(basename -- "$1")
+folder=$(dirname "$1")
+extension="${filename##*.}"
+if [ $extension == "wad" ]; then
+   $(dirname "$0")/prboom -iwad "$1"
+elif [ $extension == "doom" ]; then
+	doomfile="`cat "$1" | cut -d "|" -f 1`"
+	cd "$folder"
+   $(dirname "$0")/prboom $doomfile
+fi

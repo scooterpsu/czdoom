@@ -9,39 +9,20 @@ cat > default.retrofw.desktop <<EOF
 [Desktop Entry]
 Name=CZDoom
 Comment=Limit-removing Doom Engine
-Exec=czdoom -iwad \$f
+Exec=czdoom.dge \$f
 Terminal=false
 Type=Application
 StartupNotify=true
 Icon=czdoom
 Categories=games;
 X-OD-Alias=aliases.txt
-X-OD-Filter=.wad,.WAD
+X-OD-Filter=.wad,.WAD,.doom,.DOOM
 X-OD-Manual=czdoom.man.txt
 EOF
 
-# create modlaunch.retrofw.desktop
-cat > modlaunch.retrofw.desktop <<EOF
-[Desktop Entry]
-Name=CZDoom Mods
-Comment=CZDoom Mod Launcher
-Exec=czdoom-modlaunch \$f
-Terminal=false
-Type=Application
-StartupNotify=true
-Icon=czdoom-modlaunch
-Categories=games;
-X-OD-Alias=aliases.txt
-X-OD-Filter=.doom,.DOOM
-EOF
-
-# copy/rename binary
-cp src/prboom czdoom
-
 # create opk
-FLIST="czdoom"
+FLIST="src/prboom"
 FLIST="${FLIST} default.retrofw.desktop"
-FLIST="${FLIST} modlaunch.retrofw.desktop"
 FLIST="${FLIST} src/distrib/data/*"
 
 rm -f ${OPK_NAME}
@@ -49,9 +30,3 @@ mksquashfs ${FLIST} ${OPK_NAME} -all-root -no-xattrs -noappend -no-exports
 
 cat default.retrofw.desktop
 rm -f default.retrofw.desktop
-
-cat modlaunch.retrofw.desktop
-rm -f modlaunch.retrofw.desktop
-
-# delete copied binary
-rm -f czdoom
