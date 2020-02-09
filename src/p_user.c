@@ -297,7 +297,7 @@ void P_DeathThink (player_t* player)
     player->damagecount--;
 
 #ifdef HANDHELDMODS
-      doom_printf("You are dead. Press Y to restart.");
+      doom_printf("You are dead. Press X to restart.");
 #endif
       
   if (player->cmd.buttons & BT_USE)
