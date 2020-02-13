@@ -10,14 +10,15 @@ cat > default.retrofw.desktop <<EOF
 Name=CZDoom
 Comment=Limit-removing Doom Engine
 Exec=czdoom.dge \$f
-Terminal=false
-Type=Application
-StartupNotify=true
 Icon=czdoom
 Categories=games;
 X-OD-Alias=aliases.txt
-X-OD-Filter=.wad,.WAD,.doom,.DOOM
 X-OD-Manual=czdoom.man.txt
+X-OD-Selector=/home/retrofw/roms/doom
+X-OD-Filter=.wad,.WAD,.doom,.DOOM
+Terminal=false
+Type=Application
+StartupNotify=true
 EOF
 
 # create opk
