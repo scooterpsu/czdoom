@@ -561,6 +561,7 @@ void M_AddEpisode(const char *map, char *def)
     EpisodeMenu[EpiDef.numitems].alttext = txt;
     EpisodeMenu[EpiDef.numitems].alphaKey = alpha ? *alpha : 0;
     EpiDef.numitems++;
+    NewDef.prevMenu = &EpiDef;
   }
   if (EpiDef.numitems <= 4)
   {
