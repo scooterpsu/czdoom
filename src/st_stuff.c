@@ -748,6 +748,17 @@ static void ST_doPaletteStuff(void)
       else
         palette = 0;
 
+  // In Chex Quest, the player never sees red.  Instead, the
+  // radiation suit palette is used to tint the screen green,
+  // as though the player is being covered in goo by an
+  // attacking flemoid.
+
+  if (gamemission == chex
+    && palette >= STARTREDPALS && palette < STARTREDPALS + NUMREDPALS)
+  {
+    palette = RADIATIONPAL;
+  }
+
   if (palette != st_palette) {
     V_SetPalette(st_palette = palette); // CPhipps - use new palette function
 

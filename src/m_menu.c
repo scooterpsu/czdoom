@@ -670,7 +670,7 @@ void M_NewGame(int choice)
     return;
   }
 
-  if ( EpiDef.numitems == 0 )
+  if ( gamemission == chex || EpiDef.numitems == 0 )
     M_SetupNextMenu(&NewDef);
   else
     M_SetupNextMenu(&EpiDef);
@@ -5846,6 +5846,9 @@ void M_Init(void)
            break;
         }
       }
+	  if(gamemission == chex) {
+			NewDef.prevMenu = &MainDef;
+	  }
       break;
 
     case shareware:

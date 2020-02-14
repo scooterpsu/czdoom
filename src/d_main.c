@@ -136,6 +136,7 @@ const char *const standard_iwads[]=
   "doom1.wad",
   "doomu.wad", /* CPhipps - alow doomu.wad */
   "freedoom.wad", /* wart@kobold.org:  added freedoom for Fedora Extras */
+  "chex.wad",  
 };
 static const int nstandard_iwads = sizeof standard_iwads/sizeof*standard_iwads;
 
@@ -621,7 +622,7 @@ static void CheckIWAD(const char *iwadname,GameMode_t *gmode,boolean *hassec)
 {
   if ( !access (iwadname,R_OK) )
   {
-    int ud=0,rg=0,sw=0,cm=0,sc=0,hx=0;
+    int ud=0,rg=0,sw=0,cm=0,sc=0,hx=0,cq=0;
     boolean noiwad=0;
     FILE* fp;
 
@@ -683,10 +684,13 @@ static void CheckIWAD(const char *iwadname,GameMode_t *gmode,boolean *hassec)
             bfgedition++;
           if (!strncmp(fileinfo[length].name,"HACX",4))
             hx++;
+		  if (!strncmp(fileinfo[length].name,"W94_1",5) ||
+              !strncmp(fileinfo[length].name,"POSSH0M0",8))
+            cq++;
         }
         free(fileinfo);
 		
-        if (noiwad && !bfgedition)
+        if (noiwad && !bfgedition && cq < 2)
           I_Error("CheckIWAD: IWAD tag %s not present", iwadname);
 
       }
@@ -844,15 +848,17 @@ static void IdentifyVersion (void)
     /* jff 8/23/98 set gamemission global appropriately in all cases
      * cphipps 12/1999 - no version output here, leave that to the caller
      */
+	i = strlen(iwad);
     switch(gamemode)
     {
       case retail:
       case registered:
       case shareware:
         gamemission = doom;
+		if (i>=8 && !strnicmp(iwad+i-8,"chex.wad",8))
+		  gamemission = chex;
         break;
       case commercial:
-        i = strlen(iwad);
         gamemission = doom2;
         if (i>=10 && !strnicmp(iwad+i-10,"doom2f.wad",10))
           language=french;
@@ -882,17 +888,14 @@ static void IdentifyVersion (void)
   switch ( gamemode ) {
     case retail:
       i = strlen(iwad);
-      if (i>=8 && !strnicmp(iwad+i-8,"chex.wad",8)) // prboom chex.wad
+      if (i>=8 && !strnicmp(iwad+i-8,"chex.wad",8))
 		savefolder = "/chex.wad";
-      else if (i>=8 && !strnicmp(iwad+i-13,"freedoom1.wad",8)) // prboom chex.wad
+      else if (i>=8 && !strnicmp(iwad+i-13,"freedoom1.wad",8))
 		savefolder = "/freedoom1.wad";
       else
         savefolder = "/doom.wad";
       break;
     case shareware:
-      if (i>=8 && !strnicmp(iwad+i-8,"chex.wad",8)) // stock chex.wad
-		savefolder = "/chex.wad";
-      else
 		savefolder = "/doom.wad";
       break;
     case registered:
@@ -1330,7 +1333,15 @@ static void D_DoomMainSetup(void)
 
     switch ( gamemode ) {
     case retail:
-      doomverstr = "The Ultimate DOOM";
+      switch (gamemission)
+      {
+        case chex:
+          doomverstr = "Chex(R) Quest";
+          break;
+        default:
+          doomverstr = "The Ultimate DOOM";
+          break;
+      }
       break;
     case shareware:
       doomverstr = "DOOM Shareware";
@@ -1644,10 +1655,21 @@ static void D_DoomMainSetup(void)
   // e6y 
   // option to disable automatic loading of dehacked-in-wad lump
   if (!M_CheckParm ("-nodeh"))
+  {
     // MBF-style DeHackEd in wad support: load all lumps, not just the last one
     for (p = -1; (p = W_ListNumFromName("DEHACKED", p)) >= 0; )
       ProcessDehFile(NULL, D_dehout(), p); // cph - add dehacked-in-a-wad support
+  
+    if (gamemission == chex)
+    {
+		int lump = (W_CheckNumForName)("CHEXDEH", ns_prboom);
+		if (lump != -1)
+		{
+			ProcessDehFile(NULL, D_dehout(), lump);
+		}
+    }
 
+  }
   V_InitColorTranslation(); //jff 4/24/98 load color translation lumps
 
   // killough 2/22/98: copyright / "modified game" / SPA banners removed

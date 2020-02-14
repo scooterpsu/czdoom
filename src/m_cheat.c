@@ -441,6 +441,12 @@ static void cheat_clev(char buf[3])
       (gamemode == commercial && (epsd > 1 || map > 32 )) )  //jff no 33 and 34
     return;                                                  //8/14/98 allowed
 
+  // Chex.exe always warps to episode 1.
+  if (gamemission == chex)
+  {
+	  epsd = 1;
+  }
+
   // So be it.
 
   idmusnum = -1; //jff 3/17/98 revert to normal level music on IDCLEV

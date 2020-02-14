@@ -56,3 +56,4 @@ d4v_reverie=Doom 4 Vanilla: Reverie
 d4v_vile=Doom 4 Vanilla: Vile Flesh
 d4v_zone300=Doom 4 Vanilla: Zone 300
 d4v_nerve=Doom 4 Vanilla: No Rest for the Living
+chex2=Chex Quest 2
