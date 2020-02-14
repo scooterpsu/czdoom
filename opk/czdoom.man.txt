@@ -2,14 +2,30 @@
  Updated for RetroFW
  --------------------------------------------------
 
- CZDoom Enhancements
+ Features
  --------------------------------------------------
-
+ 
+ CZDoom Improvements
   * Weapon select button (Hold X + dpad)
   * Savegame names are automatically generated 
   * Confirmation message when overwriting save
   * Text strings changed to reflect control scheme
   * Automap control changes
+  
+ RetroFW Improvements
+  * Match gamma to Chocolate Doom
+  * Triple buffering to smooth screen tearing
+  * Menu reorganization
+  * Saves/config moved to $(HOME)/.czdoom
+  * Embedded aliases.txt for IWADS and PWADS
+  
+ Mod Support
+  * Additional IWADs support (HacX, BFG D2, Chex)
+  * Expanded DEHACKED support from libretro-prboom
+  * UMAPINFO support from libretro-prboom
+  * Custom episode support for Doom II
+  * PRBoom+ actors/spriteframe support
+  * Integrate launching for .doom files
 
  Controls
  --------------------------------------------------
@@ -42,4 +58,3 @@
   RetroFW release/upkeep by scooterpsu.
   Source available at:
   https://github.com/scooterpsu/czdoom
-

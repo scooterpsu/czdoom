@@ -24,7 +24,8 @@ EOF
 # create opk
 FLIST="src/prboom"
 FLIST="${FLIST} default.retrofw.desktop"
-FLIST="${FLIST} src/distrib/data/*"
+FLIST="${FLIST} data/prboom.wad"
+FLIST="${FLIST} opk/*"
 
 rm -f ${OPK_NAME}
 mksquashfs ${FLIST} ${OPK_NAME} -all-root -no-xattrs -noappend -no-exports

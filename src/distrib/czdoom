@@ -1,7 +1,0 @@
-title=CZDoom
-description=Limit-Removing Doom Engine
-exec=/home/retrofw/games/czdoom/czdoom
-params=-iwad $f
-clock=600
-selectordir=/home/retrofw
-selectorfilter=.wad,.WAD

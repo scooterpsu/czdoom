@@ -1,9 +1,0 @@
-title=CZDoom Mods
-description=CZDoom Mod Launcher
-exec=/home/retrofw/games/czdoom/czdoom-modlaunch
-clock=600
-selectordir=/home/retrofw/games/czdoom/mods
-selectorbrowser=false
-selectorfilter=.doom
-selectorscreens=/home/retrofw/games/czdoom/mods
-selectoraliases=/home/retrofw/games/czdoom/mods/aliases.txt
